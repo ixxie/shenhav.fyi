@@ -1,0 +1,83 @@
+:root {
+	--text: #272727;
+	--text-light: #313131;
+
+	--home: 185;
+	--websites: 160;
+	--startups: 135;
+	--experience: 110;
+	--skills: 85;
+	--contact: 60;
+}
+
+body {
+	/* layout */
+	padding: 0;
+	margin: 0;
+	box-sizing: border box;
+	min-height: 100vh;
+	display: flex;
+
+	/* typography */
+	font-family: IM Fell English, Arial;
+	color: var(--text);
+	font-size: 15px;
+}
+
+/* links */
+
+a {
+	text-decoration: none;
+	font-weight: bold;
+}
+
+b {
+	font-family: IM Fell English SC;
+}
+
+nav a {
+	font-family: IM Fell English SC;
+	font-size: 19px;
+}
+
+nav .active {
+	text-decoration: underline;
+}
+
+/* headers */
+
+.logo {
+	font-family: Water Brush;
+	font-size: 30px;
+	line-height: 40px;
+}
+
+h1,
+h2,
+h3 {
+	font-family: IM Fell English SC;
+}
+
+h1 {
+	font-size: 1.8em;
+}
+
+h2 {
+	font-size: 1.5em;
+}
+
+h3 {
+	font-size: 1.2em;
+}
+
+/* lists */
+
+ul,
+ol {
+	padding-top: 0em;
+	margin-top: 0em;
+}
+
+li {
+	padding-top: 1em;
+}
