@@ -44,7 +44,7 @@
 	}
 
 	.content {
-		max-width: 800px;
+		max-width: 700px;
 		min-height: 100%;
 		overflow-y: auto;
 		padding: 1em 1em 2em 1em;

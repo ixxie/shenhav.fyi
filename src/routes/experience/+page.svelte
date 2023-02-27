@@ -4,12 +4,23 @@
 
 <h1>what i've done so far</h1>
 
-<Section role="UI/UX Engineering Contractor" start="10/22" org="Freelance">
+<Section
+	role="UI/UX Engineering Contractor"
+	start="10/22"
+	org="Freelance"
+	skills={['TypeScript', 'Svelte/Kit', 'Supabase', 'HTML5', 'CSS3', 'GitHub', 'Netlify']}
+>
 	Since last autumn, I have started out as a freelancer. I'm specializing in Svelte frontends in
 	both Javascript and Typescript, but I am open to work with other technologies.
 </Section>
-
-<Section role="Senior Software Developer" start="10/21" end="08/22" org="Karsa (Startup)">
+<hr />
+<Section
+	role="Senior Software Developer"
+	start="10/21"
+	end="08/22"
+	org="Karsa (Startup)"
+	skills={['Python', 'JavaScript', 'Vue', 'Buefy', 'HTML5', 'CSS3', 'SQLite', 'DuckDB', 'Gitlab']}
+>
 	<p>Built software allowing non-technical users to detect chemicals using a mass spectrometer.</p>
 
 	<ol>
@@ -27,15 +38,33 @@
 		<li>Introduced Docker containerization and tooling, and Git best-practices;</li>
 	</ol>
 </Section>
-
-<Section role="EU Grant Writer" start="05/21" end="11/21">
+<hr />
+<Section
+	role="EU Grant Writer"
+	start="05/21"
+	end="11/21"
+	skills={['Technical Writing', 'Project Management', 'EU Grants']}
+>
 	<p>
 		Freelanced as writer of Eurostars grant applications and helped develop projects and consortia
 		for R&D performing SMEs.
 	</p>
 </Section>
-
-<Section role="Product Owner" start="10/19" end="02/21" org="Sievo (Enterprise SaaS Scaleup)">
+<hr />
+<Section
+	role="Product Owner"
+	start="10/19"
+	end="02/21"
+	org="Sievo (Enterprise SaaS Scaleup)"
+	skills={[
+		'Agile',
+		'Backlog Grooming',
+		'Spring Planning',
+		'Multistakeholder communication',
+		'Marketing',
+		'QlikSense'
+	]}
+>
 	<p>
 		Worked alongside the product manager to plan, prioritize and manage technical development,
 		coordinating between stakeholders.
@@ -58,8 +87,14 @@
 		environmental and social LCA to enable quantitative CSR;
 	</ol>
 </Section>
-
-<Section role="Data Scientist" start="09/17" end="09/19" org="Sievo (Enterprise SaaS Scaleup)">
+<hr />
+<Section
+	role="Data Scientist"
+	start="09/17"
+	end="09/19"
+	org="Sievo (Enterprise SaaS Scaleup)"
+	skills={['Python', 'NLP', 'Docker', 'SQLServer', 'Jira', 'Jenkins', 'Bash']}
+>
 	<p>Developed a new NLP-driven supplier record normalization microservice in Python.</p>
 	<ol>
 		<li>
@@ -76,21 +111,59 @@
 		</li>
 	</ol>
 </Section>
-
-<Section role="Researcher" start="06/14" end="04/15" org="MRC, University of Helsinki">
+<hr />
+<Section
+	role="Researcher"
+	start="06/14"
+	end="04/15"
+	org="MRC, University of Helsinki"
+	skills={['R', 'Stochastic Processes', 'Metacommunity Theory']}
+>
 	<p>Developed a stochastic spatial ecology simulation framework.</p>
 </Section>
-
-<Section role="Web Designer & Developer" start="2004" end="2017">
+<hr />
+<Section
+	role="Web Designer & Developer"
+	start="2004"
+	end="2017"
+	skills={['Illustrator', 'Photoshop', 'WordPress', 'Bash']}
+>
 	<p>Executed graphic and web design, branding and copywriting jobs for small companies.</p>
 </Section>
-
-<Section role="Freelance Private Tutor" start="2010" end="2017">
+<hr />
+<Section
+	role="Freelance Private Tutor"
+	start="2010"
+	end="2017"
+	skills={['Mathematics', 'Physics', 'Pedagogy', 'Empathy']}
+>
 	<p>Tutoring children of various ages in mathematics, physics and chemistry.</p>
 </Section>
-
-<Section role="MSc Biomathematics" start="2009" end="2013" org="University of Vienna">
+<hr />
+<Section
+	role="MSc Biomathematics"
+	start="2009"
+	end="2013"
+	org="University of Vienna"
+	skills={[
+		'Network Theory',
+		'Stochastic Processes',
+		'Probability Theory',
+		'Dynamical Systems Theory',
+		'Game Theory',
+		'Population Genetics',
+		'Philosophy of Science'
+	]}
+>
 	Specialized in stochastic processes and risk management in biological and social networks.
 </Section>
-
-<Section role="BSc Maths. and Physics" start="2005" end="2009" org="University of Utrecht" />
+<hr />
+<Section
+	role="BSc Maths. and Physics"
+	start="2005"
+	end="2009"
+	org="University of Utrecht"
+	skills={['Scientific Methodology', 'Elements of Physics & Mathematics']}
+>
+	Double degree covering the basics of the Physics and Mathematics disciplines.
+</Section>

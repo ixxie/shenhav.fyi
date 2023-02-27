@@ -6,7 +6,7 @@
 	import MenuDesktop from './MenuDesktop.svelte';
 	import MenuMobile from './MenuMobile.svelte';
 
-	const pages = ['websites', 'startups', 'experience', 'skills', 'contact'];
+	const pages = ['experience', 'contact'];
 	$: active = $page.url.pathname.slice(1);
 	const iconSize = 20;
 </script>
