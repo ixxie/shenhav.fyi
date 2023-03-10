@@ -6,9 +6,10 @@
 	import MenuDesktop from './MenuDesktop.svelte';
 	import MenuMobile from './MenuMobile.svelte';
 
-	const pages = ['experience', 'contact'];
+	export let pages: string[];
+
 	$: active = $page.url.pathname.slice(1);
-	const iconSize = 20;
+	const iconSize = 32;
 </script>
 
 {#if $mobileMenuOpen}

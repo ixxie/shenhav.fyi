@@ -2,82 +2,89 @@
 	--text: #272727;
 	--text-light: #313131;
 
-	--home: 185;
-	--websites: 160;
-	--startups: 135;
-	--experience: 110;
-	--skills: 85;
-	--contact: 60;
+	--home: 280;
+	--about: 190;
+	--services: 100;
+	--contact: 10;
+
+	--gradient-color-1: #fac000;
+	--gradient-color-2: #00ffb3;
+	--gradient-color-3: #00eeff;
+	--gradient-color-4: #307a64;
 }
 
-body {
-	/* layout */
-	padding: 0;
+* {
 	margin: 0;
-	box-sizing: border box;
-	min-height: 100vh;
-	display: flex;
+	padding: 0;
+	box-sizing: border-box;
+}
 
+@font-face {
+	font-family: 'Vollkorn';
+	src: local('Vollkorn'), url('/fonts/Vollkorn-VariableFont_wght.ttf');
+	font-weight: 100 900;
+}
+
+@font-face {
+	font-family: 'Maven Pro';
+	src: local('Maven Pro'), url('/fonts/MavenPro-VariableFont_wght.ttf');
+	font-weight: 100 900;
+}
+
+html {
 	/* typography */
-	font-family: IM Fell English, Arial;
+	font-family: Maven Pro, Arial;
 	color: var(--text);
 	font-size: 18px;
+	height: 100%;
+}
+
+p {
+	margin: 0.5em 0;
+}
+
+section,
+article {
+	margin: 2em 0 3em 0;
 }
 
 /* links */
 
 a {
-	text-decoration: none;
-	font-weight: bold;
-}
-
-b {
-	font-family: IM Fell English SC;
+	text-decoration: underline dotted;
+	font-weight: 500;
 }
 
 nav a {
-	font-family: IM Fell English SC;
 	font-size: 19px;
-}
-
-nav .active {
-	text-decoration: underline;
 }
 
 /* headers */
 
-.logo {
-	font-family: Water Brush;
-	font-size: 30px;
-	line-height: 40px;
-}
-
 h1,
 h2,
 h3 {
-	font-family: IM Fell English SC;
+	font-family: Vollkorn, Times;
+	margin-bottom: 0.5rem;
+	font-weight: 500;
 }
 
 h1 {
-	font-size: 1.8em;
+	font-size: 3rem;
 }
 
 h2 {
-	font-size: 1.5em;
+	font-size: 2rem;
 }
 
 h3 {
-	font-size: 1.2em;
+	font-size: 1em;
 }
 
-/* lists */
-
-ul,
-ol {
-	padding-top: 0em;
-	margin-top: 0em;
-}
-
-li {
-	padding-top: 1em;
+.quote {
+	display: block;
+	font-family: Vollkorn SC, Times;
+	font-weight: 900;
+	font-size: 1.4rem;
+	margin: 1.5rem 2rem;
 }

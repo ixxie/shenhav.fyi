@@ -21,17 +21,20 @@
 		<MenuSocial {iconSize} />
 	</div>
 	<button on:click={showMobileMenu}>
-		<Menu size={iconSize} />
+		<Menu size={iconSize} fill="hsl(var(--color), 50%, 20%)" />
 	</button>
 </nav>
 
 <style>
 	nav {
 		display: flex;
-		justify-items: center;
+		align-items: center;
 		justify-content: space-between;
-		gap: 0.5em;
-		margin: 1em 0em 3em 0em;
+		gap: 0.5rem;
+		margin: 2rem 0;
+		padding: 0 1rem;
+		opacity: 0.85;
+		mix-blend-mode: multiply;
 	}
 
 	div {
@@ -39,16 +42,19 @@
 		gap: 0.5em;
 		align-items: center;
 		height: 40px;
-		overflow-x: hidden;
 	}
 
 	div > a,
 	span {
-		font-size: 19px;
+		text-transform: uppercase;
 		line-height: 40px;
 		display: flex;
 		align-items: center;
 		margin: auto;
+	}
+
+	nav :global(.logo) {
+		font-size: 40px;
 	}
 
 	button {
@@ -58,9 +64,9 @@
 		display: none;
 	}
 
-	@media screen and (max-width: 700px) {
+	@media (max-width: 700px) {
 		nav {
-			margin: 0;
+			margin: 1rem 0;
 		}
 
 		div {
