@@ -56,16 +56,6 @@
 <div id="background" {style} />
 
 <style>
-	:global(body) {
-		height: 100%;
-		width: 100%;
-		max-width: 100%;
-		display: flex;
-		justify-items: flex-start;
-		justify-content: flex-start;
-		overflow: overlay;
-	}
-
 	#content {
 		max-width: 1100px;
 		min-height: 100%;

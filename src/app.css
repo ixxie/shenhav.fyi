@@ -19,6 +19,16 @@
 	box-sizing: border-box;
 }
 
+body {
+	height: 100%;
+	width: 100%;
+	max-width: 100%;
+	display: flex;
+	justify-items: flex-start;
+	justify-content: flex-start;
+	overflow: overlay;
+}
+
 @font-face {
 	font-family: 'Vollkorn';
 	src: local('Vollkorn'), url('/fonts/Vollkorn-VariableFont_wght.ttf');
