@@ -16,9 +16,9 @@
 		and
 		<a href="https://github.com/ixxie">github</a>.
 	</p>
+	<p>Or if you prefer, you write me directly here:</p>
 </Section>
 <section>
-	<p>Or if you prefer, you write me directly here:</p>
 	<Form action="contact" submitButton="GET IN TOUCH">
 		<Fieldset>
 			<TextField label="Name" required />
