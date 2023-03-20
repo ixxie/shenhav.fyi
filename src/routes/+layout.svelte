@@ -10,7 +10,6 @@
 	import { page } from '$app/stores';
 
 	import '../app.css';
-	import type { WatsonHealthStackedScrolling_1 } from 'carbon-icons-svelte';
 
 	const mod = (n: number) => ((n % 360) + 360) % 360;
 	const round = (n: number) => Math.round(n * 100) / 100;
@@ -63,6 +62,12 @@
 		contact: {
 			file: 'computer.glb',
 			spin: [0, 1, 0]
+		}
+	} as {
+		[key: string]: {
+			file: string;
+			rotation?: [number, number, number];
+			spin?: [number, number, number];
 		}
 	};
 	const credits = {
