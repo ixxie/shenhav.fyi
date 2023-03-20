@@ -40,16 +40,16 @@
 		<main>
 			<slot />
 		</main>
+		<footer>
+			<p>Copyright © 2023 - Matan Bendix Shenhav - All Rights Reserved</p>
+			<p>
+				3D Illustration credit: <a href={currentPage.modelUrl}>{currentPage.model}</a> by <a href={currentPage.authorUrl}>{currentPage.author}</a>
+			</p>
+			<p style="font-size: smaller; max-width: 500px;">
+				Modifications: {currentPage.notes}
+			</p>
+		</footer>
 	{/if}
-	<footer>
-		<p>Copyright © 2023 - Matan Bendix Shenhav - All Rights Reserved</p>
-		<p>
-			3D Illustration credit: <a href={currentPage.modelUrl}>{currentPage.model}</a> by <a href={currentPage.authorUrl}>{currentPage.author}</a>
-		</p>
-		<p style="font-size: smaller; max-width: 500px;">
-			Modifications: {currentPage.notes}
-		</p>
-	</footer>
 </div>
 <div id="background" {style} />
 <div id="illustration">
