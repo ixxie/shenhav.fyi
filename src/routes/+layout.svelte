@@ -38,6 +38,14 @@
 	</header>
 	{#if !$mobileMenuOpen}
 		<main>
+			<div id="illustration">
+				{#each pageNames as page}
+					{#if page == current}
+						{@const props = currentPage}
+						<Scene {...props} />
+					{/if}
+				{/each}
+			</div>
 			<slot />
 		</main>
 		<footer>
@@ -52,14 +60,6 @@
 	{/if}
 </div>
 <div id="background" {style} />
-<div id="illustration">
-	{#each pageNames as page}
-		{#if page == current}
-			{@const props = currentPage}
-			<Scene {...props} />
-		{/if}
-	{/each}
-</div>
 
 <style>
 	:global(body) {
@@ -129,8 +129,10 @@
 		}
 
 		#illustration {
+			height: 100vh;
 			width: 100%;
-			opacity: 0.5;
+			position: static;
+			margin: -200px 0;
 		}
 	}
 	@media (max-width: 1100px) {
