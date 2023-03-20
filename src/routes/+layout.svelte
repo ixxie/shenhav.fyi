@@ -1,112 +1,33 @@
 <script lang="ts">
 	import { setContext } from 'svelte';
-	import { tweened } from 'svelte/motion';
-	import { sineInOut } from 'svelte/easing';
-
-	import { Menu, mobileMenuOpen } from '$lib/menu';
-
-	import { Scene } from '$lib/3D';
 
 	import { page } from '$app/stores';
 
+	import { Menu, mobileMenuOpen } from '$lib/menu';
+	import { Scene } from '$lib/3D';
+
 	import '../app.css';
 
-	const mod = (n: number) => ((n % 360) + 360) % 360;
-	const round = (n: number) => Math.round(n * 100) / 100;
-	const color = tweened(0, {
-		duration: 2000,
-		easing: sineInOut,
-		interpolate: (from, to) => {
-			const direct = Math.abs(to - from);
-			const indirect = 360 - direct;
-			if (direct < indirect) {
-				return (t) => round(from + t * (to - from));
-			} else {
-				const sign = -(to - from) / direct;
-				return (t) => round(mod(from + sign * t * indirect));
-			}
-		}
-	});
-	setContext('color', color);
+	import { color } from './stores';
+	import { pages } from './pages';
 
-	const phase = 20;
-	const pages = ['home', 'about', 'services', 'contact'];
-
+	// page data
+	const pageNames = Object.keys(pages);
 	$: route = $page.route.id ?? '/';
 	$: current = route == '/' ? 'home' : route.substring(1);
-	$: index = pages.indexOf(current);
-	$: $color = phase + (index * 360) / pages.length;
+	$: currentPage = pages[current];
 
+	// color logic
+	const phase = 20;
+	$: index = pageNames.indexOf(current);
+	$: $color = phase + (index * 360) / pageNames.length;
 	$: style = `--color: ${$color};`;
+	setContext('color', color);
 
+	// mobile menu logic
 	let innerWidth: number;
 	$: desktop = innerWidth > 780;
 	$: $mobileMenuOpen = desktop ? false : $mobileMenuOpen;
-
-	const models = {
-		home: {
-			file: 'lighthouse.glb',
-			rotation: [0, 1, 0],
-			spin: [0, 1, 0]
-		},
-		about: {
-			file: 'swissknife.glb',
-			rotation: [-0.5, 0, 0],
-			spin: [0, 1, 0]
-		},
-		services: {
-			file: 'rocket.glb',
-			rotation: [0, -Math.PI / 2, Math.PI / 4],
-			spin: [0, 1, 0]
-		},
-		contact: {
-			file: 'computer.glb',
-			spin: [0, 1, 0]
-		}
-	} as {
-		[key: string]: {
-			file: string;
-			rotation?: [number, number, number];
-			spin?: [number, number, number];
-		}
-	};
-	const credits = {
-		home: {
-			author: 'libblekibble',
-			authorUrl: 'https://sketchfab.com/libblekibble',
-			model: 'Low Poly Lighthouse Scene',
-			modelUrl: 'https://sketchfab.com/3d-models/low-poly-lighthouse-scene-7cbc357ed5ce44a1bf723c13b9b212d1',
-			notes: 'removed all elements of the scene except the lighthouse and house, rendered in monochrome with toonshading.'
-		},
-		about: {
-			author: 'Hadrien Farre',
-			authorUrl: 'https://farrehadrien.wixsite.com/portfolio',
-			model: 'Swiss Army Knife',
-			modelUrl: 'https://sketchfab.com/3d-models/swiss-army-knife-bf9e6f7de2a24d169f3e6236ab3096b4',
-			notes: 'rendered in monochrome with toonshading.',
-		},
-		services: {
-			author: 'remarkable.twitch',
-			authorUrl: 'https://sketchfab.com/remarkable.twitch',
-			model: 'Red and White Rocket',
-			modelUrl: 'https://sketchfab.com/3d-models/red-and-white-rocket-a929405aab3641169756beb6b11454ac',
-			notes: 'rendered in monochrome with toonshading.',
-		},
-		contact: {
-			author: 'Tyler Halterman',
-			authorUrl: 'https://www.tylerphalterman.com/',
-			model: 'Desktop Computer',
-			modelUrl: 'https://sketchfab.com/3d-models/desktop-computer-561abc2fc95941609fc7bc6f232895c2',
-			notes: 'rendered in monochrome with toonshading.',
-		}
-	} as {[key: string]: {
-		author: string;
-		authorUrl: string;
-		model: string;
-		modelUrl: string;
-		notes: string;
-	}};
-	$: credit = credits[current];
 </script>
 
 <svelte:window bind:innerWidth />
@@ -123,18 +44,18 @@
 	<footer>
 		<p>Copyright © 2023 - Matan Bendix Shenhav - All Rights Reserved</p>
 		<p>
-			3D Illustration credit: <a href={credit.modelUrl}>{credit.model}</a> by <a href={credit.authorUrl}>{credit.author}</a>
+			3D Illustration credit: <a href={currentPage.modelUrl}>{currentPage.model}</a> by <a href={currentPage.authorUrl}>{currentPage.author}</a>
 		</p>
 		<p style="font-size: smaller; max-width: 500px;">
-			Modifications: {credit.notes}
+			Modifications: {currentPage.notes}
 		</p>
 	</footer>
 </div>
 <div id="background" {style} />
 <div id="illustration">
-	{#each pages as page}
+	{#each pageNames as page}
 		{#if page == current}
-			{@const props = models[page]}
+			{@const props = currentPage}
 			<Scene {...props} />
 		{/if}
 	{/each}
