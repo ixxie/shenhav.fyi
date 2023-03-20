@@ -49,12 +49,28 @@
 			<slot />
 		</main>
 		<footer>
-			<p>Copyright © 2023 - Matan Bendix Shenhav - All Rights Reserved</p>
 			<p>
-				3D Illustration credit: <a href={currentPage.modelUrl}>{currentPage.model}</a> by <a href={currentPage.authorUrl}>{currentPage.author}</a>
+				<span>
+				Copyright © 2023
+				</span>
+				<span class="dash"/>
+				<span>
+				Matan Bendix Shenhav
+				</span>
+				<span class="dash"/>
+				<span>
+				All Rights Reserved
+				</span>
+			</p>
+			<p>
+				<span><i>3D Illustration credit</i></span>
+				<span class="dash"/>
+				<span><a href={currentPage.modelUrl}>{currentPage.model}</a> by <a href={currentPage.authorUrl}>{currentPage.author}</a></span>
 			</p>
 			<p style="font-size: smaller; max-width: 500px;">
-				Modifications: {currentPage.notes}
+				<span><i>Modifications</i></span>
+				<span class="dash"/>
+				<span>{currentPage.notes}</span>
 			</p>
 		</footer>
 	{/if}
@@ -119,6 +135,16 @@
 		z-index: -99;
 	}
 
+	footer p {
+		display: flex;
+		flex-flow: row wrap;
+		gap: 0.5em;
+	}
+
+	.dash::before {
+		content: '-';
+	}
+
 	@media (max-width: 1800px) {
 		:global(body) {
 			justify-content: center;
@@ -150,6 +176,14 @@
 		main {
 			margin: 0;
 			padding: 1rem;
+		}
+
+		footer p {
+			flex-flow: column;
+		}
+
+		footer p .dash {
+			display: none;
 		}
 	}
 
