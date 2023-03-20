@@ -10,6 +10,7 @@
 	import { page } from '$app/stores';
 
 	import '../app.css';
+	import type { WatsonHealthStackedScrolling_1 } from 'carbon-icons-svelte';
 
 	const mod = (n: number) => ((n % 360) + 360) % 360;
 	const round = (n: number) => Math.round(n * 100) / 100;
@@ -64,6 +65,43 @@
 			spin: [0, 1, 0]
 		}
 	};
+	const credits = {
+		home: {
+			author: 'libblekibble',
+			authorUrl: 'https://sketchfab.com/libblekibble',
+			model: 'Low Poly Lighthouse Scene',
+			modelUrl: 'https://sketchfab.com/3d-models/low-poly-lighthouse-scene-7cbc357ed5ce44a1bf723c13b9b212d1',
+			notes: 'removed all elements of the scene except the lighthouse and house, rendered in monochrome with toonshading.'
+		},
+		about: {
+			author: 'Hadrien Farre',
+			authorUrl: 'https://farrehadrien.wixsite.com/portfolio',
+			model: 'Swiss Army Knife',
+			modelUrl: 'https://sketchfab.com/3d-models/swiss-army-knife-bf9e6f7de2a24d169f3e6236ab3096b4',
+			notes: 'rendered in monochrome with toonshading.',
+		},
+		services: {
+			author: 'remarkable.twitch',
+			authorUrl: 'https://sketchfab.com/remarkable.twitch',
+			model: 'Red and White Rocket',
+			modelUrl: 'https://sketchfab.com/3d-models/red-and-white-rocket-a929405aab3641169756beb6b11454ac',
+			notes: 'rendered in monochrome with toonshading.',
+		},
+		contact: {
+			author: 'Tyler Halterman',
+			authorUrl: 'https://www.tylerphalterman.com/',
+			model: 'Desktop Computer',
+			modelUrl: 'https://sketchfab.com/3d-models/desktop-computer-561abc2fc95941609fc7bc6f232895c2',
+			notes: 'rendered in monochrome with toonshading.',
+		}
+	} as {[key: string]: {
+		author: string;
+		authorUrl: string;
+		model: string;
+		modelUrl: string;
+		notes: string;
+	}};
+	$: credit = credits[current];
 </script>
 
 <svelte:window bind:innerWidth />
@@ -77,6 +115,15 @@
 			<slot />
 		</main>
 	{/if}
+	<footer>
+		<p>Copyright © 2023 - Matan Bendix Shenhav - All Rights Reserved</p>
+		<p>
+			3D Illustration credit: <a href={credit.modelUrl}>{credit.model}</a> by <a href={credit.authorUrl}>{credit.author}</a>
+		</p>
+		<p style="font-size: smaller; max-width: 500px;">
+			Modifications: {credit.notes}
+		</p>
+	</footer>
 </div>
 <div id="background" {style} />
 <div id="illustration">
@@ -109,8 +156,16 @@
 	}
 
 	main {
-		margin: 0 2rem 10rem 2rem;
+		margin: 0 2rem 5rem 2rem;
 		flex-grow: 1;
+	}
+
+	footer {
+		padding: 3rem 0;
+		display: flex;
+		flex-flow: column;
+		align-items: center;
+		text-align: center;
 	}
 
 	#background {
