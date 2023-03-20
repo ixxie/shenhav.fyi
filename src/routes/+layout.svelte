@@ -1,6 +1,4 @@
 <script lang="ts">
-	import { setContext } from 'svelte';
-
 	import { page } from '$app/stores';
 
 	import { Menu, mobileMenuOpen } from '$lib/menu';
@@ -8,9 +6,9 @@
 
 	import '../app.css';
 
-	import { color } from './stores';
 	import { pages } from './pages';
 
+	import Coloring from './Coloring.svelte';
 	import Footer from './Footer.svelte';
 
 	// page data
@@ -18,13 +16,8 @@
 	$: route = $page.route.id ?? '/';
 	$: current = route == '/' ? 'home' : route.substring(1);
 	$: currentPage = pages[current];
-
-	// color logic
-	const phase = 20;
-	$: index = pageNames.indexOf(current);
-	$: $color = phase + (index * 360) / pageNames.length;
-	$: style = `--color: ${$color};`;
-	setContext('color', color);
+	$: pageIndex = pageNames.indexOf(current);
+	const pageCount = pageNames.length;
 
 	// mobile menu logic
 	let innerWidth: number;
@@ -34,29 +27,31 @@
 
 <svelte:window bind:innerWidth />
 
-<div id="content" {style}>
-	<header>
-		<Menu pages={['about', 'services', 'contact']} />
-	</header>
-	{#if !$mobileMenuOpen}
-		<main>
-			<div id="illustration">
-				{#each pageNames as page}
-					{#if page == current}
-						{@const props = currentPage}
-						<Scene {...props} />
-					{/if}
-				{/each}
-			</div>
-			<slot />
-		</main>
-		<Footer {currentPage}/>
-	{/if}
-</div>
-<div id="background" {style} />
+<Coloring {pageIndex} {pageCount}>
+	<div id="container">
+		<header>
+			<Menu pages={['about', 'services', 'contact']} />
+		</header>
+		{#if !$mobileMenuOpen}
+			<main>
+				<div id="illustration">
+					{#each pageNames as page}
+						{#if page == current}
+							{@const props = currentPage}
+							<Scene {...props} />
+						{/if}
+					{/each}
+				</div>
+				<slot />
+			</main>
+			<Footer {currentPage}/>
+		{/if}
+	</div>
+	<div id="background"/>
+</Coloring>
 
 <style>
-	#content {
+	#container {
 		max-width: 1100px;
 		min-height: 100%;
 		flex-grow: 1;
@@ -79,11 +74,11 @@
 			hsl(var(--color), 50%, 91%) 6px
 		);
 		position: fixed;
+		top: 0;
+		left: 0;
 		z-index: -100;
-		width: 100%;
-		height: 100%;
-		display: flex;
-		flex-flow: row nowrap;
+		width: 100vw;
+		height: 100vh;
 	}
 
 	#illustration {
@@ -97,11 +92,7 @@
 
 
 	@media (max-width: 1800px) {
-		:global(body) {
-			justify-content: center;
-		}
-
-		#content {
+		#container {
 			padding: 0;
 		}
 
@@ -112,8 +103,9 @@
 			margin: -200px 0;
 		}
 	}
+
 	@media (max-width: 1100px) {
-		#content {
+		#container {
 			width: 100%;
 			max-width: 100%;
 		}
@@ -128,33 +120,5 @@
 			margin: 0;
 			padding: 1rem;
 		}
-	}
-
-	:global(a),
-	:global(h1),
-	:global(h2) {
-		color: hsl(var(--color), 50%, 20%);
-	}
-
-	:global(.quote) {
-		color: hsl(var(--color), 50%, 30%);
-	}
-
-	:global(svg.picto) {
-		fill: hsl(var(--color), 30%, 50%);
-	}
-
-	:global(::-webkit-scrollbar) {
-		width: 6px;
-		background: transparent;
-	}
-
-	:global(::-webkit-scrollbar-track) {
-		background: transparent;
-	}
-
-	:global(::-webkit-scrollbar-thumb) {
-		background-color: rgb(100, 100, 100, 0.4);
-		border-radius: 3px;
 	}
 </style>

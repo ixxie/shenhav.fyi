@@ -1,18 +1,3 @@
-:root {
-	--text: #272727;
-	--text-light: #313131;
-
-	--home: 280;
-	--about: 190;
-	--services: 100;
-	--contact: 10;
-
-	--gradient-color-1: #fac000;
-	--gradient-color-2: #00ffb3;
-	--gradient-color-3: #00eeff;
-	--gradient-color-4: #307a64;
-}
-
 * {
 	margin: 0;
 	padding: 0;
@@ -29,6 +14,30 @@ body {
 	overflow: overlay;
 }
 
+@media (max-width: 1800px) {
+	body {
+		justify-content: center;
+	}
+}
+
+/* scroll bar */
+
+::-webkit-scrollbar {
+	width: 6px;
+	background: transparent;
+}
+
+::-webkit-scrollbar-track {
+	background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+	background-color: rgb(100, 100, 100, 0.4);
+	border-radius: 3px;
+}
+
+/* typography */
+
 @font-face {
 	font-family: 'Vollkorn';
 	src: local('Vollkorn'), url('/fonts/Vollkorn-VariableFont_wght.ttf');
@@ -42,9 +51,8 @@ body {
 }
 
 html {
-	/* typography */
 	font-family: Maven Pro, Arial;
-	color: var(--text);
+	color: #272727;
 	font-size: 18px;
 	height: 100%;
 }

@@ -53,7 +53,7 @@
 	.org {
 		font-size: smaller;
 		font-weight: 500;
-		color: var(--text-light);
+		color: hsl(var(--color), 20%, 40%);
 	}
 
 	ol {
