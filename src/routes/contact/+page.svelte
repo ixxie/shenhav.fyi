@@ -8,7 +8,10 @@
 </script>
 
 <Section pictogram={Envelope} layout="left" large>
-	<h1>Let's Get In Touch</h1>
+	<hgroup>
+		<p>Contact</p>
+		<h1>Let's Get In Touch</h1>
+	</hgroup>
 	<p>
 		Want a quote, or just have a question? Feel free to drop me an email at <Email /> or fill the form
 		below and I will usually respond within 24h. You can also find me on

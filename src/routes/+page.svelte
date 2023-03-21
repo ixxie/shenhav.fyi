@@ -10,7 +10,10 @@
 
 <article>
 	<Section pictogram={FlashingContent} layout="right" large>
-		<h1>Web Design that Makes a Difference</h1>
+		<hgroup>
+			<p>Premium Web Experiences</p>
+			<h1>Web Design that Makes a Difference</h1>
+		</hgroup>
 		<p>
 			My name is Matan Bendix Shenhav, I'm a digital jack-of-all-trades: I've done <a href="/about"
 				>a little bit of everything</a
@@ -20,7 +23,10 @@
 		</p>
 	</Section>
 	<Section pictogram={Growth} layout="left" large>
-		<h2>Web Services for Small Organizations</h2>
+		<hgroup>
+			<p>Web Services for Small Organizations</p>
+			<h2>Make an Impression with your Website</h2>
+		</hgroup>
 		<p>
 			First impressions matter, and these days, that means your website. Your website will get that
 			special touch, whether its 3D graphics, sophisticated illustrations or quality stock footage.
@@ -34,7 +40,10 @@
 		<List items={['Stunning Visuals', 'Custom Functionality', 'Affordable Prices']} />
 	</Section>
 	<Section pictogram={SocialWork_01} layout="right" large>
-		<h2>Advanced Capabilities for Creative Agencies</h2>
+		<hgroup>
+			<p>Special Ops for Creative Agencies</p>
+			<h2>Deliver Awesome Projects to your Customers</h2>
+		</hgroup>
 		<p>
 			I love collaborating with other creatives. I can support in-house creative and web development
 			teams with challenging projects. I have extended experience collaborating with creative
@@ -52,7 +61,10 @@
 		/>
 	</Section>
 	<Section pictogram={Rocket} layout="left" large>
-		<h2>Flexible Contracting for Tech Startups</h2>
+		<hgroup>
+			<p>Flexible Contracting for Startups</p>
+			<h2>Fullstack Support with No Strings Attached</h2>
+		</hgroup>
 		<p>
 			I also offer contracting services as a full-stack developer and UI/UX designer for tech
 			startups. I'm a good

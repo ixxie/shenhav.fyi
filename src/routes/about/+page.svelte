@@ -13,7 +13,10 @@
 </script>
 
 <Section pictogram={UserExperienceDesign} large layout="left">
-	<h1>Your Jack-of-all-Trades</h1>
+	<hgroup>
+		<p>A Creative Generalist</p>
+		<h1>Your Jack-of-all-Trades</h1>
+	</hgroup>
 	<p>
 		I'm a passionate and curious person, which makes me a natural generalist. I've taught myself
 		tools and methods from a variety of disciplines, and I will quickly pick up whatever is needed
@@ -35,7 +38,10 @@
 	/>
 </Section>
 <Section pictogram={CodeSyntax} layout="right">
-	<h1>Tech Industry Veteran</h1>
+	<hgroup>
+		<p>IT Professional</p>
+		<h1>Tech Industry Veteran</h1>
+	</hgroup>
 	<p>
 		I've taken on different roles over the years, developing apps in the software industry or
 		offering services as a freelancer to SMEs. I grew from one role to the next by teaching myself
@@ -47,7 +53,10 @@
 	<ExperienceSection {...item} />
 </Masonry>
 <Section pictogram={University} layout="left">
-	<h1>Recovering Academic</h1>
+	<hgroup>
+		<p>Life Scientist</p>
+		<h1>Recovering Academic</h1>
+	</hgroup>
 	<p>
 		By training, I am a biomathematician: I was interested in mathematically describing social and
 		biological networks. How likely is an ecosystem to collapse if a certain species disappears? How
@@ -60,7 +69,10 @@
 	<ExperienceSection {...item} />
 </Masonry>
 <section>
-	<h1>Want to know more?</h1>
+	<hgroup>
+		<p>Seems Legit...</p>
+		<h1>Want to know more?</h1>
+	</hgroup>
 	<p>
 		<a href="/contact">Get in touch</a> and let's have a chat! I'm happy to share my experience with
 		you.

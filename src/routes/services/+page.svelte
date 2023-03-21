@@ -11,7 +11,10 @@
 
 <article>
 	<Section pictogram={CloudUpload} layout="right" large>
-		<h1>Everything You Need for a Successful Launch</h1>
+		<hgroup>
+			<p>Full-Suite Web Services</p>
+			<h1>Everything You Need for a Successful Launch</h1>
+		</hgroup>
 		<p>
 			I offer a full-suite web service package for small organizations: everything you need to get
 			your digital presence started or revamped. Whether you want to freshen things up with a new
@@ -19,7 +22,10 @@
 		</p>
 	</Section>
 	<Section pictogram={Websites} layout="left">
-		<h2>Websites with a twist</h2>
+		<hgroup>
+			<p>Web Development</p>
+			<h2>Websites with a twist</h2>
+		</hgroup>
 		<p>
 			Most websites these days are build with off-the-shelf systems like WordPress, Ghost or
 			Squarespace. This is fine for very basic needs, but if you want something really special, you
@@ -28,7 +34,10 @@
 		</p>
 	</Section>
 	<Section pictogram={ArtTools_01} layout="right">
-		<h2>Tailored brand identities</h2>
+		<hgroup>
+			<p>Branding & Graphic Design</p>
+			<h2>Tailored brand identities</h2>
+		</hgroup>
 		<p>
 			Without solid branding, a website is doomed to fail. A slick logo, a refined color palette and
 			well-selected fonts are tools for communicating your value proposition to your audience. But
@@ -38,7 +47,10 @@
 		</p>
 	</Section>
 	<Section pictogram={TextData} layout="left">
-		<h2>Writing that packs a punch</h2>
+		<hgroup>
+			<p>Copywriting & Technical Writing</p>
+			<h2>Writing that packs a punch</h2>
+		</hgroup>
 		<p>
 			I've got extensive experience writing in English in a wide variety of contexts. Whether its
 			marketing copy for your website, technical documentation for your customers or team, or
@@ -48,7 +60,10 @@
 		</p>
 	</Section>
 	<Section pictogram={ChartMultiType} layout="right">
-		<h2>Targeted marketing support</h2>
+		<hgroup>
+			<p>Marketing Support</p>
+			<h2>Campaigns the reach your audience</h2>
+		</hgroup>
 		<p>
 			Can't afford to fully outsource your marketing, but still want a hand? There are 1001 ways to
 			promote: digital ad campaigns on major platforms, content marketing through a blog and organic
@@ -58,7 +73,10 @@
 		</p>
 	</Section>
 	<Section pictogram={AppDeveloper} layout="left">
-		<h2>Modern business tooling</h2>
+		<hgroup>
+			<p>IT Consulting</p>
+			<h2>Modern business tooling</h2>
+		</hgroup>
 		<p>
 			Are there some internal processes you are struggling with? Ever wonder if the right kind of
 			app could save you a lot of time, money and headaches? I've helped with selection and
