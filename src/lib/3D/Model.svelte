@@ -5,7 +5,7 @@
 	import * as THREE from 'three';
 	import type { OrbitControls as OrbitControlsType } from 'three/addons/controls/OrbitControls.js';
 
-	import { getContext, onMount } from 'svelte';
+	import { getContext } from 'svelte';
 	import type { Readable } from 'svelte/store';
 
 	import { initModel } from './merge';
@@ -34,6 +34,7 @@
 		camera: $camera as THREE.PerspectiveCamera,
 		controls,
 		selection: [ref],
+		fitOffset: innerWidth < 800 ? innerWidth / 800 : 1.1,
 		offsetWidth: innerWidth,
 		offsetHeight: innerHeight
 	});

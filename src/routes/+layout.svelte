@@ -44,10 +44,10 @@
 				</div>
 				<slot />
 			</main>
-			<Footer {currentPage}/>
+			<Footer {currentPage} />
 		{/if}
 	</div>
-	<div id="background"/>
+	<div id="background" />
 </Coloring>
 
 <style>
@@ -87,9 +87,8 @@
 		top: 0;
 		width: calc(100vw - 1100px);
 		height: 100vh;
-		z-index: -99;
+		z-index: 10;
 	}
-
 
 	@media (max-width: 1800px) {
 		#container {
@@ -97,10 +96,11 @@
 		}
 
 		#illustration {
-			height: 100vh;
-			width: 100%;
 			position: static;
-			margin: -200px 0;
+			height: 90vh;
+			width: 100%;
+			margin-top: -20vh;
+			margin-bottom: -10vh;
 		}
 	}
 
@@ -119,6 +119,12 @@
 		main {
 			margin: 0;
 			padding: 1rem;
+		}
+
+		#illustration {
+			margin-top: -10vh;
+			margin-bottom: -30vh;
+			z-index: -1;
 		}
 	}
 </style>

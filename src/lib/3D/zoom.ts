@@ -5,7 +5,7 @@ export function zoomCameraToSelection({
 	camera,
 	controls,
 	selection,
-	fitOffset = 0.9,
+	fitOffset = 1.1,
 	offsetWidth = undefined,
 	offsetHeight = undefined
 }: {
