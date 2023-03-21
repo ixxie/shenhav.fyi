@@ -68,6 +68,22 @@
 			display: flex;
 			flex-flow: column;
 			align-items: center;
+			position: relative;
+		}
+
+		.illustration {
+			position: absolute;
+			top: 0;
+			z-index: -1;
+			opacity: 0.2;
+		}
+
+		.left .illustration {
+			left: 0;
+		}
+
+		.right .illustration {
+			right: 0;
 		}
 	}
 </style>

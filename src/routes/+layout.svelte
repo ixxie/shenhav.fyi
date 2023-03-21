@@ -126,5 +126,9 @@
 			margin-bottom: -30vh;
 			z-index: -1;
 		}
+
+		main :global(section:first-of-type) :global(.illustration) {
+			display: none;
+		}
 	}
 </style>
