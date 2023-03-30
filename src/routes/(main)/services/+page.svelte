@@ -62,7 +62,7 @@
 	<Section pictogram={ChartMultiType} layout="right">
 		<hgroup>
 			<p>Marketing Support</p>
-			<h2>Campaigns the reach your audience</h2>
+			<h2>Campaigns that reach your audience</h2>
 		</hgroup>
 		<p>
 			Can't afford to fully outsource your marketing, but still want a hand? There are 1001 ways to

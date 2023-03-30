@@ -2,7 +2,6 @@
 	import { T, useThrelte, useFrame } from '@threlte/core';
 	import { useGltf } from '@threlte/extras';
 
-	import * as THREE from 'three';
 	import type { OrbitControls as OrbitControlsType } from 'three/addons/controls/OrbitControls.js';
 
 	import { getContext } from 'svelte';
@@ -16,16 +15,16 @@
 	export let rotation: [number, number, number] = [0, 0, 0];
 	export let spin: [number, number, number] = [0, 0, 0];
 
-	$: ({ gltf } = useGltf(`/scenes/${file}`, {
+	$: gltf = useGltf(`/scenes/${file}`, {
 		useDraco: true
-	}));
+	});
 
 	const { camera } = useThrelte();
 
 	$: model = initModel($gltf);
 
 	const color = getContext('color') as Readable<number>;
-	$: shade = `hsl(${$color}, 50%, 50%)`;
+	$: shade = `hsl(${$color}, 70%, 70%)`;
 
 	let innerWidth: number; // react to resize
 	let innerHeight: number; // react to resize

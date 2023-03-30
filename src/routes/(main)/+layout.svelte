@@ -4,7 +4,7 @@
 	import { Menu, mobileMenuOpen } from '$lib/menu';
 	import { Scene } from '$lib/3D';
 
-	import '../app.css';
+	import './app.css';
 
 	import { pages } from './pages';
 
@@ -13,8 +13,8 @@
 
 	// page data
 	const pageNames = Object.keys(pages);
-	$: route = $page.route.id ?? '/';
-	$: current = route == '/' ? 'home' : route.substring(1);
+	$: route = $page.route.id?.replace('/(main)', '') ?? '/';
+	$: current = route == '' ? 'home' : route.substring(1);
 	$: currentPage = pages[current];
 	$: pageIndex = pageNames.indexOf(current);
 	const pageCount = pageNames.length;

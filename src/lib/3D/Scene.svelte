@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { Canvas, OrbitControls, T, type ThrelteContext } from '@threlte/core';
+	import { Canvas, T } from '@threlte/core';
+	import { OrbitControls } from '@threlte/extras';
 
-	import * as THREE from 'three';
 	import type { OrbitControls as OrbitControlsType } from 'three/addons/controls/OrbitControls.js';
 	import { degToRad } from 'three/src/math/MathUtils';
 
@@ -12,6 +12,7 @@
 	export let spin: [number, number, number] = [0, 0, 0];
 
 	let controls: OrbitControlsType;
+	$: console.log(controls);
 </script>
 
 <Canvas>
@@ -19,8 +20,9 @@
 		<OrbitControls
 			maxPolarAngle={degToRad(80)}
 			enableZoom={false}
-			target={new THREE.Vector3(0, 0, 0)}
-			bind:controls
+			target={[0, 0, 0]}
+			bind:ref={controls}
+			enabled={false}
 		/>
 	</T.PerspectiveCamera>
 

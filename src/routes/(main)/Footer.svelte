@@ -1,31 +1,28 @@
 <script lang="ts">
-	import type { Page } from "./pages";
+	import type { Page } from './pages';
 
-    export let currentPage: Page;
+	export let currentPage: Page;
 </script>
 
 <footer>
 	<p>
-		<span>
-		    Copyright © 2023
-		</span>
-		<span class="dash"/>
-		<span>
-		    Matan Bendix Shenhav
-		</span>
-		<span class="dash"/>
-		<span>
-		    All Rights Reserved
-		</span>
+		<span> Copyright © 2023 </span>
+		<span class="dash" />
+		<span> Matan Bendix Shenhav </span>
+		<span class="dash" />
+		<span> All Rights Reserved </span>
 	</p>
 	<p>
 		<span><i>3D Illustration credit</i></span>
-		<span class="dash"/>
-		<span><a href={currentPage.modelUrl}>{currentPage.model}</a> by <a href={currentPage.authorUrl}>{currentPage.author}</a></span>
+		<span class="dash" />
+		<span>
+			<a href={currentPage.modelUrl}>{currentPage.model}</a> by
+			<a href={currentPage.authorUrl}>{currentPage.author}</a>
+		</span>
 	</p>
 	<p style="font-size: smaller; max-width: 500px;">
 		<span><i>Modifications</i></span>
-		<span class="dash"/>
+		<span class="dash" />
 		<span>{currentPage.notes}</span>
 	</p>
 </footer>
