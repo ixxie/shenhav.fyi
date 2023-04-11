@@ -5,11 +5,10 @@
 	import University from 'carbon-pictograms-svelte/lib/University.svelte';
 	import CodeSyntax from 'carbon-pictograms-svelte/lib/CodeSyntax.svelte';
 
-	import { Section } from '$lib/layout';
+	import { Section, ExperienceSection } from '$lib/layout';
 	import { List } from '$lib/list';
 
 	import { industry, academic } from '$lib/content';
-	import ExperienceSection from './ExperienceSection.svelte';
 </script>
 
 <Section pictogram={UserExperienceDesign} large layout="left">
