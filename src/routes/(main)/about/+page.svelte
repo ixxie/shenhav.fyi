@@ -8,7 +8,7 @@
 	import { Section } from '$lib/layout';
 	import { List } from '$lib/list';
 
-	import { industry, academic } from './sections';
+	import { industry, academic } from '$lib/content';
 	import ExperienceSection from './ExperienceSection.svelte';
 </script>
 
