@@ -56,6 +56,7 @@
 		max-width: 100%;
 		width: var(--section-normal-width);
 		height: auto;
+		margin-top: 2.5rem;
 	}
 
 	section :global(svg.large) {
