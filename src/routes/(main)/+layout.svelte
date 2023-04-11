@@ -131,4 +131,23 @@
 			display: none;
 		}
 	}
+
+	@media print {
+		header {
+			display: none;
+		}
+
+		:global(footer) {
+			display: none !important;
+		}
+
+		#illustration {
+			position: absolute;
+			height: 90vh;
+			width: 100%;
+			margin-top: -20vh;
+			margin-bottom: -10vh;
+			z-index: -1;
+		}
+	}
 </style>

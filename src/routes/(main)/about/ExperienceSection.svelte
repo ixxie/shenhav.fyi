@@ -32,6 +32,10 @@
 </section>
 
 <style>
+	:root {
+		--spacing: 1em;
+	}
+
 	section {
 		display: flex;
 		flex-flow: column;
@@ -57,11 +61,17 @@
 	}
 
 	ol {
-		margin: 1em 0 0 0;
-		padding: 0 1em 0 1.5em;
+		margin: var(--spacing) 0 0 0;
+		padding: 0 var(--spacing) 0 calc(var(--spacing) * 1.5);
 	}
 
 	li {
-		padding-bottom: 1em;
+		padding-bottom: var(--spacing);
+	}
+
+	@media print {
+		:root {
+			--spacing: 0.5em;
+		}
 	}
 </style>
