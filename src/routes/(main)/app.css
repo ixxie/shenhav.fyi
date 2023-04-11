@@ -60,7 +60,7 @@ html {
 
 @media print {
 	html {
-		font-size: 12pt;
+		font-size: 12pt !important;
 	}
 }
 

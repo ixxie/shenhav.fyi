@@ -67,6 +67,7 @@
 
 	li {
 		padding-bottom: var(--spacing);
+		margin-left: 0.5em;
 	}
 
 	@media print {

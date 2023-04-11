@@ -1,0 +1,69 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	break-inside: auto !important;
+}
+
+:root {
+	--color: 110
+}
+
+@media print {
+@page {
+	size: a4;
+	margin: 1cm;
+}
+}
+
+@font-face {
+	font-family: 'Vollkorn';
+	src: local('Vollkorn'), url('/fonts/Vollkorn-VariableFont_wght.ttf');
+	font-weight: 100 900;
+}
+
+@font-face {
+	font-family: 'Maven Pro';
+	src: local('Maven Pro'), url('/fonts/MavenPro-VariableFont_wght.ttf');
+	font-weight: 100 900;
+}
+
+html {
+	font-family: Maven Pro, Arial;
+	color: #272727;
+	font-size: 10pt;
+	line-height: 1.45rem;
+}
+
+article {
+	height: 100%;
+}
+
+article:first-child {
+	margin-top: -0.5cm !important;
+}
+
+h1,
+h2,
+h3 {
+	font-family: Vollkorn, Times;
+	margin-bottom: 0.5rem;
+	font-weight: 500;
+	line-height: 1.2em;
+}
+
+h1 {
+	font-size: 2rem;
+}
+
+h2 {
+	font-size: 2rem;
+}
+
+h3 {
+	font-size: 1.5em;
+}
+
+section {
+	margin: 0.5cm 0 0.5cm 0 !important;
+}

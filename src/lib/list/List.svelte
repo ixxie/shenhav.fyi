@@ -1,8 +1,9 @@
 <script lang="ts">
 	export let items: string[];
+	export let small = false;
 </script>
 
-<p class="list">
+<p class="list" class:small>
 	{#each items as item, i}
 		{@const last = i == items?.length - 1}
 		<span>{item}</span>{#if !last}<span>∙</span>{/if}
@@ -18,5 +19,11 @@
 		gap: 0.5rem;
 		color: hsl(var(--color), 50%, 20%);
 		margin-top: 1rem;
+		line-height: 1.2rem;
+	}
+
+	.small {
+		font-size: smaller;
+		gap: 0.2rem;
 	}
 </style>
