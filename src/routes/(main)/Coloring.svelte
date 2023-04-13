@@ -7,12 +7,15 @@
 	export let pageIndex: number;
 	export let pageCount: number;
 
+	// params
+	const phase = 20;
+
 	// helpers
 	const mod = (n: number) => ((n % 360) + 360) % 360;
 	const round = (n: number) => Math.round(n * 100) / 100;
 
 	// store
-	const color = tweened(0, {
+	const color = tweened(phase + (pageIndex * 360) / pageCount, {
 		duration: 2000,
 		easing: sineInOut,
 		interpolate: (from, to) => {
@@ -28,7 +31,6 @@
 	});
 
 	// logic
-	const phase = 20;
 	$: $color = phase + (pageIndex * 360) / pageCount;
 	$: style = `--color: ${$color};`;
 	setContext('color', color);
