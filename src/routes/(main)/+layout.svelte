@@ -1,5 +1,10 @@
 <script lang="ts">
 	import { page } from '$app/stores';
+	import { beforeNavigate } from '$app/navigation';
+
+	import { onMount } from 'svelte';
+	import { fly } from 'svelte/transition';
+	import type { BeforeNavigate, NavigationTarget } from '@sveltejs/kit';
 
 	import { Menu, mobileMenuOpen } from '$lib/menu';
 	import { Scene } from '$lib/3D';
@@ -23,28 +28,56 @@
 	let innerWidth: number;
 	$: desktop = innerWidth > 780;
 	$: $mobileMenuOpen = desktop ? false : $mobileMenuOpen;
+
+	// trigger for navigation transition
+	let target: NavigationTarget | string | null = null;
+	beforeNavigate(async (navigation: BeforeNavigate) => {
+		if (target !== navigation.to) {
+			target = navigation.to;
+		}
+		await new Promise((r) => setTimeout(r, 1000));
+	});
+
+	// trigger for initial trasition
+	let ready = false;
+	onMount(() => (ready = true));
 </script>
 
 <svelte:window bind:innerWidth />
 
 <Coloring {pageIndex} {pageCount}>
 	<div id="container">
-		<header>
-			<Menu pages={['about', 'services', 'contact']} />
-		</header>
-		{#if !$mobileMenuOpen}
-			<main>
-				<div id="illustration">
-					{#each pageNames as page}
-						{#if page == current}
-							{@const props = currentPage}
-							<Scene {...props} />
-						{/if}
-					{/each}
-				</div>
-				<slot />
-			</main>
-			<Footer {currentPage} />
+		{#if ready}
+			<header in:fly={{ duration: 1000, delay: 0, x: -100 }}>
+				<Menu pages={['about', 'services', 'contact']} />
+			</header>
+			{#if !$mobileMenuOpen}
+				<main>
+					{#key target}
+						<div
+							id="illustration"
+							in:fly={{ duration: 1000, delay: 1000, y: -100 }}
+							out:fly={{ duration: desktop ? 1000 : 0, y: -100 }}
+						>
+							{#each pageNames as page}
+								{#if page == current}
+									{@const props = currentPage}
+									<Scene {...props} />
+								{/if}
+							{/each}
+						</div>
+					{/key}
+					{#key target}
+						<div
+							in:fly={{ duration: 1000, delay: 1000, y: 100 }}
+							out:fly={{ duration: desktop ? 1000 : 0, y: 100 }}
+						>
+							<slot />
+						</div>
+					{/key}
+				</main>
+				<Footer {currentPage} />
+			{/if}
 		{/if}
 	</div>
 	<div id="background" />
