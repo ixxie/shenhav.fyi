@@ -68,7 +68,7 @@
 		color: hsl(var(--color), 50%, 20%);
 	}
 
-	:global(hgroup) :global(p:first-of-type) {
+	:global(hgroup) :global(p) {
 		color: hsl(var(--color), 30%, 40%);
 	}
 

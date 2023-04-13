@@ -107,7 +107,7 @@ h3 {
 	font-size: 1em;
 }
 
-hgroup p:first-of-type {
+hgroup p {
 	font-size: 1.2rem;
 	font-weight: 500;
 	margin-bottom: 0.5rem;

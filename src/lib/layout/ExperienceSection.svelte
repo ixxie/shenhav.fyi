@@ -11,11 +11,11 @@
 </script>
 
 <section class="panel">
-	<h2>
-		<span class="period">{start}-{end}</span>
-		<span class="role">{role}</span>
-		<span class="org">{org}</span>
-	</h2>
+	<hgroup>
+		<p class="period">{start}-{end}</p>
+		<h2 class="role">{role}</h2>
+		<p class="org">{org}</p>
+	</hgroup>
 	<p>
 		{summary}
 	</p>
@@ -43,21 +43,23 @@
 		margin: 0;
 	}
 
-	h2 {
-		display: flex;
-		flex-flow: column;
-	}
-
 	.role {
 		font-weight: bold;
 		color: hsl(var(--color), 50%, 30%);
 	}
 
+	h2 {
+		margin: 0;
+	}
+
 	.period,
 	.org {
-		font-size: smaller;
 		font-weight: 500;
-		color: hsl(var(--color), 20%, 40%);
+		margin: 0;
+	}
+
+	.org {
+		line-height: 1rem;
 	}
 
 	ol {
