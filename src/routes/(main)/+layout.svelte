@@ -60,6 +60,7 @@
 							in:fly={{ duration: 1000, delay: 1000, y: -100 }}
 							out:fly={{ duration: desktop ? 1000 : 0, y: -100 }}
 						>
+							<div id="cover" />
 							{#each pageNames as page}
 								{#if page == current}
 									<Scene
@@ -72,12 +73,12 @@
 						</div>
 					{/key}
 					{#key target}
-						<div
+						<article
 							in:fly={{ duration: 1000, delay: 1000, y: 100 }}
 							out:fly={{ duration: desktop ? 1000 : 0, y: 100 }}
 						>
 							<slot />
-						</div>
+						</article>
 					{/key}
 				</main>
 				<Footer {currentPage} />
@@ -127,6 +128,10 @@
 		z-index: 10;
 	}
 
+	#cover {
+		display: none;
+	}
+
 	@media (max-width: 1800px) {
 		#container {
 			padding: 0;
@@ -155,13 +160,20 @@
 
 		main {
 			margin: 0;
-			padding: 1rem;
 		}
 
 		#illustration {
-			margin-top: -10vh;
-			margin-bottom: -30vh;
+			margin: -10vh 0 -30vh 0;
 			z-index: -1;
+			position: relative;
+		}
+
+		#cover {
+			position: absolute;
+			display: block;
+			width: 100%;
+			height: 100%;
+			z-index: 1;
 		}
 
 		main :global(section:first-of-type) :global(.illustration) {
