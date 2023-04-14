@@ -13,7 +13,7 @@
 </script>
 
 <nav>
-	<Logo {active} />
+	<Logo />
 	<div>
 		{#each pages as page}
 			<a class:active={active == page} href="/{page}">{page}</a> <span>∙</span>
