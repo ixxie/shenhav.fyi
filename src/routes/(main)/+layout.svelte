@@ -30,11 +30,12 @@
 	$: $mobileMenuOpen = desktop ? false : $mobileMenuOpen;
 
 	// trigger for navigation transition
-	let target: NavigationTarget | string | null = null;
+	let target: string | null | undefined = null;
 	beforeNavigate(async (navigation: BeforeNavigate) => {
-		if (target !== navigation.to) {
-			target = navigation.to;
+		if (target == navigation.to?.route.id) {
+			navigation.cancel();
 		}
+		target = navigation.to?.route.id;
 		await new Promise((r) => setTimeout(r, 1000));
 	});
 
