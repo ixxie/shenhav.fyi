@@ -12,7 +12,6 @@
 	export let spin: [number, number, number] = [0, 0, 0];
 
 	let controls: OrbitControlsType;
-	$: console.log(controls);
 </script>
 
 <Canvas>
