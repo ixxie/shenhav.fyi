@@ -62,8 +62,11 @@
 						>
 							{#each pageNames as page}
 								{#if page == current}
-									{@const props = currentPage}
-									<Scene {...props} />
+									<Scene
+										file={currentPage.file}
+										rotation={currentPage.rotation}
+										spin={currentPage.spin}
+									/>
 								{/if}
 							{/each}
 						</div>
