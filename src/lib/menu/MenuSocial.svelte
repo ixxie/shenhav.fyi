@@ -6,11 +6,11 @@
 </script>
 
 <div>
-	<a href="https://github.com/ixxie">
-		<LogoGithub size={iconSize} />
-	</a>
 	<a href="https://www.linkedin.com/in/matan-shenhav/">
 		<LogoLinkedin size={iconSize} />
+	</a>
+	<a href="https://github.com/ixxie">
+		<LogoGithub size={iconSize} />
 	</a>
 </div>
 
