@@ -49,7 +49,7 @@
 <Coloring {pageIndex} {pageCount}>
 	<div id="container">
 		{#if ready}
-			<header in:fly={{ duration: 1000, delay: 0, x: -100 }}>
+			<header in:fly={{ duration: 1000, delay: 0, y: +100 }}>
 				<Menu pages={['about', 'services', 'contact']} />
 			</header>
 			{#if !$mobileMenuOpen}
