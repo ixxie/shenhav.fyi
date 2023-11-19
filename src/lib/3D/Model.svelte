@@ -24,7 +24,7 @@
 	$: model = initModel($gltf);
 
 	const color = getContext('color') as Readable<number>;
-	$: shade = `hsl(${$color}, 70%, 70%)`;
+	$: shade = `hsl(${$color}, 90%, 70%)`;
 
 	let innerWidth: number; // react to resize
 	let innerHeight: number; // react to resize

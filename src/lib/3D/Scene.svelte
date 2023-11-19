@@ -25,7 +25,8 @@
 		/>
 	</T.PerspectiveCamera>
 
-	<T.DirectionalLight castShadow position={[3, 10, 10]} />
+	<T.DirectionalLight intensity={1.2} castShadow position={[3, 10, 10]} />
+	<T.AmbientLight intensity={0.2} />
 
 	<Model {file} {controls} {rotation} {spin} />
 </Canvas>

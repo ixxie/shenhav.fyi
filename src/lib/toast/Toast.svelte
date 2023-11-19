@@ -4,10 +4,7 @@
 	export let title: string = '';
 	export let message: string;
 
-	import CloseIcon from 'carbon-icons-svelte/lib/Close.svelte';
-	import ErrorIcon from 'carbon-icons-svelte/lib/Error.svelte';
-	import WarningAltIcon from 'carbon-icons-svelte/lib/WarningAlt.svelte';
-	import CheckmarkIcon from 'carbon-icons-svelte/lib/Checkmark.svelte';
+	import { Close, Checkmark, Warning, Error } from '$lib/icons';
 
 	import { fade } from 'svelte/transition';
 	import { createEventDispatcher } from 'svelte';
@@ -17,9 +14,9 @@
 	$: info = type == 'info';
 
 	const icon = {
-		error: ErrorIcon,
-		warning: WarningAltIcon,
-		info: CheckmarkIcon
+		error: Error,
+		warning: Warning,
+		info: Checkmark
 	};
 
 	const dispatch = createEventDispatcher();
@@ -32,11 +29,11 @@
 {#if open}
 	<section class:error class:warning class:info transition:fade={{ duration: 200 }}>
 		<span>
-			<svelte:component this={icon[type]} size={16} />
+			<svelte:component this={icon[type]} />
 			<b>{title ? title + ':' : ''}</b>{message}
 		</span>
 		<span on:click={close} on:keypress={close}>
-			<CloseIcon size={16} />
+			<Close />
 		</span>
 	</section>
 {/if}

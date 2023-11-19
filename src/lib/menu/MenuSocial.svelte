@@ -1,16 +1,13 @@
 <script lang="ts">
-	import LogoGithub from 'carbon-icons-svelte/lib/LogoGithub.svelte';
-	import LogoLinkedin from 'carbon-icons-svelte/lib/LogoLinkedin.svelte';
-
-	export let iconSize: 20 | 16 | 24 | 32 | undefined;
+	import { Github, Linkedin } from '$lib/icons';
 </script>
 
 <div>
 	<a href="https://www.linkedin.com/in/matan-shenhav/">
-		<LogoLinkedin size={iconSize} />
+		<Linkedin />
 	</a>
 	<a href="https://github.com/ixxie">
-		<LogoGithub size={iconSize} />
+		<Github />
 	</a>
 </div>
 

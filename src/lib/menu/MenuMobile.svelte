@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Close from 'carbon-icons-svelte/lib/Close.svelte';
+	import { Close } from '$lib/icons';
 
 	import { mobileMenuOpen } from './stores';
 	import Logo from './Logo.svelte';
@@ -7,7 +7,6 @@
 
 	export let pages: string[];
 	export let active: string;
-	export let iconSize: 20 | 16 | 24 | 32 | undefined;
 
 	const hideMobileMenu = () => ($mobileMenuOpen = false);
 </script>
@@ -16,7 +15,7 @@
 	<header>
 		<Logo on:click={hideMobileMenu} />
 		<button on:click={hideMobileMenu}>
-			<Close size={iconSize} fill="hsl(var(--color), 50%, 20%)" />
+			<Close />
 		</button>
 	</header>
 	<div id="links">
@@ -27,7 +26,7 @@
 			</a>
 		{/each}
 	</div>
-	<MenuSocial {iconSize} />
+	<MenuSocial />
 </nav>
 
 <style>

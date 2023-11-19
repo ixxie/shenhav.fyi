@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Menu from 'carbon-icons-svelte/lib/Menu.svelte';
+	import { Menu } from '$lib/icons';
 
 	import { mobileMenuOpen } from './stores';
 	import Logo from './Logo.svelte';
@@ -7,7 +7,6 @@
 
 	export let pages: string[];
 	export let active: string;
-	export let iconSize: 20 | 16 | 24 | 32 | undefined;
 
 	const showMobileMenu = () => ($mobileMenuOpen = true);
 </script>
@@ -18,10 +17,10 @@
 		{#each pages as page}
 			<a class:active={active == page} href="/{page}">{page}</a> <span>∙</span>
 		{/each}
-		<MenuSocial {iconSize} />
+		<MenuSocial />
 	</div>
 	<button on:click={showMobileMenu}>
-		<Menu size={iconSize} fill="hsl(var(--color), 50%, 20%)" />
+		<Menu />
 	</button>
 </nav>
 
