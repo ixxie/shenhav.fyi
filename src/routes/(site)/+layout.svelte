@@ -1,25 +1,25 @@
 <script lang="ts">
-	import { page } from "$app/stores";
-	import { beforeNavigate } from "$app/navigation";
+	import { page } from '$app/stores';
+	import { beforeNavigate } from '$app/navigation';
 
-	import { onMount } from "svelte";
-	import { fly } from "svelte/transition";
-	import type { BeforeNavigate, NavigationTarget } from "@sveltejs/kit";
+	import { onMount } from 'svelte';
+	import { fly } from 'svelte/transition';
+	import type { BeforeNavigate, NavigationTarget } from '@sveltejs/kit';
 
-	import { Menu, mobileMenuOpen } from "$lib/menu";
-	import { Scene } from "$lib/3D";
+	import { Menu, mobileMenuOpen } from '$lib/menu';
+	import { Scene } from '$lib/3D';
 
-	import "./app.css";
+	import './app.css';
 
-	import { pages } from "./pages";
+	import { pages } from './pages';
 
-	import Coloring from "./Coloring.svelte";
-	import Footer from "./Footer.svelte";
+	import Coloring from './Coloring.svelte';
+	import Footer from './Footer.svelte';
 
 	// page data
 	const pageNames = Object.keys(pages);
-	$: route = $page.route.id?.replace("/(main)", "") ?? "/";
-	$: current = route == "" ? "home" : route.substring(1);
+	$: route = $page.route.id?.replace('/(site)', '') ?? '/';
+	$: current = route == '' ? 'home' : route.substring(1);
 	$: currentPage = pages[current];
 	$: pageIndex = pageNames.indexOf(current);
 	const pageCount = pageNames.length;
@@ -50,7 +50,7 @@
 	<div id="container">
 		{#if ready}
 			<header in:fly={{ duration: 1000, delay: 0, y: -100 }}>
-				<Menu pages={["about", "services", "contact"]} />
+				<Menu pages={['about', 'services', 'contact']} />
 			</header>
 			{#if !$mobileMenuOpen}
 				<main>

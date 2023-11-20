@@ -13,7 +13,7 @@
 </script>
 
 {#if $mobileMenuOpen}
-	<MenuMobile {pages} {active} {iconSize} />
+	<MenuMobile {pages} {active} />
 {:else}
-	<MenuDesktop {pages} {active} {iconSize} />
+	<MenuDesktop {pages} {active} />
 {/if}

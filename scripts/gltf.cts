@@ -8,7 +8,7 @@ import * as fs from 'fs';
 
 const buildOutputPath = './scripts/gltf.cjs';
 
-run('./assets', './static/scenes');
+run('./assets', './static/models');
 
 fs.unlink(buildOutputPath, (err) => {
 	if (err) {
