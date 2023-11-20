@@ -193,7 +193,7 @@
           "group / computer.glb": {
             "position": {
               "x": 9.73023527337134,
-              "y": 2.6262296728921903,
+              "y": 3,
               "z": 0.26976472662865925
             },
             "rotation": {
@@ -202,9 +202,9 @@
               "z": 0
             },
             "scale": {
-              "x": 5,
-              "y": 5,
-              "z": 5
+              "x": 7,
+              "y": 7,
+              "z": 7
             }
           },
           "group / swissknife.glb": {
@@ -214,7 +214,7 @@
               "z": 0
             },
             "rotation": {
-              "x": 0,
+              "x": -20,
               "y": 0,
               "z": 0
             },
@@ -258,6 +258,7 @@
   },
   "definitionVersion": "0.4.0",
   "revisionHistory": [
+    "Nj9Lq8oEAw9yiM4y",
     "4Q3IYdTf2Nbugxum"
   ]
 }

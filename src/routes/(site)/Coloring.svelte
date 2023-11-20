@@ -1,7 +1,8 @@
 <script lang="ts">
 	import { setContext } from 'svelte';
 	import { tweened } from 'svelte/motion';
-	import { cubicInOut, sineInOut } from 'svelte/easing';
+	import { sineInOut } from 'svelte/easing';
+	import { writable } from 'svelte/store';
 
 	// props
 	export let pageIndex: number;
@@ -36,7 +37,7 @@
 	setContext('color', color);
 
 	let container: HTMLDivElement;
-	export const scroll = tweened(0, { duration: 1000, easing: cubicInOut });
+	export const scroll = writable(0);
 
 	function getScroll() {
 		$scroll = container.scrollTop;

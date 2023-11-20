@@ -4,7 +4,10 @@
 
 	import { onMount } from 'svelte';
 	import { fly } from 'svelte/transition';
-	import type { BeforeNavigate, NavigationTarget } from '@sveltejs/kit';
+	import { tweened } from 'svelte/motion';
+	import { cubicInOut } from 'svelte/easing';
+	import type { Writable } from 'svelte/store';
+	import type { BeforeNavigate } from '@sveltejs/kit';
 
 	import { Menu, mobileMenuOpen } from '$lib/menu';
 	import { Scene } from '$lib/3D';
@@ -15,7 +18,6 @@
 
 	import Coloring from './Coloring.svelte';
 	import Footer from './Footer.svelte';
-	import type { Tweened } from 'svelte/motion';
 
 	// page data
 	const pageNames = Object.keys(pages);
@@ -46,19 +48,19 @@
 	let ready = false;
 	onMount(() => (ready = true));
 
-	let scroll: Tweened<number>;
+	// scroll based offsetting
+	let scroll: Writable<number>;
+
+	let offset = tweened(0, { duration: 800, easing: cubicInOut });
+
+	$: $offset = $scroll / innerHeight > 0.5 ? 10 : 0;
 </script>
 
 <svelte:window bind:innerWidth bind:innerHeight />
 
 <Coloring {pageIndex} {pageCount} bind:scroll>
 	<div id="illustration">
-		<Scene
-			offset={(30 * $scroll) / innerHeight}
-			file={currentPage.file}
-			rotation={[0, 1, 0]}
-			spin={currentPage.spin}
-		/>
+		<Scene offset={$offset} file={currentPage.file} rotation={[0, 1, 0]} spin={currentPage.spin} />
 	</div>
 	<div id="container">
 		{#if ready}

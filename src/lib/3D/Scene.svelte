@@ -4,7 +4,7 @@
 
 	import { Canvas, T } from '@threlte/core';
 	import { OrbitControls, Suspense } from '@threlte/extras';
-	import { Project, Sheet, SheetObject } from '@threlte/theatre';
+	import { Theatre, SheetObject } from '@threlte/theatre';
 
 	import type { OrbitControls as OrbitControlsType } from 'three/addons/controls/OrbitControls.js';
 	import { degToRad } from 'three/src/math/MathUtils';
@@ -32,34 +32,32 @@
 	$: $target = Math.PI / 4 + rotations[file];
 </script>
 
-<Project name="default" config={{ state }}>
-	<Sheet name="default">
-		<Canvas>
-			<T.PerspectiveCamera makeDefault position={[10, 5, 10]} fov={24}>
-				<OrbitControls
-					maxPolarAngle={degToRad(80)}
-					enableZoom={false}
-					target={[0, 0, 0]}
-					bind:ref={controls}
-					enabled={false}
-				/>
-			</T.PerspectiveCamera>
+<Theatre studio={{ enabled: false }} config={{ state }}>
+	<Canvas>
+		<T.PerspectiveCamera makeDefault position={[10, 5, 10]} fov={24}>
+			<OrbitControls
+				maxPolarAngle={degToRad(80)}
+				enableZoom={false}
+				target={[0, 0, 0]}
+				bind:ref={controls}
+				enabled={false}
+			/>
+		</T.PerspectiveCamera>
 
-			<T.DirectionalLight intensity={1.2} castShadow position={[3, 10, 10]} />
-			<T.AmbientLight intensity={0.2} />
+		<T.DirectionalLight intensity={1.2} castShadow position={[3, 10, 10]} />
+		<T.AmbientLight intensity={0.2} />
 
-			<SheetObject key="group" let:Transform>
-				<Transform>
-					<T.Group position.y={offset} rotation.y={$target}>
-						<Suspense>
-							<Model file="swissknife.glb" {controls} {rotation} {spin} />
-							<Model file="rocket.glb" {controls} {rotation} {spin} />
-							<Model file="computer.glb" {controls} {rotation} {spin} />
-							<Model file="lighthouse.glb" {controls} {rotation} {spin} />
-						</Suspense>
-					</T.Group>
-				</Transform>
-			</SheetObject>
-		</Canvas>
-	</Sheet>
-</Project>
+		<SheetObject key="group" let:Transform>
+			<Transform>
+				<T.Group position.y={offset} rotation.y={$target}>
+					<Suspense>
+						<Model file="swissknife.glb" {controls} {rotation} {spin} />
+						<Model file="rocket.glb" {controls} {rotation} {spin} />
+						<Model file="computer.glb" {controls} {rotation} {spin} />
+						<Model file="lighthouse.glb" {controls} {rotation} {spin} />
+					</Suspense>
+				</T.Group>
+			</Transform>
+		</SheetObject>
+	</Canvas>
+</Theatre>
