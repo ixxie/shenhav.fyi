@@ -15,6 +15,7 @@
 
 	import Coloring from './Coloring.svelte';
 	import Footer from './Footer.svelte';
+	import type { Tweened } from 'svelte/motion';
 
 	// page data
 	const pageNames = Object.keys(pages);
@@ -24,8 +25,10 @@
 	$: pageIndex = pageNames.indexOf(current);
 	const pageCount = pageNames.length;
 
-	// mobile menu logic
 	let innerWidth: number;
+	let innerHeight: number;
+
+	// mobile menu logic
 	$: desktop = innerWidth > 780;
 	$: $mobileMenuOpen = desktop ? false : $mobileMenuOpen;
 
@@ -42,11 +45,21 @@
 	// trigger for initial trasition
 	let ready = false;
 	onMount(() => (ready = true));
+
+	let scroll: Tweened<number>;
 </script>
 
-<svelte:window bind:innerWidth />
+<svelte:window bind:innerWidth bind:innerHeight />
 
-<Coloring {pageIndex} {pageCount}>
+<Coloring {pageIndex} {pageCount} bind:scroll>
+	<div id="illustration">
+		<Scene
+			offset={(30 * $scroll) / innerHeight}
+			file={currentPage.file}
+			rotation={[0, 1, 0]}
+			spin={currentPage.spin}
+		/>
+	</div>
 	<div id="container">
 		{#if ready}
 			<header in:fly={{ duration: 1000, delay: 0, y: -100 }}>
@@ -54,24 +67,7 @@
 			</header>
 			{#if !$mobileMenuOpen}
 				<main>
-					{#key target}
-						<div
-							id="illustration"
-							in:fly={{ duration: 1000, delay: 1000, y: -100 }}
-							out:fly={{ duration: desktop ? 1000 : 0, y: -100 }}
-						>
-							<div id="cover" />
-							{#each pageNames as page}
-								{#if page == current}
-									<Scene
-										file={currentPage.file}
-										rotation={currentPage.rotation}
-										spin={currentPage.spin}
-									/>
-								{/if}
-							{/each}
-						</div>
-					{/key}
+					<div id="spacer" />
 					{#key target}
 						<article
 							in:fly={{ duration: 1000, delay: 1000, y: 100 }}
@@ -120,29 +116,22 @@
 	}
 
 	#illustration {
-		position: fixed;
+		pointer-events: none;
+		position: absolute;
 		right: 0;
 		top: 0;
-		width: calc(100vw - 1100px);
-		height: 100vh;
-		z-index: 10;
+		width: 100%;
+		height: 100%;
+		z-index: -10;
 	}
 
-	#cover {
-		display: none;
+	#spacer {
+		min-height: 30vh;
 	}
 
 	@media (max-width: 1800px) {
 		#container {
 			padding: 0;
-		}
-
-		#illustration {
-			position: static;
-			height: 90vh;
-			width: 100%;
-			margin-top: -20vh;
-			margin-bottom: -10vh;
 		}
 	}
 
@@ -160,12 +149,6 @@
 
 		main {
 			margin: 0;
-		}
-
-		#illustration {
-			margin: -10vh 0 -30vh 0;
-			z-index: -1;
-			position: relative;
 		}
 
 		#cover {

@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { T, useThrelte, useFrame } from '@threlte/core';
-	import { useGltf } from '@threlte/extras';
+	import { Suspense, useGltf, useSuspense } from '@threlte/extras';
+
+	import { SheetObject } from '@threlte/theatre';
 
 	import type { OrbitControls as OrbitControlsType } from 'three/addons/controls/OrbitControls.js';
 
@@ -15,9 +17,13 @@
 	export let rotation: [number, number, number] = [0, 0, 0];
 	export let spin: [number, number, number] = [0, 0, 0];
 
-	$: gltf = useGltf(`/scenes/${file}`, {
-		useDraco: true
-	});
+	const suspense = useSuspense();
+
+	$: gltf = suspense(
+		useGltf(`/scenes/${file}`, {
+			useDraco: true
+		})
+	);
 
 	const { camera } = useThrelte();
 
@@ -29,14 +35,6 @@
 	let innerWidth: number; // react to resize
 	let innerHeight: number; // react to resize
 	let ref: THREE.Group; // focus on group
-	$: zoomCameraToSelection({
-		camera: $camera as THREE.PerspectiveCamera,
-		controls,
-		selection: [ref],
-		fitOffset: innerWidth < 800 ? innerWidth / 800 : 1.1,
-		offsetWidth: innerWidth,
-		offsetHeight: innerHeight
-	});
 
 	let orientation: [number, number, number] = [0, 0, 0];
 	useFrame(() => {
@@ -47,9 +45,13 @@
 <svelte:window bind:innerWidth bind:innerHeight />
 
 {#if model}
-	<T.Group {rotation} bind:ref>
-		<T.Mesh geometry={model.children[0].geometry} rotation={orientation} castShadow>
-			<T.MeshToonMaterial color={shade} />
-		</T.Mesh>
-	</T.Group>
+	<SheetObject key="group / {file}" let:Transform>
+		<Transform>
+			<T.Group {rotation} bind:ref>
+				<T.Mesh geometry={model.children[0].geometry} rotation={orientation} castShadow>
+					<T.MeshToonMaterial color={shade} />
+				</T.Mesh>
+			</T.Group>
+		</Transform>
+	</SheetObject>
 {/if}

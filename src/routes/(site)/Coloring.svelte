@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { setContext } from 'svelte';
 	import { tweened } from 'svelte/motion';
-	import { sineInOut } from 'svelte/easing';
+	import { cubicInOut, sineInOut } from 'svelte/easing';
 
 	// props
 	export let pageIndex: number;
@@ -34,9 +34,16 @@
 	$: $color = phase + (pageIndex * 360) / pageCount;
 	$: style = `--color: ${$color};`;
 	setContext('color', color);
+
+	let container: HTMLDivElement;
+	export const scroll = tweened(0, { duration: 1000, easing: cubicInOut });
+
+	function getScroll() {
+		$scroll = container.scrollTop;
+	}
 </script>
 
-<div {style}>
+<div {style} bind:this={container} on:scroll={getScroll}>
 	<slot />
 </div>
 
