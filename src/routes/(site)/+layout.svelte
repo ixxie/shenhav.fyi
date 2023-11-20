@@ -53,7 +53,7 @@
 
 	let offset = tweened(0, { duration: 800, easing: cubicInOut });
 
-	$: $offset = $scroll / innerHeight > 0.5 ? 10 : 0;
+	$: $offset = $scroll / innerHeight > 0.4 ? 10 : 0;
 </script>
 
 <svelte:window bind:innerWidth bind:innerHeight />
