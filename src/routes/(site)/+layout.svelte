@@ -1,13 +1,14 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import { beforeNavigate } from '$app/navigation';
+	import { afterNavigate, beforeNavigate } from '$app/navigation';
 
 	import { onMount } from 'svelte';
-	import { fly } from 'svelte/transition';
+	import { fly, fade } from 'svelte/transition';
 	import { tweened } from 'svelte/motion';
 	import { cubicInOut } from 'svelte/easing';
 	import type { Writable } from 'svelte/store';
-	import type { BeforeNavigate } from '@sveltejs/kit';
+
+	import type { AfterNavigate, BeforeNavigate } from '@sveltejs/kit';
 
 	import { Menu, mobileMenuOpen } from '$lib/menu';
 	import { Scene } from '$lib/3D';
@@ -34,53 +35,41 @@
 	$: desktop = innerWidth > 780;
 	$: $mobileMenuOpen = desktop ? false : $mobileMenuOpen;
 
+	const globalDelay = 100;
+
 	// trigger for navigation transition
 	let target: string | null | undefined = null;
 	beforeNavigate(async (navigation: BeforeNavigate) => {
 		if (target == navigation.to?.route.id) {
 			navigation.cancel();
 		}
-		target = navigation.to?.route.id;
-		await new Promise((r) => setTimeout(r, 1000));
 	});
-
-	// trigger for initial trasition
-	let ready = false;
-	onMount(() => (ready = true));
+	afterNavigate(async (navigation: AfterNavigate) => {
+		target = navigation.to?.route.id;
+	});
 
 	// scroll based offsetting
 	let scroll: Writable<number>;
-
-	let offset = tweened(0, { duration: 800, easing: cubicInOut });
-
-	$: $offset = $scroll / innerHeight > 0.4 ? 10 : 0;
+	let offset = tweened(0, { duration: 1500, easing: cubicInOut });
+	$: $offset = $scroll / innerHeight > 0.3 ? 20 : 0;
 </script>
 
 <svelte:window bind:innerWidth bind:innerHeight />
 
 <Coloring {pageIndex} {pageCount} bind:scroll>
 	<div id="illustration">
-		<Scene offset={$offset} file={currentPage.file} rotation={[0, 1, 0]} spin={currentPage.spin} />
+		<Scene dolly={-$offset} file={currentPage.file} rotation={[0, 1, 0]} spin={currentPage.spin} />
 	</div>
 	<div id="container">
-		{#if ready}
-			<header in:fly={{ duration: 1000, delay: 0, y: -100 }}>
-				<Menu pages={['about', 'services', 'contact']} />
-			</header>
-			{#if !$mobileMenuOpen}
-				<main>
-					<div id="spacer" />
-					{#key target}
-						<article
-							in:fly={{ duration: 1000, delay: 1000, y: 100 }}
-							out:fly={{ duration: desktop ? 1000 : 0, y: 100 }}
-						>
-							<slot />
-						</article>
-					{/key}
-				</main>
-				<Footer {currentPage} />
-			{/if}
+		<header in:fly={{ duration: 1000, delay: globalDelay, y: 100 }}>
+			<Menu pages={['about', 'services', 'contact']} />
+		</header>
+		{#if !$mobileMenuOpen}
+			<main>
+				<div id="spacer" />
+				<slot />
+			</main>
+			<Footer {currentPage} />
 		{/if}
 	</div>
 	<div id="background" />

@@ -18,7 +18,7 @@ function mergeObject(object) {
 		}
 	});
 
-	const mergedGeometries = BufferGeometryUtils.mergeBufferGeometries(geometry, false);
+	const mergedGeometries = BufferGeometryUtils.mergeGeometries(geometry, false);
 	const mergedGeometry = BufferGeometryUtils.mergeVertices(mergedGeometries);
 
 	const group = new THREE.Group();
