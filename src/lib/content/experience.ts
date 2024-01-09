@@ -124,6 +124,13 @@ export const academic = [
 
 export const volunteering = [
 	{
+		role: 'Open-Source Maintainer',
+		start: '03/23',
+		org: "Threlte (Core Team)",
+		skills: ['Svelte', 'Three.js', 'Theatre.js', 'FOSS Community'],
+		summary: 'Core team member in the leading Svelte framework for 3D graphics in the web. Contributed major PRs and played a key role in community engagement and team organization.'
+	},
+	{
 		role: 'WWOOFer / Farmhand ',
 		start: '07/23',
 		org: "Organic Farms",
@@ -145,13 +152,5 @@ export const volunteering = [
 		org: 'Pirilä Commune',
 		skills: ['Community', 'Homesteading', 'Somatics'],
 		summary: "In the forests of East-Finland, cocreated an intentional community exploring themes of sustainability living. Cocreated engaging events for visitors and established a network of likeminded folks in the area."
-	},
-	{
-		role: 'Event Organizer',
-		start: '2014',
-		end: '2017',
-		org: 'The Biosophical Society',
-		skills: ['Biology', 'Philosophy', 'Events'],
-		summary: "Organized a discussion group for exploring themes in the philosophy of the life sciences and other areas of inquiry."
 	}
 ]
