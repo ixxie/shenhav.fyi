@@ -28,8 +28,8 @@
 	$: $target = Math.PI / 4 + rotations[file];
 </script>
 
-<Theatre studio={{ enabled: false }} config={{ state }}>
-	<Canvas>
+<Canvas>
+	<Theatre studio={{ enabled: false }} config={{ state }}>
 		<T.PerspectiveCamera
 			makeDefault
 			position={[10 + dolly, 5, 10 + dolly / 3]}
@@ -55,5 +55,5 @@
 				</Transform>
 			</SheetObject>
 		</Suspense>
-	</Canvas>
-</Theatre>
+	</Theatre>
+</Canvas>

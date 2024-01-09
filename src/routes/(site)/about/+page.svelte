@@ -4,13 +4,14 @@
 	import UserExperienceDesign from 'carbon-pictograms-svelte/lib/UserExperienceDesign.svelte';
 	import University from 'carbon-pictograms-svelte/lib/University.svelte';
 	import CodeSyntax from 'carbon-pictograms-svelte/lib/CodeSyntax.svelte';
+	import Advocate from 'carbon-pictograms-svelte/lib/Advocate.svelte';
 
 	import { fly } from 'svelte/transition';
 
 	import { Section, ExperienceSection } from '$lib/layout';
 	import { List } from '$lib/list';
 
-	import { industry, academic } from '$lib/content';
+	import { industry, academic, volunteering } from '$lib/content';
 </script>
 
 <article
@@ -42,21 +43,40 @@
 			]}
 		/>
 	</Section>
+	<!-- Industry -->
 	<Section pictogram={CodeSyntax} layout="right">
 		<hgroup>
 			<p>IT Professional</p>
 			<h1>Tech Industry Veteran</h1>
 		</hgroup>
 		<p>
+			
 			I've taken on different roles over the years, developing apps in the software industry or
-			offering services as a freelancer to SMEs. I grew from one role to the next by teaching myself
-			new skills every day, a habit I continue to cultivate. I keep up with the latest developments
-			in the field, and keep up a wide network of contacts and channels in the industry.
+			offering services as a freelancer to SMEs. I tend to learn on the job and I try to keep up
+			with the latest developments.
 		</p>
 	</Section>
 	<Masonry items={industry} idKey="role" let:item>
 		<ExperienceSection {...item} />
 	</Masonry>
+	
+	<!-- Volunteering -->
+	<Section pictogram={Advocate} layout="left">
+		<hgroup>
+			<p>Civic Dilettante</p>
+			<h1>Engaged Citizen</h1>
+		</hgroup>
+		<p>
+			In recent years I have gotten interested in the civil society, in particular the associative sector
+			and the social economy. I've also been interested in agroecological practices and community-orientated
+			living for years. 
+		</p>
+	</Section>
+	<Masonry items={volunteering} idKey="role" let:item>
+		<ExperienceSection {...item} />
+	</Masonry>
+
+	<!-- Academic -->
 	<Section pictogram={University} layout="left">
 		<hgroup>
 			<p>Life Scientist</p>
@@ -64,15 +84,14 @@
 		</hgroup>
 		<p>
 			By training, I am a biomathematician: I was interested in mathematically describing social and
-			biological networks. How likely is an ecosystem to collapse if a certain species disappears?
-			How quickly can a rumor spread if an influential person refuses to perpetuate it? That sort of
-			thing. In the end, I decided I want to <i>do</i> stuff instead of just <i>think</i> about it, and
-			decided to leave academic pursuits for professional practice.
+			biological networks. In the end, I decided I want to <i>do</i> stuff instead of just <i>think</i> 
+			about it, and decided to leave academic pursuits for professional practice.
 		</p>
 	</Section>
 	<Masonry items={academic} idKey="role" let:item>
 		<ExperienceSection {...item} />
 	</Masonry>
+
 	<section>
 		<hgroup>
 			<p>Seems Legit...</p>

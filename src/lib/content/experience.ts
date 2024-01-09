@@ -121,3 +121,37 @@ export const academic = [
 		summary: 'Double degree covering the basics of the Physics and Mathematics disciplines.'
 	}
 ] as ExperienceSection[];
+
+export const volunteering = [
+	{
+		role: 'WWOOFer / Farmhand ',
+		start: '07/23',
+		org: "Organic Farms",
+		skills: ['Permaculture', 'No-till', 'Homesteading', 'Livestock'],
+		summary: 'Volunteered in a small commercial organic vegetable farm in Provence and a mountain homesteading farm in the Savoie.'
+	},
+	{
+		role: 'Web Developer & Designer',
+		start: '01/23',
+		end: '07/23',
+		org: 'Global Ecovillage Network',
+		skills: ['WordPress', 'Associative Sector', 'Ecovillages', 'Multitiered Orgs'],
+		summary: "Helped streamline a legacy website's navigation and content in preperation for fundraising. The site had decades of legacy content and plugins contributed by dozens of volunteers. The network is composed of several regional organizations, making the site complex."
+	},
+	{
+		role: 'Community Member',
+		start: '02/21',
+		end: '07/22',
+		org: 'Pirilä Commune',
+		skills: ['Community', 'Homesteading', 'Somatics'],
+		summary: "In the forests of East-Finland, cocreated an intentional community exploring themes of sustainability living. Cocreated engaging events for visitors and established a network of likeminded folks in the area."
+	},
+	{
+		role: 'Event Organizer',
+		start: '2014',
+		end: '2017',
+		org: 'The Biosophical Society',
+		skills: ['Biology', 'Philosophy', 'Events'],
+		summary: "Organized a discussion group for exploring themes in the philosophy of the life sciences and other areas of inquiry."
+	}
+]

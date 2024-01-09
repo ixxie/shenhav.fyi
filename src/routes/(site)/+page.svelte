@@ -16,8 +16,8 @@
 >
 	<Section pictogram={FlashingContent} layout="right" large>
 		<hgroup>
-			<p>Premium Web Experiences</p>
-			<h1>Web Design that Makes a Difference</h1>
+			<p>Awesome Web Experiences</p>
+			<h1>Web Design Makes a Difference</h1>
 		</hgroup>
 		<p>
 			My name is Matan Bendix Shenhav, I'm a digital jack-of-all-trades: I've done <a href="/about"
@@ -77,8 +77,7 @@
 			workloads.
 		</p>
 		<p>
-			I'm happy to work with any technology for the right price, but I'm currently specializing on
-			the following stack:
+			I'm happy to work with any technology, but I'm currently working with the following stack:
 		</p>
 		<List
 			items={[
@@ -86,10 +85,8 @@
 				'TypeScript',
 				'NodeJS',
 				'Python',
-				'Supabase',
-				'PostgreSQL',
 				'GitHub',
-				'Netlify',
+				'Vercel',
 				'Linux',
 				'Bash'
 			]}

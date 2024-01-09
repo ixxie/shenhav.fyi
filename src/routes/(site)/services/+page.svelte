@@ -64,20 +64,7 @@
 			select the content, structure the message and refine the tone so your message will be heard.
 		</p>
 	</Section>
-	<Section pictogram={ChartMultiType} layout="right">
-		<hgroup>
-			<p>Marketing Support</p>
-			<h2>Campaigns that reach your audience</h2>
-		</hgroup>
-		<p>
-			Can't afford to fully outsource your marketing, but still want a hand? There are 1001 ways to
-			promote: digital ad campaigns on major platforms, content marketing through a blog and organic
-			growth hacking on social media. I'll help you with finding the right mix of approaches for
-			your situation. After helping you set up the tools, I'll teach you how to use them to do your
-			own marketing.
-		</p>
-	</Section>
-	<Section pictogram={AppDeveloper} layout="left">
+	<Section pictogram={AppDeveloper}>
 		<hgroup>
 			<p>IT Consulting</p>
 			<h2>Modern business tooling</h2>
