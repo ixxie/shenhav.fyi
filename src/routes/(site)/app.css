@@ -124,3 +124,7 @@ hgroup p {
 	font-size: 1.4rem;
 	margin: 1.5rem 2rem;
 }
+
+.deactivate {
+	display: none !important;
+}

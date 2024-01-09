@@ -1,10 +1,11 @@
 <script lang="ts">
 	import type { Page } from './pages';
+	import { mobileMenuOpen } from '$lib/menu';
 
 	export let currentPage: Page;
 </script>
 
-<footer>
+<footer class:deactivate={$mobileMenuOpen}>
 	<p>
 		<span> Copyright © 2023 </span>
 		<span class="dash" />

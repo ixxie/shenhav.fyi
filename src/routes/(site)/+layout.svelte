@@ -61,16 +61,14 @@
 		<Scene dolly={-$offset} file={currentPage.file} rotation={[0, 1, 0]} spin={currentPage.spin} />
 	</div>
 	<div id="container">
-		<header in:fly={{ duration: 1000, delay: globalDelay, y: 100 }}>
+		<header>
 			<Menu pages={['about', 'services', 'contact']} />
 		</header>
-		{#if !$mobileMenuOpen}
-			<main>
-				<div id="spacer" />
-				<slot />
-			</main>
-			<Footer {currentPage} />
-		{/if}
+		<main class:deactivate={$mobileMenuOpen}>
+			<div id="spacer" />
+			<slot />
+		</main>
+		<Footer {currentPage} />
 	</div>
 	<div id="background" />
 </Coloring>
@@ -89,6 +87,7 @@
 		margin: 0 2rem 5rem 2rem;
 		flex-grow: 1;
 	}
+
 
 	#background {
 		background: repeating-linear-gradient(

@@ -57,6 +57,7 @@
 
 	@media (max-width: 700px) {
 		nav {
+			position: fixed;
 			display: flex;
 			flex-direction: column;
 			justify-content: flex-start;
@@ -66,6 +67,7 @@
 			min-height: 100%;
 			margin: 0;
 			padding: 1rem;
+
 		}
 
 		nav a {
