@@ -46,6 +46,7 @@
 	section {
 		flex-grow: 1;
 		padding: 0.5em;
+		margin: 0;
 		display: flex;
 		gap: 0.5em;
 		flex-flow: row;
