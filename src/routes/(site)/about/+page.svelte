@@ -1,6 +1,4 @@
 <script lang="ts">
-	import Masonry from 'svelte-bricks';
-
 	import UserExperienceDesign from 'carbon-pictograms-svelte/lib/UserExperienceDesign.svelte';
 	import University from 'carbon-pictograms-svelte/lib/University.svelte';
 	import CodeSyntax from 'carbon-pictograms-svelte/lib/CodeSyntax.svelte';
@@ -56,9 +54,9 @@
 			with the latest developments.
 		</p>
 	</Section>
-	<Masonry items={industry} idKey="role" let:item>
+	{#each industry as item}
 		<ExperienceSection {...item} />
-	</Masonry>
+	{/each}
 	
 	<!-- Volunteering -->
 	<Section pictogram={Advocate} layout="left">
@@ -72,9 +70,9 @@
 			living for years. 
 		</p>
 	</Section>
-	<Masonry items={volunteering} idKey="role" let:item>
+	{#each volunteering as item}
 		<ExperienceSection {...item} />
-	</Masonry>
+	{/each}
 
 	<!-- Academic -->
 	<Section pictogram={University} layout="left">
@@ -88,9 +86,9 @@
 			about it, and decided to leave academic pursuits for professional practice.
 		</p>
 	</Section>
-	<Masonry items={academic} idKey="role" let:item>
+	{#each academic as item}
 		<ExperienceSection {...item} />
-	</Masonry>
+	{/each}
 
 	<section>
 		<hgroup>

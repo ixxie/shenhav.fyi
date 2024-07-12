@@ -1,10 +1,10 @@
 <script lang="ts">
 	const {
 		items,
-		small
+		small = false
 	} = $props<{
 		items: string[],
-		small: boolean
+		small?: boolean
 	}>()
 </script>
 

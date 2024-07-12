@@ -5,15 +5,13 @@
 	
 	// props
 	let {
+		children,
 		pageIndex,
-		pageCount,
-		scroll = $bindable(0),
-		children
+		pageCount
 	}: {
+		children: Snippet,
 		pageIndex: number,
-		pageCount: number,
-		scroll: number,
-		children: Snippet
+		pageCount: number
 	} = $props()
 
 	// params
@@ -47,13 +45,9 @@
 	const style = $derived( `--color: ${$color};`);
 
 	let container: HTMLDivElement;
-
-	function getScroll() {
-		scroll = container.scrollTop;
-	}
 </script>
 
-<div {style} bind:this={container} onscroll={getScroll}>
+<div {style} bind:this={container}>
 	{@render children()}
 </div>
 

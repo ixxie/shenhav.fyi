@@ -11,9 +11,9 @@
 		skills = undefined
 	} = $props<{
 		role: string
-		org: string
+		org?: string
 		start: string
-		end: string
+		end?: string
 		summary: string
 		details?: string[]
 		skills?: string[]

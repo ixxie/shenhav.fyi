@@ -1,12 +1,5 @@
 <script lang="ts">
-	import type { Page } from './pages';
 	import { mobileMenu } from '$lib/menu';
-
-	const {
-		currentPage
-	}: {
-		currentPage: Page
-	} = $props();
 </script>
 
 <footer class:deactivate={mobileMenu.open}>
@@ -16,19 +9,6 @@
 		<span> Matan Bendix Shenhav </span>
 		<span class="dash"></span>
 		<span> All Rights Reserved </span>
-	</p>
-	<p>
-		<span><i>3D Illustration credit</i></span>
-		<span class="dash"></span>
-		<span>
-			<a href={currentPage.modelUrl}>{currentPage.model}</a> by
-			<a href={currentPage.authorUrl}>{currentPage.author}</a>
-		</span>
-	</p>
-	<p style="font-size: smaller; max-width: 500px;">
-		<span><i>Modifications</i></span>
-		<span class="dash"></span>
-		<span>{currentPage.notes}</span>
 	</p>
 </footer>
 

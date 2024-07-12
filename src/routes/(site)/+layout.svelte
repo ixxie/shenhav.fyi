@@ -8,21 +8,21 @@
 	import { Menu, mobileMenu } from '$lib/menu';
 	
 	import './app.css';
-	import { pages } from './pages';
 	import Coloring from './Coloring.svelte';
 	import Footer from './Footer.svelte';
 
 	const {
-		children
+		children,
+		prerender = true
 	}: {
-		children: Snippet
+		children: Snippet,
+		prerender: boolean
 	} = $props()
 
 	// page data
-	const pageNames = Object.keys(pages);
+	const pageNames = ['home', 'about', 'services', 'contact']
 	const route = $derived($page.route.id?.replace('/(site)', '') ?? '/');
 	const current = $derived(route == '' ? 'home' : route.substring(1));
-	const currentPage = $derived(pages[current]);
 	const pageIndex = $derived(pageNames.indexOf(current));
 	const pageCount = pageNames.length;
 
@@ -57,7 +57,7 @@
 		<main class:deactivate={mobileMenu.open}>
 			{@render children()}
 		</main>
-		<Footer {currentPage} />
+		<Footer/>
 	</div>
 	<div id="background"></div>
 </Coloring>
