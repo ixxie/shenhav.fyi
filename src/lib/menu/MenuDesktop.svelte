@@ -1,25 +1,33 @@
 <script lang="ts">
 	import { Menu } from '$lib/icons';
 
-	import { mobileMenuOpen } from './stores';
+	import { mobileMenu } from './state.svelte';
 	import Logo from './Logo.svelte';
 	import MenuSocial from './MenuSocial.svelte';
 
-	export let pages: string[];
-	export let active: string;
+	const {
+		pages,
+		active
+	} = $props<{
+		pages: string[],
+		active: string
+	}>()
 
-	const showMobileMenu = () => ($mobileMenuOpen = true);
+	const showMobileMenu = () => (mobileMenu.open = true);
 </script>
 
 <nav>
 	<Logo />
 	<div>
 		{#each pages as page}
-			<a class:active={active == page} href="/{page}">{page}</a> <span>∙</span>
+			<a
+				class:active={active == page}
+				href="/{page}"
+			>{page}</a> <span>∙</span>
 		{/each}
 		<MenuSocial />
 	</div>
-	<button on:click={showMobileMenu}>
+	<button onclick={showMobileMenu}>
 		<Menu />
 	</button>
 </nav>

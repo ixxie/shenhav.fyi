@@ -2,30 +2,38 @@
 	import { page } from '$app/stores';
 	import { afterNavigate, beforeNavigate } from '$app/navigation';
 
+	import type { Snippet } from 'svelte';
 	import type { AfterNavigate, BeforeNavigate } from '@sveltejs/kit';
 
-	import { Menu, mobileMenuOpen } from '$lib/menu';
+	import { Menu, mobileMenu } from '$lib/menu';
+	
 	import './app.css';
-
 	import { pages } from './pages';
-
 	import Coloring from './Coloring.svelte';
 	import Footer from './Footer.svelte';
 
+	const {
+		children
+	}: {
+		children: Snippet
+	} = $props()
+
 	// page data
 	const pageNames = Object.keys(pages);
-	$: route = $page.route.id?.replace('/(site)', '') ?? '/';
-	$: current = route == '' ? 'home' : route.substring(1);
-	$: currentPage = pages[current];
-	$: pageIndex = pageNames.indexOf(current);
+	const route = $derived($page.route.id?.replace('/(site)', '') ?? '/');
+	const current = $derived(route == '' ? 'home' : route.substring(1));
+	const currentPage = $derived(pages[current]);
+	const pageIndex = $derived(pageNames.indexOf(current));
 	const pageCount = pageNames.length;
 
-	let innerWidth: number;
-	let innerHeight: number;
+	let innerWidth: number | undefined = $state();
+	let innerHeight: number | undefined = $state();
 
 	// mobile menu logic
-	$: desktop = innerWidth > 780;
-	$: $mobileMenuOpen = desktop ? false : $mobileMenuOpen;
+	const desktop = $derived(innerWidth ?? 1000 > 780);
+	$effect(() => {
+		mobileMenu.open = desktop ? false : mobileMenu.open;
+	});
 
 	// trigger for navigation transition
 	let target: string | null | undefined = null;
@@ -46,8 +54,8 @@
 		<header>
 			<Menu pages={['about', 'services', 'contact']} />
 		</header>
-		<main class:deactivate={$mobileMenuOpen}>
-			<slot />
+		<main class:deactivate={mobileMenu.open}>
+			{@render children()}
 		</main>
 		<Footer {currentPage} />
 	</div>

@@ -1,11 +1,15 @@
 <script lang="ts">
 	import type { Page } from './pages';
-	import { mobileMenuOpen } from '$lib/menu';
+	import { mobileMenu } from '$lib/menu';
 
-	export let currentPage: Page;
+	const {
+		currentPage
+	}: {
+		currentPage: Page
+	} = $props();
 </script>
 
-<footer class:deactivate={$mobileMenuOpen}>
+<footer class:deactivate={mobileMenu.open}>
 	<p>
 		<span> Copyright © 2023 </span>
 		<span class="dash"></span>

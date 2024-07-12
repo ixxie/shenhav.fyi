@@ -1,31 +1,31 @@
 <script lang="ts">
-	import { writable, type Writable } from 'svelte/store';
-
 	import { enhance } from '$app/forms';
 
 	import { Button } from '$lib/buttons';
 	import { Toast } from '$lib/toast';
+	import type { Snippet } from 'svelte';
 
 	import { Fieldset } from './fields';
 
-	export let action: string;
-	export let submitButton: string = 'submit';
-	export let method: 'post' | 'get' = 'post';
-	export let id: string = action;
+	const {
+		children,
+		action,
+		submitButton = 'submit',
+		method = 'post',
+		id = action
+	} = $props<{
+		children: Snippet,
+		action: string;
+		submitButton?: string
+		method?: 'post' | 'get'
+		id?: string
+	}>()
 
-	let toast:
-		| {
-				type: 'error' | 'info';
-				title: string;
-				message: string;
-		  }
-		| undefined = undefined;
+	let open = $state(false)
 
-	let open: Writable<boolean> = writable(false);
-
-	let type: 'error' | 'info' = 'info';
-	let title: string = '';
-	let message: string = '';
+	let type: 'error' | 'info' = $state('info');
+	let title: string = $state('');
+	let message: string = $state('');
 </script>
 
 <form
@@ -34,11 +34,11 @@
 	action="?/{action}"
 	use:enhance={() => {
 		return async ({ result, update }) => {
-			$open = true;
+			open = true;
 			if (result.type != 'redirect' && result.type != 'error') {
 				type = result.type == 'success' ? 'info' : 'error';
-				title = result?.data?.title;
-				message = result?.data?.message;
+				title = `${result?.data?.title}`;
+				message = `${result?.data?.message}`;
 			} else {
 				type = 'error';
 				title = 'Unknown Error';
@@ -49,10 +49,10 @@
 		};
 	}}
 >
-	<slot />
+	{@render children()}
 	<Fieldset align="right">
 		<Button formaction="?/{action}">{submitButton}</Button>
-		<Toast bind:open={$open} {type} {title} {message} />
+		<Toast bind:open {type} {title} {message} />
 	</Fieldset>
 </form>
 

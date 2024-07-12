@@ -1,14 +1,24 @@
 <script lang="ts">
-	export let pictogram: any = undefined;
-	export let large: boolean = false;
-	export let layout: 'left' | 'right' = 'right';
+	import type { Snippet } from "svelte";
+
+	const {
+		pictogram = undefined,
+		large = false,
+		layout = 'right',
+		children
+	} = $props<{
+		pictogram?: any 
+		large?: boolean
+		layout?: 'left' | 'right',
+		children: Snippet
+	}>()
 
 	const classes = `${large ? 'large' : ''} ${layout}`;
 </script>
 
 <section class={classes}>
 	<div class="content">
-		<slot />
+		{@render children()}
 	</div>
 	<div class="illustration">
 		{#if pictogram}

@@ -1,4 +1,12 @@
-<a href="/" on:click>
+<script lang="ts">
+   const {
+      onclick = () => {}
+   } = $props<{
+      onclick?: () => void
+   }>()
+</script>
+ 
+<a href="/" {onclick}>
 <svg
    width="100.50958mm"
    height="29.718109mm"
@@ -6,7 +14,7 @@
    version="1.1"
    id="svg527"
    xmlns="http://www.w3.org/2000/svg"
-   xmlns:svg="http://www.w3.org/2000/svg">
+  >
   <defs
      id="defs524" />
   <g

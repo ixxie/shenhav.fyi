@@ -1,12 +1,20 @@
 <script lang="ts">
-	import { setContext } from 'svelte';
+	import { setContext, type Snippet } from 'svelte';
 	import { tweened } from 'svelte/motion';
 	import { sineInOut } from 'svelte/easing';
-	import { writable } from 'svelte/store';
-
+	
 	// props
-	export let pageIndex: number;
-	export let pageCount: number;
+	let {
+		pageIndex,
+		pageCount,
+		scroll = $bindable(0),
+		children
+	}: {
+		pageIndex: number,
+		pageCount: number,
+		scroll: number,
+		children: Snippet
+	} = $props()
 
 	// params
 	const phase = 20;
@@ -16,7 +24,7 @@
 	const round = (n: number) => Math.round(n * 100) / 100;
 
 	// store
-	const color = tweened(phase + (pageIndex * 360) / pageCount, {
+	let color = tweened(phase + (pageIndex * 360) / pageCount, {
 		duration: 2000,
 		easing: sineInOut,
 		interpolate: (from, to) => {
@@ -32,20 +40,21 @@
 	});
 
 	// logic
-	$: $color = phase + (pageIndex * 360) / pageCount;
-	$: style = `--color: ${$color};`;
+	$effect(() => {
+		$color = phase + (pageIndex * 360) / pageCount
+	});
 	setContext('color', color);
+	const style = $derived( `--color: ${$color};`);
 
 	let container: HTMLDivElement;
-	export const scroll = writable(0);
 
 	function getScroll() {
-		$scroll = container.scrollTop;
+		scroll = container.scrollTop;
 	}
 </script>
 
-<div {style} bind:this={container} on:scroll={getScroll}>
-	<slot />
+<div {style} bind:this={container} onscroll={getScroll}>
+	{@render children()}
 </div>
 
 <style>

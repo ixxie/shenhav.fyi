@@ -3,7 +3,6 @@
 	import Websites from 'carbon-pictograms-svelte/lib/Websites.svelte';
 	import ArtTools_01 from 'carbon-pictograms-svelte/lib/ArtTools_01.svelte';
 	import TextData from 'carbon-pictograms-svelte/lib/TextData.svelte';
-	import ChartMultiType from 'carbon-pictograms-svelte/lib/ChartMultiType.svelte';
 	import AppDeveloper from 'carbon-pictograms-svelte/lib/AppDeveloper.svelte';
 
 	import { fly } from 'svelte/transition';

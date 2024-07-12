@@ -1,27 +1,32 @@
 <script lang="ts">
 	import { Close } from '$lib/icons';
 
-	import { mobileMenuOpen } from './stores';
+	import { mobileMenu } from './state.svelte';
 	import Logo from './Logo.svelte';
 	import MenuSocial from './MenuSocial.svelte';
 
-	export let pages: string[];
-	export let active: string;
+	const {
+		pages,
+		active
+	} = $props<{
+		pages: string[],
+		active: string
+	}>()
 
-	const hideMobileMenu = () => ($mobileMenuOpen = false);
+	const hideMobileMenu = () => (mobileMenu.open = false);
 </script>
 
 <nav>
 	<header>
-		<Logo on:click={hideMobileMenu} />
-		<button on:click={hideMobileMenu}>
+		<Logo onclick={hideMobileMenu} />
+		<button onclick={hideMobileMenu}>
 			<Close />
 		</button>
 	</header>
 	<div id="links">
-		<a class:active={'home' == active} href="/" on:click={hideMobileMenu}> home </a>
+		<a class:active={'home' == active} href="/" onclick={hideMobileMenu}> home </a>
 		{#each pages as page}
-			<a class:active={page == active} href="/{page}" on:click={hideMobileMenu}>
+			<a class:active={page == active} href="/{page}" onclick={hideMobileMenu}>
 				{page}
 			</a>
 		{/each}

@@ -1,8 +1,26 @@
 <script lang="ts">
-	export let formaction: string | undefined = undefined;
+	import type { Snippet } from "svelte";
+
+	const {
+		children,
+		formaction,
+		onclick = () => {},
+		onkeypress = () => {},
+		onkeydown = () => {},
+		onkeyup = () => {},
+	} = $props<{
+		children: Snippet,
+		formaction?: string,
+		onclick?: () => void,
+		onkeypress?: () => void,
+		onkeydown?: () => void,
+		onkeyup?: () => void,
+	}>()
 </script>
 
-<button on:click on:keypress on:keydown on:keyup {formaction}><slot /></button>
+<button {onclick} {onkeypress} {onkeydown} {onkeyup} {formaction}>
+	{@render children()}
+</button>
 
 <style>
 	button {

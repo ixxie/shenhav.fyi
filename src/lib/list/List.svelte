@@ -1,6 +1,11 @@
 <script lang="ts">
-	export let items: string[];
-	export let small = false;
+	const {
+		items,
+		small
+	} = $props<{
+		items: string[],
+		small: boolean
+	}>()
 </script>
 
 <p class="list" class:small>

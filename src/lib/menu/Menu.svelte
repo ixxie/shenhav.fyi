@@ -1,18 +1,20 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 
-	import { mobileMenuOpen } from './stores';
-
+	import { mobileMenu } from './state.svelte';
 	import MenuDesktop from './MenuDesktop.svelte';
 	import MenuMobile from './MenuMobile.svelte';
 
-	export let pages: string[];
+	const {
+		pages
+	} = $props<{
+		pages: string[]
+	}>();
 
-	$: active = $page.url.pathname.slice(1);
-	const iconSize = 32;
+	const active = $derived($page.url.pathname.slice(1));
 </script>
 
-{#if $mobileMenuOpen}
+{#if mobileMenu.open}
 	<MenuMobile {pages} {active} />
 {:else}
 	<MenuDesktop {pages} {active} />

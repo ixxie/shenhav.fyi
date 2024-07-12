@@ -1,14 +1,24 @@
 <script lang="ts">
-	export let align: 'left' | 'center' | 'right' = 'left';
-	export let legend: string | undefined = undefined;
-	export let nowrap: boolean = false;
+	import type { Snippet } from "svelte";
+
+	const {
+		children,
+		align = 'left',
+		legend = undefined,
+		nowrap = false
+	} = $props<{
+		children: Snippet,
+		align?: 'left' | 'center' | 'right'
+		legend?: string
+		nowrap?: boolean
+	}>()
 </script>
 
 <fieldset class={align} class:nowrap>
 	{#if legend}
 		<legend>{legend}</legend>
 	{/if}
-	<slot />
+	{@render children()}
 </fieldset>
 
 <style>

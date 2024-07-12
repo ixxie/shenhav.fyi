@@ -1,13 +1,23 @@
 <script lang="ts">
 	import { List } from '$lib/list';
 
-	export let role: string;
-	export let org: string = 'Freelance';
-	export let start: string;
-	export let end: string = 'present';
-	export let summary: string;
-	export let details: string[] | undefined = undefined;
-	export let skills: string[] | undefined = undefined;
+	const {
+		role,
+		org = 'Freelance',
+		start,
+		end = 'present',
+		summary,
+		details = undefined,
+		skills = undefined
+	} = $props<{
+		role: string
+		org: string
+		start: string
+		end: string
+		summary: string
+		details?: string[]
+		skills?: string[]
+	}>()
 </script>
 
 <section class="panel">

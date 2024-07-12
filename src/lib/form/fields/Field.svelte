@@ -1,7 +1,17 @@
 <script lang="ts">
-	export let label: string;
-	export let id: string = label.toLowerCase().replace(' ', '-');
-	export let required: boolean = false;
+	import type { Snippet } from "svelte";
+
+	let {
+		children,
+		label = 'Email',
+		id = label.toLowerCase().replace(' ', '-'),
+		required = false
+	} = $props<{
+		children: Snippet
+		label?: string
+		id?: string
+		required?: boolean
+	}>()
 </script>
 
 <div>
@@ -11,7 +21,7 @@
 			<span>*</span>
 		{/if}
 	</label>
-	<slot />
+	{@render children()}
 </div>
 
 <style>

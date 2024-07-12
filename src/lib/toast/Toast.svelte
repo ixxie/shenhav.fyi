@@ -1,28 +1,36 @@
 <script lang="ts">
-	export let type: 'error' | 'warning' | 'info' = 'info';
-	export let open: boolean = true;
-	export let title: string = '';
-	export let message: string;
-
 	import { Close, Checkmark, Warning, Error } from '$lib/icons';
 
 	import { fade } from 'svelte/transition';
-	import { createEventDispatcher } from 'svelte';
+	import type { SvelteComponent } from 'svelte';
 
-	$: error = type == 'error';
-	$: warning = type == 'warning';
-	$: info = type == 'info';
+	let {
+		type = 'info',
+		open = $bindable(true),
+		title = '',
+		message,
+		ontoastclosed
+	} = $props<{
+		type: 'error' | 'warning' | 'info'
+		open: boolean
+		title: string
+		message: string,
+		ontoastclosed: () => void
+	}>()
 
-	const icon = {
+	const error = $derived(type == 'error');
+	const warning = $derived(type == 'warning');
+	const info = $derived(type == 'info');
+
+	const icon: Record<'error' | 'warning' | 'info', SvelteComponent> = {
 		error: Error,
 		warning: Warning,
 		info: Checkmark
 	};
 
-	const dispatch = createEventDispatcher();
 	function close() {
 		open = false;
-		dispatch('toast-closed');
+		ontoastclosed()
 	}
 </script>
 
@@ -32,7 +40,7 @@
 			<svelte:component this={icon[type]} />
 			<b>{title ? title + ':' : ''}</b>{message}
 		</span>
-		<span on:click={close} on:keypress={close} role="button" tabindex="0">
+		<span onclick={close} onkeypress={close} role="button" tabindex="0">
 			<Close />
 		</span>
 	</section>
