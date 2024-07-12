@@ -9,5 +9,5 @@
 </script>
 
 <Field {label} {id} {required}>
-	<textarea type="text" name={id} {rows} {required} bind:value />
+	<textarea name={id} {rows} {required} bind:value></textarea>
 </Field>

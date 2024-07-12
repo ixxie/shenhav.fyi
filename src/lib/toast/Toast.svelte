@@ -32,7 +32,7 @@
 			<svelte:component this={icon[type]} />
 			<b>{title ? title + ':' : ''}</b>{message}
 		</span>
-		<span on:click={close} on:keypress={close}>
+		<span on:click={close} on:keypress={close} role="button" tabindex="0">
 			<Close />
 		</span>
 	</section>
