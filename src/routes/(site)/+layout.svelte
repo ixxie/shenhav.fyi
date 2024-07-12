@@ -12,11 +12,9 @@
 	import Footer from './Footer.svelte';
 
 	const {
-		children,
-		prerender = true
+		children
 	}: {
-		children: Snippet,
-		prerender: boolean
+		children: Snippet
 	} = $props()
 
 	// page data
