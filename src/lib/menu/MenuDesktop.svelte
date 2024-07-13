@@ -38,8 +38,8 @@
 		align-items: center;
 		justify-content: space-between;
 		gap: 0.5rem;
-		margin: 2rem 0;
-		padding: 0 1rem;
+		margin: 1rem 0;
+		padding: 0 1.5rem;
 		opacity: 0.85;
 		mix-blend-mode: multiply;
 	}
@@ -69,6 +69,7 @@
 		padding: 0;
 		background: none;
 		display: none;
+		z-index: 100;
 	}
 
 	@media (max-width: 700px) {

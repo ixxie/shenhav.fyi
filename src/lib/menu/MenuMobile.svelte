@@ -71,7 +71,8 @@
 			height: 100%;
 			min-height: 100%;
 			margin: 0;
-			padding: 1rem;
+			padding: 1rem 1.5rem;
+			opacity: 0.85;
 
 		}
 
@@ -84,7 +85,7 @@
 		}
 
 		button {
-			display: inline-block;
+			display: block;
 		}
 	}
 </style>
