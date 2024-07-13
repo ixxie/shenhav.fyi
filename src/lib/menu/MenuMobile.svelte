@@ -13,13 +13,15 @@
 		active: string
 	}>()
 
-	const hideMobileMenu = () => (mobileMenu.open = false);
+	const hideMobileMenu = () => {
+		mobileMenu.open = false;
+	};
 </script>
 
 <nav>
 	<header>
 		<Logo onclick={hideMobileMenu} />
-		<button onclick={hideMobileMenu} ontouchend={hideMobileMenu}>
+		<button onclick={hideMobileMenu}>
 			<Close />
 		</button>
 	</header>

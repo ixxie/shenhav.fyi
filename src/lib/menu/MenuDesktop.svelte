@@ -13,7 +13,9 @@
 		active: string
 	}>()
 
-	const showMobileMenu = () => (mobileMenu.open = true);
+	const showMobileMenu = () => {
+		mobileMenu.open = true
+	};
 </script>
 
 <nav>
@@ -27,7 +29,7 @@
 		{/each}
 		<MenuSocial />
 	</div>
-	<button onclick={showMobileMenu} ontouchend={showMobileMenu}>
+	<button onclick={showMobileMenu}>
 		<Menu />
 	</button>
 </nav>

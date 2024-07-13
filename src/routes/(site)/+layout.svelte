@@ -28,7 +28,7 @@
 	let innerHeight: number | undefined = $state();
 
 	// mobile menu logic
-	const desktop = $derived(innerWidth ?? 1000 > 780);
+	const desktop = $derived((innerWidth ?? 1000) > 780);
 	$effect(() => {
 		mobileMenu.open = desktop ? false : mobileMenu.open;
 	});
