@@ -19,7 +19,7 @@
 <nav>
 	<header>
 		<Logo onclick={hideMobileMenu} />
-		<button onclick={hideMobileMenu}>
+		<button onclick={hideMobileMenu} ontouchend={hideMobileMenu}>
 			<Close />
 		</button>
 	</header>

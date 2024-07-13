@@ -27,7 +27,7 @@
 		{/each}
 		<MenuSocial />
 	</div>
-	<button onclick={showMobileMenu}>
+	<button onclick={showMobileMenu} ontouchend={showMobileMenu}>
 		<Menu />
 	</button>
 </nav>
