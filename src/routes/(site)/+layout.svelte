@@ -5,7 +5,7 @@
 	import type { Snippet } from 'svelte';
 	import type { AfterNavigate, BeforeNavigate } from '@sveltejs/kit';
 
-	import { Menu, mobileMenu } from '$lib/menu';
+	import { Menu } from '$lib/menu';
 	
 	import './app.css';
 	import Coloring from './Coloring.svelte';
@@ -29,9 +29,6 @@
 
 	// mobile menu logic
 	const desktop = $derived((innerWidth ?? 1000) > 780);
-	$effect(() => {
-		mobileMenu.open = desktop ? false : mobileMenu.open;
-	});
 
 	// trigger for navigation transition
 	let target: string | null | undefined = null;
@@ -52,7 +49,7 @@
 		<header>
 			<Menu pages={['about', 'services', 'contact']} />
 		</header>
-		<main class:deactivate={mobileMenu.open}>
+		<main>
 			{@render children()}
 		</main>
 		<Footer/>
@@ -68,6 +65,7 @@
 		display: flex;
 		flex-flow: column;
 		padding-left: 100px;
+		scrollbar-gutter: stable;
 	}
 
 	main {

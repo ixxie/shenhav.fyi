@@ -6,12 +6,12 @@
 		align = 'left',
 		legend = undefined,
 		nowrap = false
-	} = $props<{
+	}: {
 		children: Snippet,
 		align?: 'left' | 'center' | 'right'
 		legend?: string
 		nowrap?: boolean
-	}>()
+	} = $props()
 </script>
 
 <fieldset class={align} class:nowrap>

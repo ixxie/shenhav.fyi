@@ -6,12 +6,12 @@
 		id = label.toLowerCase().replace(' ', '-'),
 		required = false,
 		value = $bindable(undefined)
-	} = $props<{
+	}: {
 		label?: string
 		id?: string
 		required?: boolean
 		value?: string
-	}>()
+	} = $props()
 </script>
 
 <Field {label} {id} {required}>

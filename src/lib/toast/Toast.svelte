@@ -1,31 +1,31 @@
 <script lang="ts">
-	import { Close, Checkmark, Warning, Error } from '$lib/icons';
+	import { CloseIcon, CheckmarkIcon, WarningIcon, ErrorIcon } from '$lib/icons';
 
 	import { fade } from 'svelte/transition';
-	import type { SvelteComponent } from 'svelte';
+	import type { Component } from 'svelte';
 
 	let {
 		type = 'info',
 		open = $bindable(true),
 		title = '',
 		message,
-		ontoastclosed
-	} = $props<{
+		ontoastclosed = () => {}
+	}: {
 		type: 'error' | 'warning' | 'info'
 		open: boolean
 		title: string
-		message: string,
-		ontoastclosed: () => void
-	}>()
+		message: string
+		ontoastclosed?: () => void
+	} = $props()
 
 	const error = $derived(type == 'error');
 	const warning = $derived(type == 'warning');
 	const info = $derived(type == 'info');
 
-	const icon: Record<'error' | 'warning' | 'info', SvelteComponent> = {
-		error: Error,
-		warning: Warning,
-		info: Checkmark
+	const icon: Record<'error' | 'warning' | 'info', Component> = {
+		error: ErrorIcon,
+		warning: WarningIcon,
+		info: CheckmarkIcon
 	};
 
 	function close() {
@@ -41,7 +41,7 @@
 			<b>{title ? title + ':' : ''}</b>{message}
 		</span>
 		<span onclick={close} onkeypress={close} role="button" tabindex="0">
-			<Close />
+			<CloseIcon />
 		</span>
 	</section>
 {/if}

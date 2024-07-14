@@ -1,8 +1,4 @@
-<script lang="ts">
-	import { mobileMenu } from '$lib/menu';
-</script>
-
-<footer class:deactivate={mobileMenu.open}>
+<footer>
 	<p>
 		<span> Copyright © 2023 </span>
 		<span class="dash"></span>

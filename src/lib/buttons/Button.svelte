@@ -8,14 +8,14 @@
 		onkeypress = () => {},
 		onkeydown = () => {},
 		onkeyup = () => {},
-	} = $props<{
+	}: {
 		children: Snippet,
 		formaction?: string,
 		onclick?: () => void,
 		onkeypress?: () => void,
 		onkeydown?: () => void,
 		onkeyup?: () => void,
-	}>()
+	} = $props()
 </script>
 
 <button {onclick} {onkeypress} {onkeydown} {onkeyup} {formaction}>

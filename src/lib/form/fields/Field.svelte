@@ -6,12 +6,12 @@
 		label = 'Email',
 		id = label.toLowerCase().replace(' ', '-'),
 		required = false
-	} = $props<{
+	}: {
 		children: Snippet
 		label?: string
 		id?: string
 		required?: boolean
-	}>()
+	} = $props()
 </script>
 
 <div>

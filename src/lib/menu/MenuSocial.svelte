@@ -1,13 +1,13 @@
 <script lang="ts">
-	import { Github, Linkedin } from '$lib/icons';
+	import { GithubIcon, LinkedinIcon } from '$lib/icons';
 </script>
 
 <div>
 	<a href="https://www.linkedin.com/in/matan-shenhav/">
-		<Linkedin />
+		<LinkedinIcon />
 	</a>
 	<a href="https://github.com/ixxie">
-		<Github />
+		<GithubIcon />
 	</a>
 </div>
 

@@ -13,13 +13,13 @@
 		submitButton = 'submit',
 		method = 'post',
 		id = action
-	} = $props<{
+	}: {
 		children: Snippet,
 		action: string;
 		submitButton?: string
 		method?: 'post' | 'get'
 		id?: string
-	}>()
+	} = $props()
 
 	let open = $state(false)
 
