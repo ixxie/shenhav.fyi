@@ -72,6 +72,10 @@
 		scrollbar-gutter: stable;
 	}
 
+	#container :global(*) {
+		opacity: 0.98;
+	}
+
 	main {
 		margin: 0 2rem 5rem 2rem;
 		flex-grow: 1;
@@ -115,7 +119,10 @@
 	}
 
 	#color {
-		background: hsl(var(--color), 60%, 90%);
+		background:
+			radial-gradient(ellipse at bottom right, hsl(var(--color), 90%, 90%), transparent),
+			radial-gradient(ellipse at top left, hsl(var(--color), 90%, 95%), transparent),
+			white;
 		z-index: -300;
 	}
 
