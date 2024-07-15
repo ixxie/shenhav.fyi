@@ -54,7 +54,11 @@
 		</main>
 		<Footer/>
 	</div>
-	<div id="background"></div>
+	<div class="background">
+		<div id="stripes"></div>
+		<div id="noise"></div>
+		<div id="color"></div>
+	</div>
 </Coloring>
 
 <style>
@@ -73,21 +77,46 @@
 		flex-grow: 1;
 	}
 
+	.background {
+		isolation: isolate;
+	}
 
-	#background {
-		background: repeating-linear-gradient(
-			-45deg,
-			hsl(var(--color), 50%, 90%),
-			hsl(var(--color), 50%, 90%) 3px,
-			hsl(var(--color), 50%, 91%) 3px,
-			hsl(var(--color), 50%, 91%) 6px
-		);
+	.background, .background > * {
 		position: fixed;
 		top: 0;
 		left: 0;
 		z-index: -100;
 		width: 100vw;
 		height: 100vh;
+	}
+
+	#stripes {
+		background: repeating-linear-gradient(
+			-45deg,
+			hsl(0, 0%, 90%),
+			hsl(0, 0%, 90%) 3px,
+			hsl(0, 0%, 95%) 3px,
+			hsl(0, 0%, 95%) 6px
+		);
+		z-index: -100;
+		opacity: 0.3;
+		mix-blend-mode: luminosity;
+	}
+
+	#noise {
+		background: 
+			radial-gradient(ellipse at bottom left, rgb(49, 49, 49), transparent), 
+			radial-gradient(ellipse at top right, rgb(49, 49, 49), transparent), 
+			url(/images/noise.svg);   
+		filter: contrast(200%) brightness(1000%);
+		opacity: 0.15;
+		mix-blend-mode: multiply;
+		z-index: -200;
+	}
+
+	#color {
+		background: hsl(var(--color), 60%, 90%);
+		z-index: -300;
 	}
 
 	@media (max-width: 1800px) {
