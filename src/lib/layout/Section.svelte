@@ -86,7 +86,7 @@
 			position: absolute;
 			top: 0;
 			z-index: -1;
-			opacity: 0.2;
+			opacity: 0.2 !important;
 		}
 
 		.left .illustration {
