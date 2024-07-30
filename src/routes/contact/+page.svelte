@@ -4,7 +4,6 @@
 	import { fly } from 'svelte/transition';
 
 	import Email from '$lib/Email.svelte';
-	import { Form, Fieldset, EmailField, TextField, TextAreaField } from '$lib/form';
 	import { Section } from '$lib/layout';
 </script>
 
@@ -24,17 +23,5 @@
 			and
 			<a href="https://github.com/ixxie">github</a>.
 		</p>
-		<p>Or if you prefer, you write me directly here:</p>
 	</Section>
-	<section>
-		<Form action="contact" submitButton="GET IN TOUCH">
-			<Fieldset>
-				<TextField label="Name" required />
-				<EmailField required />
-			</Fieldset>
-			<Fieldset>
-				<TextAreaField label="Message" required />
-			</Fieldset>
-		</Form>
-	</section>
 </article>
