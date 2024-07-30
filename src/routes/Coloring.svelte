@@ -2,17 +2,17 @@
 	import { setContext, type Snippet } from 'svelte';
 	import { tweened } from 'svelte/motion';
 	import { sineInOut } from 'svelte/easing';
-	
+
 	// props
 	let {
 		children,
 		pageIndex,
 		pageCount
 	}: {
-		children: Snippet,
-		pageIndex: number,
-		pageCount: number
-	} = $props()
+		children: Snippet;
+		pageIndex: number;
+		pageCount: number;
+	} = $props();
 
 	// params
 	const phase = 20;
@@ -39,10 +39,10 @@
 
 	// logic
 	$effect(() => {
-		$color = phase + (pageIndex * 360) / pageCount
+		$color = phase + (pageIndex * 360) / pageCount;
 	});
 	setContext('color', color);
-	const style = $derived( `--color: ${$color};`);
+	const style = $derived(`--color: ${$color};`);
 
 	let container: HTMLDivElement;
 </script>
