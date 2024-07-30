@@ -34,10 +34,6 @@
 	}
 
 	@media (max-width: 700px) {
-		header {
-			height: 100%;
-		}
-
 		main {
 			margin: 0;
 		}
