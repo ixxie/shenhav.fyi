@@ -6,7 +6,7 @@
 	import type { AfterNavigate, BeforeNavigate } from '@sveltejs/kit';
 
 	import { Menu } from '$lib/menu';
-	
+
 	import './app.css';
 	import Coloring from './Coloring.svelte';
 	import Footer from './Footer.svelte';
@@ -14,21 +14,18 @@
 	const {
 		children
 	}: {
-		children: Snippet
-	} = $props()
+		children: Snippet;
+	} = $props();
 
 	// page data
-	const pageNames = ['home', 'about', 'services', 'contact']
+	const pageNames = ['home', 'about', 'services', 'contact'];
 	const route = $derived($page.route.id?.replace('/(site)', '') ?? '/');
-	const current = $derived(route == '' ? 'home' : route.substring(1));
+	const current = $derived(route == '/' ? 'home' : route.substring(1));
 	const pageIndex = $derived(pageNames.indexOf(current));
 	const pageCount = pageNames.length;
 
 	let innerWidth: number | undefined = $state();
 	let innerHeight: number | undefined = $state();
-
-	// mobile menu logic
-	const desktop = $derived((innerWidth ?? 1000) > 780);
 
 	// trigger for navigation transition
 	let target: string | null | undefined = null;
@@ -52,7 +49,7 @@
 		<main>
 			{@render children()}
 		</main>
-		<Footer/>
+		<Footer />
 	</div>
 	<div class="background">
 		<div id="stripes"></div>
@@ -85,7 +82,8 @@
 		isolation: isolate;
 	}
 
-	.background, .background > * {
+	.background,
+	.background > * {
 		position: fixed;
 		top: 0;
 		left: 0;
@@ -108,10 +106,8 @@
 	}
 
 	#noise {
-		background: 
-			radial-gradient(ellipse at bottom left, rgb(49, 49, 49), transparent), 
-			radial-gradient(ellipse at top right, rgb(49, 49, 49), transparent), 
-			url(/images/noise.svg);   
+		background: radial-gradient(ellipse at bottom left, rgb(49, 49, 49), transparent),
+			radial-gradient(ellipse at top right, rgb(49, 49, 49), transparent), url(/images/noise.svg);
 		filter: contrast(200%) brightness(1000%);
 		opacity: 0.15;
 		mix-blend-mode: multiply;
@@ -119,10 +115,8 @@
 	}
 
 	#color {
-		background:
-			radial-gradient(ellipse at bottom right, hsl(var(--color), 90%, 90%), transparent),
-			radial-gradient(ellipse at top left, hsl(var(--color), 90%, 95%), transparent),
-			white;
+		background: radial-gradient(ellipse at bottom right, hsl(var(--color), 90%, 90%), transparent),
+			radial-gradient(ellipse at top left, hsl(var(--color), 90%, 95%), transparent), white;
 		z-index: -300;
 	}
 

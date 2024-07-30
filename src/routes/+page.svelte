@@ -4,16 +4,11 @@
 	import SocialWork_01 from 'carbon-pictograms-svelte/lib/SocialWork_01.svelte';
 	import FlashingContent from 'carbon-pictograms-svelte/lib/FlashingContent.svelte';
 
-	import { fly } from 'svelte/transition';
-
 	import { List } from '$lib/list';
 	import { Section } from '$lib/layout';
 </script>
 
-<article
-	out:fly={{ duration: 1000, delay: 0, y: 100 }}
-	in:fly={{ duration: 1000, delay: 1000, y: 100 }}
->
+<article>
 	<Section pictogram={FlashingContent} layout="right" large>
 		<hgroup>
 			<p>Awesome Web Experiences</p>
@@ -80,16 +75,7 @@
 			I'm happy to work with any technology, but I'm currently working with the following stack:
 		</p>
 		<List
-			items={[
-				'Svelte/Kit',
-				'TypeScript',
-				'NodeJS',
-				'Python',
-				'GitHub',
-				'Vercel',
-				'Linux',
-				'Bash'
-			]}
+			items={['Svelte/Kit', 'TypeScript', 'NodeJS', 'Python', 'GitHub', 'Vercel', 'Linux', 'Bash']}
 		/>
 	</Section>
 </article>

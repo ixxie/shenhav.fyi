@@ -19,11 +19,11 @@
 		"carbon-pictograms-svelte": "^12.11.0",
 		"eslint": "^9.0.0",
 		"eslint-config-prettier": "^9.1.0",
-		"eslint-plugin-svelte": "2.38.0",
+		"eslint-plugin-svelte": "2.43.0",
 		"globals": "^15.0.0",
 		"prettier": "^3.1.1",
 		"prettier-plugin-svelte": "^3.1.2",
-		"svelte": "5.0.0-next.179",
+		"svelte": "^5.0.0-next.202",
 		"svelte-check": "^3.6.0",
 		"tslib": "^2.4.1",
 		"typescript": "^5.0.0",
@@ -32,6 +32,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@sveltejs/adapter-vercel": "^5.4.1",
 		"@sveltejs/vite-plugin-svelte": "^3.1.1"
 	}
 }
