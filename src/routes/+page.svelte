@@ -5,10 +5,10 @@
 	import FlashingContent from 'carbon-pictograms-svelte/lib/FlashingContent.svelte';
 
 	import { List } from '$lib/list';
-	import { Section } from '$lib/layout';
+	import { Article, Section } from '$lib/layout';
 </script>
 
-<article>
+<Article>
 	<Section pictogram={FlashingContent} layout="right" large>
 		<hgroup>
 			<p>Awesome Web Experiences</p>
@@ -78,4 +78,4 @@
 			items={['Svelte/Kit', 'TypeScript', 'NodeJS', 'Python', 'GitHub', 'Vercel', 'Linux', 'Bash']}
 		/>
 	</Section>
-</article>
+</Article>

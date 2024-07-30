@@ -1,16 +1,11 @@
 <script lang="ts">
 	import Envelope from 'carbon-pictograms-svelte/lib/Envelope.svelte';
 
-	import { fly } from 'svelte/transition';
-
 	import Email from '$lib/Email.svelte';
-	import { Section } from '$lib/layout';
+	import { Article, Section } from '$lib/layout';
 </script>
 
-<article
-	out:fly={{ duration: 1000, delay: 0, y: 100 }}
-	in:fly={{ duration: 1000, delay: 1000, y: 100 }}
->
+<Article>
 	<Section pictogram={Envelope} layout="left" large>
 		<hgroup>
 			<p>Contact</p>
@@ -24,4 +19,4 @@
 			<a href="https://github.com/ixxie">github</a>.
 		</p>
 	</Section>
-</article>
+</Article>

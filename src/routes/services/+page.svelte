@@ -5,15 +5,10 @@
 	import TextData from 'carbon-pictograms-svelte/lib/TextData.svelte';
 	import AppDeveloper from 'carbon-pictograms-svelte/lib/AppDeveloper.svelte';
 
-	import { fly } from 'svelte/transition';
-
-	import { Section } from '$lib/layout';
+	import { Article, Section } from '$lib/layout';
 </script>
 
-<article
-	out:fly={{ duration: 1000, delay: 0, y: 100 }}
-	in:fly={{ duration: 1000, delay: 1000, y: 100 }}
->
+<Article>
 	<Section pictogram={CloudUpload} layout="right" large>
 		<hgroup>
 			<p>Full-Suite Web Services</p>
@@ -76,4 +71,4 @@
 			budget.
 		</p>
 	</Section>
-</article>
+</Article>

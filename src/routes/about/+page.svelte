@@ -4,18 +4,12 @@
 	import CodeSyntax from 'carbon-pictograms-svelte/lib/CodeSyntax.svelte';
 	import Advocate from 'carbon-pictograms-svelte/lib/Advocate.svelte';
 
-	import { fly } from 'svelte/transition';
-
-	import { Section, ExperienceSection } from '$lib/layout';
+	import { Article, Section, ExperienceSection } from '$lib/layout';
 	import { List } from '$lib/list';
-
 	import { industry, academic, volunteering } from '$lib/content';
 </script>
 
-<article
-	out:fly={{ duration: 1000, delay: 0, y: 100 }}
-	in:fly={{ duration: 1000, delay: 1000, y: 100 }}
->
+<Article>
 	<Section pictogram={UserExperienceDesign} large layout="left">
 		<hgroup>
 			<p>A Creative Generalist</p>
@@ -48,7 +42,6 @@
 			<h1>Tech Industry Veteran</h1>
 		</hgroup>
 		<p>
-			
 			I've taken on different roles over the years, developing apps in the software industry or
 			offering services as a freelancer to SMEs. I tend to learn on the job and I try to keep up
 			with the latest developments.
@@ -57,7 +50,7 @@
 	{#each industry as item}
 		<ExperienceSection {...item} />
 	{/each}
-	
+
 	<!-- Volunteering -->
 	<Section pictogram={Advocate} layout="left">
 		<hgroup>
@@ -65,9 +58,9 @@
 			<h1>Engaged Citizen</h1>
 		</hgroup>
 		<p>
-			In recent years I have gotten interested in the civil society, in particular the associative sector
-			and the social economy. I've also been interested in agroecological practices and community-orientated
-			living for years. 
+			In recent years I have gotten interested in the civil society, in particular the associative
+			sector and the social economy. I've also been interested in agroecological practices and
+			community-orientated living for years.
 		</p>
 	</Section>
 	{#each volunteering as item}
@@ -82,7 +75,8 @@
 		</hgroup>
 		<p>
 			By training, I am a biomathematician: I was interested in mathematically describing social and
-			biological networks. In the end, I decided I want to <i>do</i> stuff instead of just <i>think</i> 
+			biological networks. In the end, I decided I want to <i>do</i> stuff instead of just
+			<i>think</i>
 			about it, and decided to leave academic pursuits for professional practice.
 		</p>
 	</Section>
@@ -100,4 +94,4 @@
 			you.
 		</p>
 	</section>
-</article>
+</Article>

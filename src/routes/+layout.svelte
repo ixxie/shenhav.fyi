@@ -1,15 +1,12 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import { afterNavigate, beforeNavigate } from '$app/navigation';
+	import { onNavigate, beforeNavigate } from '$app/navigation';
 
 	import type { Snippet } from 'svelte';
-	import type { AfterNavigate, BeforeNavigate } from '@sveltejs/kit';
-
-	import { Menu } from '$lib/menu';
+	import type { BeforeNavigate } from '@sveltejs/kit';
 
 	import './app.css';
 	import Coloring from './Coloring.svelte';
-	import Footer from './Footer.svelte';
 
 	const {
 		children
@@ -34,7 +31,7 @@
 			navigation.cancel();
 		}
 	});
-	afterNavigate(async (navigation: AfterNavigate) => {
+	onNavigate((navigation) => {
 		target = navigation.to?.route.id;
 	});
 </script>
@@ -43,18 +40,12 @@
 
 <Coloring {pageIndex} {pageCount}>
 	<div id="container">
-		<header>
-			<Menu pages={['about', 'services', 'contact']} />
-		</header>
-		<main>
-			{@render children()}
-		</main>
-		<Footer />
-	</div>
-	<div class="background">
-		<div id="stripes"></div>
-		<div id="noise"></div>
-		<div id="color"></div>
+		{@render children()}
+		<div class="background">
+			<div id="stripes"></div>
+			<div id="noise"></div>
+			<div id="color"></div>
+		</div>
 	</div>
 </Coloring>
 
@@ -73,9 +64,17 @@
 		opacity: 0.98;
 	}
 
-	main {
-		margin: 0 2rem 5rem 2rem;
-		flex-grow: 1;
+	@media (max-width: 1800px) {
+		#container {
+			padding: 0;
+		}
+	}
+
+	@media (max-width: 1100px) {
+		#container {
+			width: 100%;
+			max-width: 100%;
+		}
 	}
 
 	.background {
@@ -118,38 +117,5 @@
 		background: radial-gradient(ellipse at bottom right, hsl(var(--color), 90%, 90%), transparent),
 			radial-gradient(ellipse at top left, hsl(var(--color), 90%, 95%), transparent), white;
 		z-index: -300;
-	}
-
-	@media (max-width: 1800px) {
-		#container {
-			padding: 0;
-		}
-	}
-
-	@media (max-width: 1100px) {
-		#container {
-			width: 100%;
-			max-width: 100%;
-		}
-	}
-
-	@media (max-width: 700px) {
-		header {
-			height: 100%;
-		}
-
-		main {
-			margin: 0;
-		}
-	}
-
-	@media print {
-		header {
-			display: none;
-		}
-
-		:global(footer) {
-			display: none !important;
-		}
 	}
 </style>
