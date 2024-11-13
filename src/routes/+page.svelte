@@ -9,7 +9,7 @@
 </script>
 
 <Article>
-	<Section pictogram={FlashingContent} layout="right" large>
+	<Section Pictogram={FlashingContent} layout="right">
 		<hgroup>
 			<p>Awesome Web Experiences</p>
 			<h1>Web Design Makes a Difference</h1>
@@ -22,7 +22,7 @@
 			<a href="/contact">get in touch</a> to ask questions or get a quote!
 		</p>
 	</Section>
-	<Section pictogram={Growth} layout="left" large>
+	<Section Pictogram={Growth} layout="left">
 		<hgroup>
 			<p>Web Services for Small Organizations</p>
 			<h2>Make an Impression with your Website</h2>
@@ -39,7 +39,7 @@
 		</p>
 		<List items={['Stunning Visuals', 'Custom Functionality', 'Affordable Prices']} />
 	</Section>
-	<Section pictogram={SocialWork_01} layout="right" large>
+	<Section Pictogram={SocialWork_01} layout="right">
 		<hgroup>
 			<p>Special Ops for Creative Agencies</p>
 			<h2>Deliver Awesome Projects to your Customers</h2>
@@ -60,7 +60,7 @@
 			]}
 		/>
 	</Section>
-	<Section pictogram={Rocket} layout="left" large>
+	<Section Pictogram={Rocket} layout="left">
 		<hgroup>
 			<p>Flexible Contracting for Startups</p>
 			<h2>Fullstack Support with No Strings Attached</h2>

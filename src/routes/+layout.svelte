@@ -51,7 +51,7 @@
 
 <style>
 	#container {
-		max-width: 1100px;
+		max-width: 80ch;
 		min-height: 100%;
 		flex-grow: 1;
 		display: flex;

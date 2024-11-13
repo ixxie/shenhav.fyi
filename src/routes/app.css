@@ -21,6 +21,11 @@ article {
 	padding: 1rem;
 }
 
+blockquote {
+	padding-left: 1rem;
+	font-style: italic;
+}
+
 @media (max-width: 1800px) {
 	body {
 		justify-content: center;

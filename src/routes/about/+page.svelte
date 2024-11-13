@@ -10,7 +10,7 @@
 </script>
 
 <Article>
-	<Section pictogram={UserExperienceDesign} large layout="left">
+	<Section Pictogram={UserExperienceDesign} layout="left">
 		<hgroup>
 			<p>A Creative Generalist</p>
 			<h1>Your Jack-of-all-Trades</h1>
@@ -36,7 +36,7 @@
 		/>
 	</Section>
 	<!-- Industry -->
-	<Section pictogram={CodeSyntax} layout="right">
+	<Section Pictogram={CodeSyntax} layout="right">
 		<hgroup>
 			<p>IT Professional</p>
 			<h1>Tech Industry Veteran</h1>
@@ -52,7 +52,7 @@
 	{/each}
 
 	<!-- Volunteering -->
-	<Section pictogram={Advocate} layout="left">
+	<Section Pictogram={Advocate} layout="left">
 		<hgroup>
 			<p>Civic Dilettante</p>
 			<h1>Engaged Citizen</h1>
@@ -68,7 +68,7 @@
 	{/each}
 
 	<!-- Academic -->
-	<Section pictogram={University} layout="left">
+	<Section Pictogram={University} layout="left">
 		<hgroup>
 			<p>Life Scientist</p>
 			<h1>Recovering Academic</h1>

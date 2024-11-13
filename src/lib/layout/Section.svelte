@@ -1,77 +1,53 @@
 <script lang="ts">
-	import type { Snippet } from "svelte";
+	import type { Snippet } from 'svelte';
 
 	const {
-		pictogram = undefined,
-		large = false,
+		Pictogram = undefined,
 		layout = 'right',
 		children
 	} = $props<{
-		pictogram?: any 
-		large?: boolean
-		layout?: 'left' | 'right',
-		children: Snippet
-	}>()
-
-	const classes = `${large ? 'large' : ''} ${layout}`;
+		Pictogram?: any;
+		layout?: 'left' | 'right';
+		children: Snippet;
+	}>();
 </script>
 
-<section class={classes}>
+<section class={layout}>
 	<div class="content">
 		{@render children()}
 	</div>
 	<div class="illustration">
-		{#if pictogram}
-			<svelte:component this={pictogram} class="picto {classes}" />
+		{#if Pictogram}
+			<Pictogram class="picto {layout}" width="min(100%, 250px)" height="auto" />
 		{/if}
 	</div>
 </section>
 
 <style>
-	:root {
-		--section-normal-width: 200px;
-		--section-large-width: 250px;
+	.content {
+		grid-area: content;
 	}
 
 	.illustration {
 		grid-area: illustration;
-	}
-
-	.content {
-		grid-area: content;
+		padding-top: 2rem;
+		display: grid;
+		place-items: center;
 	}
 
 	section {
 		display: grid;
 		gap: 1rem;
-	}
 
-	section.left {
-		grid-template-columns: var(--section-normal-width) 1fr;
-		grid-template-areas: 'illustration content';
-	}
-	section.left.large {
-		grid-template-columns: var(--section-large-width) 1fr;
-	}
+		&.left {
+			grid-template-columns: 1fr 2fr;
+			grid-template-areas: 'illustration content';
+		}
 
-	section.right {
-		grid-template-columns: 1fr var(--section-normal-width);
-		grid-template-areas: 'content illustration';
-	}
-	section.right.large {
-		grid-template-columns: 1fr var(--section-large-width);
-	}
-
-	section :global(svg.picto) {
-		max-width: 100%;
-		width: var(--section-normal-width);
-		height: auto;
-		margin-top: 2.5rem;
-	}
-
-	section :global(svg.large) {
-		width: var(--section-large-width);
-		height: auto;
+		&.right {
+			grid-template-columns: 2fr 1fr;
+			grid-template-areas: 'content illustration';
+		}
 	}
 
 	@media (max-width: 700px) {

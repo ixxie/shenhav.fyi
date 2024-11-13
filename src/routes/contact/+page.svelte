@@ -6,7 +6,7 @@
 </script>
 
 <Article>
-	<Section pictogram={Envelope} layout="left" large>
+	<Section Pictogram={Envelope} layout="left">
 		<hgroup>
 			<p>Contact</p>
 			<h1>Let's Get In Touch</h1>

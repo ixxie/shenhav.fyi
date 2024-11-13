@@ -9,7 +9,7 @@
 </script>
 
 <Article>
-	<Section pictogram={CloudUpload} layout="right" large>
+	<Section Pictogram={CloudUpload} layout="right">
 		<hgroup>
 			<p>Full-Suite Web Services</p>
 			<h1>Everything You Need for a Successful Launch</h1>
@@ -20,7 +20,7 @@
 			site, launch a new marketing campaign or launch a new brand, I'm your man.
 		</p>
 	</Section>
-	<Section pictogram={Websites} layout="left">
+	<Section Pictogram={Websites} layout="left">
 		<hgroup>
 			<p>Web Development</p>
 			<h2>Websites with a twist</h2>
@@ -32,7 +32,7 @@
 			customized, pixel-perfect website with advanced features. The sky is the limit!
 		</p>
 	</Section>
-	<Section pictogram={ArtTools_01} layout="right">
+	<Section Pictogram={ArtTools_01} layout="right">
 		<hgroup>
 			<p>Branding & Graphic Design</p>
 			<h2>Tailored brand identities</h2>
@@ -45,7 +45,7 @@
 			you are launching a shiny new brand, I can set you up with everything you need.
 		</p>
 	</Section>
-	<Section pictogram={TextData} layout="left">
+	<Section Pictogram={TextData} layout="left">
 		<hgroup>
 			<p>Copywriting & Technical Writing</p>
 			<h2>Writing that packs a punch</h2>
@@ -58,7 +58,7 @@
 			select the content, structure the message and refine the tone so your message will be heard.
 		</p>
 	</Section>
-	<Section pictogram={AppDeveloper}>
+	<Section Pictogram={AppDeveloper}>
 		<hgroup>
 			<p>IT Consulting</p>
 			<h2>Modern business tooling</h2>
