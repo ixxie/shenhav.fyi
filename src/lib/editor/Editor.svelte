@@ -10,23 +10,19 @@
 		$props();
 
 	const editor = useEditor();
-
-	onMount(() => editor.init());
 </script>
 
-{#if editor.instance}
-	<div use:editor.root>
-		<menu id="toolbar">
-			{#each editor.tools as tool}
-				{@render tool()}
-			{/each}
-		</menu>
-		<article>
-			<!-- content -->
-		</article>
-		{@render children()}
-	</div>
-{/if}
+<div use:editor.root>
+	<menu id="toolbar">
+		{#each editor.tools as tool}
+			{@render tool()}
+		{/each}
+	</menu>
+	<article>
+		<!-- content -->
+	</article>
+	{@render children()}
+</div>
 
 {#if debug}
 	<pre>{JSON.stringify(editor.state, null, 2)}</pre>

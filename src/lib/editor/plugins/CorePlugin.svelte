@@ -1,6 +1,4 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
-
 	import { useEditor } from '../hook.svelte';
 
 	import { Tool } from './lib';

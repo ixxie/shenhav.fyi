@@ -26,7 +26,7 @@
 		nodes: [link.LinkNode, link.AutoLinkNode]
 	});
 
-	onMount(() => {
+	$effect(() => {
 		return editor.instance
 			? utils.mergeRegister(
 					editor.instance.registerCommand(
@@ -97,7 +97,7 @@
 							)
 						: () => {} // noop if no validation provided
 				)
-			: null;
+			: () => null;
 	});
 
 	// runtime

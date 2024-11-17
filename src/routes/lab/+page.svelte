@@ -11,8 +11,6 @@
 
 <Editor debug>
 	<CorePlugin />
-	<LinkPlugin />
-	<DragonPlugin />
-	<HistoryPlugin />
 	<RichTextPlugin />
+	<HistoryPlugin />
 </Editor>

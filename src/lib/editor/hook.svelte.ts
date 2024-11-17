@@ -22,7 +22,6 @@ export interface EditorContext {
 	registerPlugin: (plugin: EditorPlugin) => void;
 	format: (style: core.TextFormatType) => void;
 	update: core.LexicalEditor['update'];
-	init: () => void;
 }
 
 export interface EditorPlugin {
@@ -47,7 +46,7 @@ export function useEditor() {
 
 function initEditorContext() {
 	// state
-	let instance: core.LexicalEditor | undefined = $state();
+	let instance: core.LexicalEditor | undefined = $state.raw();
 	let state: {} = $state({});
 	let nodes: (core.Klass<core.LexicalNode> | core.LexicalNodeReplacement)[] =
 		$state([]);
@@ -55,9 +54,19 @@ function initEditorContext() {
 	let mode: string | null = $state(null);
 	let selecting: boolean = $state(false);
 
-	// if (typeof window !== 'undefined') {
-	const init = () => {
-		console.log(nodes);
+	// listen to selections
+
+	if (typeof window !== 'undefined') {
+		on(document, 'selectionchange', () => {
+			const selection = window?.getSelection();
+			selecting = selection !== null && !selection.isCollapsed;
+		});
+	}
+
+	const root = (node: HTMLElement) => {
+		console.log('setting up');
+		// init instance
+
 		instance = core.createEditor({
 			theme,
 			editable: true,
@@ -70,26 +79,20 @@ function initEditorContext() {
 		instance.registerUpdateListener(({ editorState }) => {
 			state = editorState.toJSON();
 		});
-		on(document, 'selectionchange', () => {
-			const selection = window?.getSelection();
-			selecting = selection !== null && !selection.isCollapsed;
-		});
-	};
 
-	// actions
-	const root = (node: HTMLElement) => {
-		const toolbar = node.querySelector('menu');
-		const article = node.querySelector('article');
-		if (!instance) {
-			return;
-		}
 		// setup editable content
+
+		const article = node.querySelector('article');
 		if (article) {
 			article.contentEditable = 'true';
 			instance.setRootElement(article);
 		}
+
 		// setup toolbar
+
+		const toolbar = node.querySelector('menu');
 		if (toolbar) {
+			console.log('toolbar');
 			on(node, 'pointerup', () => {
 				const { active, rect } = getSelection();
 				if (active) {
@@ -137,14 +140,15 @@ function initEditorContext() {
 			mode = value;
 		},
 		registerPlugin(plugin: EditorPlugin) {
-			console.log(plugin);
+			console.log('registering plugin', plugin);
 			tools.push(...(plugin?.tools ?? []));
 			nodes.push(...(plugin?.nodes ?? []));
 		},
-		format: (style: core.TextFormatType) =>
-			instance?.dispatchCommand(core.FORMAT_TEXT_COMMAND, style),
-		update: instance?.update ?? (() => {}),
-		init
+		format: (style: core.TextFormatType) => {
+			console.log('fmt');
+			instance?.dispatchCommand(core.FORMAT_TEXT_COMMAND, style);
+		},
+		update: instance?.update ?? (() => {})
 	};
 }
 
