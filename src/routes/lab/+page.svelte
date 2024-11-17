@@ -1,5 +1,18 @@
 <script lang="ts">
-	import { EditorPad } from '$lib/editor';
+	import { Editor } from '$lib/editor';
+	import {
+		CorePlugin,
+		LinkPlugin,
+		DragonPlugin,
+		HistoryPlugin,
+		RichTextPlugin
+	} from '$lib/editor/plugins';
 </script>
 
-<EditorPad debug />
+<Editor debug>
+	<CorePlugin />
+	<LinkPlugin />
+	<DragonPlugin />
+	<HistoryPlugin />
+	<RichTextPlugin />
+</Editor>

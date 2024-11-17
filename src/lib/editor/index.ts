@@ -1,3 +1,2 @@
 export * from './hook.svelte';
-export { default as EditorPad } from './component.svelte';
-export * from './testdata';
+export { default as Editor } from './Editor.svelte';

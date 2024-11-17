@@ -1,85 +1,97 @@
-import { registerDragonSupport } from '@lexical/dragon';
-import { createEmptyHistoryState, registerHistory } from '@lexical/history';
-import { HeadingNode, QuoteNode, registerRichText } from '@lexical/rich-text';
-import { mergeRegister } from '@lexical/utils';
+import * as core from 'lexical';
+
 import {
-	createEditor,
-	FORMAT_TEXT_COMMAND,
-	type TextFormatType,
-	type CreateEditorArgs
-} from 'lexical';
+	onMount,
+	setContext,
+	getContext,
+	hasContext,
+	type Snippet
+} from 'svelte';
+import { on } from 'svelte/events';
+import type { Action } from 'svelte/action';
 
-import { insertTestdata } from './testdata';
+import { theme } from './lib/theme';
 
-export function useEditor(
-	config: CreateEditorArgs = {
-		editable: true,
-		namespace: 'editor',
-		nodes: [HeadingNode, QuoteNode],
-		onError: (error: Error) => {
-			throw error;
-		}
+export interface EditorContext {
+	instance?: core.LexicalEditor;
+	state: {};
+	selecting: boolean;
+	root: Action;
+	tools: Snippet[];
+	mode: string | null;
+	registerPlugin: (plugin: EditorPlugin) => void;
+	format: (style: core.TextFormatType) => void;
+	update: core.LexicalEditor['update'];
+	init: () => void;
+}
+
+export interface EditorPlugin {
+	tools?: Snippet[];
+	nodes?: (core.Klass<core.LexicalNode> | core.LexicalNodeReplacement)[];
+}
+
+export function useEditor() {
+	let context: EditorContext;
+
+	if (!hasContext('editor')) {
+		context = initEditorContext();
+		setContext('editor', context);
+	} else {
+		context = getContext<EditorContext>('editor');
 	}
-) {
-	// init
 
-	if (typeof window === 'undefined')
-		return {
-			instance: null,
-			pad: () => {},
-			state: null,
-			format: (_: TextFormatType) => {},
-			update: () => {}
-		};
+	return context;
+}
 
-	const instance = createEditor(config);
+// CONTEXT
 
-	// plugins
-
-	mergeRegister(
-		registerRichText(instance),
-		registerDragonSupport(instance),
-		registerHistory(instance, createEmptyHistoryState(), 300)
-	);
-
-	instance.update(insertTestdata, { tag: 'history-merge' });
-
+function initEditorContext() {
 	// state
-	let state = $state();
-	let selection = $state();
+	let instance: core.LexicalEditor | undefined = $state();
+	let state: {} = $state({});
+	let nodes: (core.Klass<core.LexicalNode> | core.LexicalNodeReplacement)[] =
+		$state([]);
+	let tools: Snippet[] = $state([]);
+	let mode: string | null = $state(null);
+	let selecting: boolean = $state(false);
 
-	instance.registerUpdateListener(({ editorState }) => {
-		state = editorState.toJSON();
-		selection = editorState._selection;
-	});
+	// if (typeof window !== 'undefined') {
+	const init = () => {
+		console.log(nodes);
+		instance = core.createEditor({
+			theme,
+			editable: true,
+			namespace: 'editor',
+			nodes,
+			onError: (error: Error) => {
+				throw error;
+			}
+		});
+		instance.registerUpdateListener(({ editorState }) => {
+			state = editorState.toJSON();
+		});
+		on(document, 'selectionchange', () => {
+			const selection = window?.getSelection();
+			selecting = selection !== null && !selection.isCollapsed;
+		});
+	};
 
-	// events
-
-	function sel() {
-		console.log(selection);
-		const s = window.getSelection();
-		let rect = (s?.rangeCount ?? 0) > 0 ? s?.getRangeAt(0)?.getBoundingClientRect() : null;
-		const text = s?.toString();
-		const active = !s?.isCollapsed;
-		return {
-			rect,
-			text,
-			active
-		};
-	}
-
-	function pad(node: HTMLElement) {
+	// actions
+	const root = (node: HTMLElement) => {
 		const toolbar = node.querySelector('menu');
 		const article = node.querySelector('article');
+		if (!instance) {
+			return;
+		}
+		// setup editable content
 		if (article) {
-			// setup editable content
 			article.contentEditable = 'true';
 			instance.setRootElement(article);
 		}
+		// setup toolbar
 		if (toolbar) {
-			// setup toolbar
-			node.addEventListener('pointerup', () => {
-				const { active, rect } = sel();
+			on(node, 'pointerup', () => {
+				const { active, rect } = getSelection();
 				if (active) {
 					toolbar.style.display = 'flex';
 					toolbar.style.top = `calc(${rect?.top}px - 45px)`;
@@ -88,28 +100,67 @@ export function useEditor(
 					toolbar.style.display = 'none';
 				}
 			});
-
-			toolbar.addEventListener('pointerdown', (e) => {
-				e.stopPropagation();
-			});
-
-			document.addEventListener('pointerdown', () => {
+			// deselect and hide toolbar on press
+			on(document, 'pointerdown', () => {
 				document.getSelection()?.removeAllRanges();
 				toolbar.style.display = 'none';
 			});
+			// except when clicking the toolbar
+			on(toolbar, 'pointerdown', (e) => {
+				e.stopPropagation();
+			});
 		}
-	}
+	};
+
+	// api
 
 	return {
-		instance,
-		pad,
+		get instance() {
+			return instance;
+		},
+		get root() {
+			return root;
+		},
 		get state() {
 			return state;
 		},
-		get selection() {
-			return selection;
+		get selecting() {
+			return selecting;
 		},
-		format: (style: TextFormatType) => instance?.dispatchCommand(FORMAT_TEXT_COMMAND, style),
-		update: instance.update
+		get tools() {
+			return tools;
+		},
+		get mode() {
+			return mode;
+		},
+		set mode(value) {
+			mode = value;
+		},
+		registerPlugin(plugin: EditorPlugin) {
+			console.log(plugin);
+			tools.push(...(plugin?.tools ?? []));
+			nodes.push(...(plugin?.nodes ?? []));
+		},
+		format: (style: core.TextFormatType) =>
+			instance?.dispatchCommand(core.FORMAT_TEXT_COMMAND, style),
+		update: instance?.update ?? (() => {}),
+		init
+	};
+}
+
+// helpers
+
+function getSelection() {
+	const selection = window?.getSelection();
+	let rect =
+		(selection?.rangeCount ?? 0) > 0
+			? selection?.getRangeAt(0)?.getBoundingClientRect()
+			: null;
+	const text = selection?.toString();
+	const active = !selection?.isCollapsed;
+	return {
+		rect,
+		text,
+		active
 	};
 }
