@@ -1,32 +1,28 @@
 import * as core from 'lexical';
 
-import {
-	onMount,
-	setContext,
-	getContext,
-	hasContext,
-	type Snippet
-} from 'svelte';
+import { setContext, getContext, hasContext, type Snippet } from 'svelte';
 import { on } from 'svelte/events';
 import type { Action } from 'svelte/action';
 
 import { theme } from './lib/theme';
 
 export interface EditorContext {
+	init: Action;
 	instance?: core.LexicalEditor;
 	state: {};
 	selecting: boolean;
-	root: Action;
 	tools: Snippet[];
 	mode: string | null;
-	registerPlugin: (plugin: EditorPlugin) => void;
+	plugin: (plugin: EditorPlugin) => void;
 	format: (style: core.TextFormatType) => void;
 	update: core.LexicalEditor['update'];
 }
 
 export interface EditorPlugin {
+	name: string;
 	tools?: Snippet[];
 	nodes?: (core.Klass<core.LexicalNode> | core.LexicalNodeReplacement)[];
+	register?: (instance: core.LexicalEditor) => void;
 }
 
 export function useEditor() {
@@ -47,7 +43,7 @@ export function useEditor() {
 function initEditorContext() {
 	// state
 	let instance: core.LexicalEditor | undefined = $state.raw();
-	let state: {} = $state({});
+	let state: {} = $state.raw({});
 	let nodes: (core.Klass<core.LexicalNode> | core.LexicalNodeReplacement)[] =
 		$state([]);
 	let tools: Snippet[] = $state([]);
@@ -56,15 +52,8 @@ function initEditorContext() {
 
 	// listen to selections
 
-	if (typeof window !== 'undefined') {
-		on(document, 'selectionchange', () => {
-			const selection = window?.getSelection();
-			selecting = selection !== null && !selection.isCollapsed;
-		});
-	}
-
-	const root = (node: HTMLElement) => {
-		console.log('setting up');
+	const init = (node: HTMLElement) => {
+		console.info('setting up editor');
 		// init instance
 
 		instance = core.createEditor({
@@ -80,6 +69,13 @@ function initEditorContext() {
 			state = editorState.toJSON();
 		});
 
+		// listen to selection changes
+
+		on(document, 'selectionchange', () => {
+			const selection = window?.getSelection();
+			selecting = selection !== null && !selection.isCollapsed;
+		});
+
 		// setup editable content
 
 		const article = node.querySelector('article');
@@ -92,7 +88,6 @@ function initEditorContext() {
 
 		const toolbar = node.querySelector('menu');
 		if (toolbar) {
-			console.log('toolbar');
 			on(node, 'pointerup', () => {
 				const { active, rect } = getSelection();
 				if (active) {
@@ -118,11 +113,9 @@ function initEditorContext() {
 	// api
 
 	return {
+		init,
 		get instance() {
 			return instance;
-		},
-		get root() {
-			return root;
 		},
 		get state() {
 			return state;
@@ -139,15 +132,18 @@ function initEditorContext() {
 		set mode(value) {
 			mode = value;
 		},
-		registerPlugin(plugin: EditorPlugin) {
-			console.log('registering plugin', plugin);
+		plugin(plugin: EditorPlugin) {
+			console.info(`Registering plugin ${plugin.name}`);
 			tools.push(...(plugin?.tools ?? []));
 			nodes.push(...(plugin?.nodes ?? []));
+			if (plugin?.register) {
+				$effect(() =>
+					instance && plugin.register ? plugin.register(instance) : () => {}
+				);
+			}
 		},
-		format: (style: core.TextFormatType) => {
-			console.log('fmt');
-			instance?.dispatchCommand(core.FORMAT_TEXT_COMMAND, style);
-		},
+		format: (style: core.TextFormatType) =>
+			instance?.dispatchCommand(core.FORMAT_TEXT_COMMAND, style),
 		update: instance?.update ?? (() => {})
 	};
 }

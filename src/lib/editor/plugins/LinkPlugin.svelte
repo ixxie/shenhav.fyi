@@ -3,8 +3,6 @@
 	import * as link from '@lexical/link';
 	import * as utils from '@lexical/utils';
 
-	import { onMount } from 'svelte';
-
 	import { useEditor } from '../hook.svelte';
 	import { Tool } from './lib';
 
@@ -21,83 +19,80 @@
 	let url = $state();
 
 	// init
-	editor.registerPlugin({
+	editor.plugin({
+		name: 'link',
 		tools: [linkTool],
-		nodes: [link.LinkNode, link.AutoLinkNode]
-	});
-
-	$effect(() => {
-		return editor.instance
-			? utils.mergeRegister(
-					editor.instance.registerCommand(
-						link.TOGGLE_LINK_COMMAND,
-						(payload) => {
-							if (payload === null) {
-								link.$toggleLink(payload);
+		nodes: [link.LinkNode, link.AutoLinkNode],
+		register: (instance) =>
+			utils.mergeRegister(
+				instance.registerCommand(
+					link.TOGGLE_LINK_COMMAND,
+					(payload) => {
+						if (payload === null) {
+							link.$toggleLink(payload);
+							return true;
+						} else if (typeof payload === 'string') {
+							if (validateUrl === undefined || validateUrl(payload)) {
+								link.$toggleLink(payload, attributes);
 								return true;
-							} else if (typeof payload === 'string') {
-								if (validateUrl === undefined || validateUrl(payload)) {
-									link.$toggleLink(payload, attributes);
+							}
+							return false;
+						} else {
+							const { url, target, rel, title } = payload;
+							link.$toggleLink(url, {
+								...attributes,
+								rel,
+								target,
+								title
+							});
+							return true;
+						}
+					},
+					core.COMMAND_PRIORITY_LOW
+				),
+				validateUrl !== undefined
+					? instance.registerCommand(
+							core.PASTE_COMMAND,
+							(event) => {
+								if (!editor.instance) {
+									return false;
+								}
+								const selection = core.$getSelection();
+								if (
+									!core.$isRangeSelection(selection) ||
+									selection.isCollapsed() ||
+									!utils.objectKlassEquals(event, ClipboardEvent)
+								) {
+									return false;
+								}
+								const clipboardEvent = event as ClipboardEvent;
+								if (clipboardEvent.clipboardData === null) {
+									return false;
+								}
+								const clipboardText =
+									clipboardEvent.clipboardData.getData('text');
+								if (!validateUrl(clipboardText)) {
+									return false;
+								}
+								// don't apply link to element nodes
+								if (
+									!selection
+										.getNodes()
+										.some((node) => core.$isElementNode(node))
+								) {
+									editor.instance.dispatchCommand(link.TOGGLE_LINK_COMMAND, {
+										...attributes,
+										url: clipboardText
+									});
+									event.preventDefault();
 									return true;
 								}
 								return false;
-							} else {
-								const { url, target, rel, title } = payload;
-								link.$toggleLink(url, {
-									...attributes,
-									rel,
-									target,
-									title
-								});
-								return true;
-							}
-						},
-						core.COMMAND_PRIORITY_LOW
-					),
-					validateUrl !== undefined
-						? editor.instance.registerCommand(
-								core.PASTE_COMMAND,
-								(event) => {
-									if (!editor.instance) {
-										return false;
-									}
-									const selection = core.$getSelection();
-									if (
-										!core.$isRangeSelection(selection) ||
-										selection.isCollapsed() ||
-										!utils.objectKlassEquals(event, ClipboardEvent)
-									) {
-										return false;
-									}
-									const clipboardEvent = event as ClipboardEvent;
-									if (clipboardEvent.clipboardData === null) {
-										return false;
-									}
-									const clipboardText =
-										clipboardEvent.clipboardData.getData('text');
-									if (!validateUrl(clipboardText)) {
-										return false;
-									}
-									// don't apply link to element nodes
-									if (
-										!selection
-											.getNodes()
-											.some((node) => core.$isElementNode(node))
-									) {
-										editor.instance.dispatchCommand(link.TOGGLE_LINK_COMMAND, {
-											...attributes,
-											url: clipboardText
-										});
-										event.preventDefault();
-										return true;
-									}
-									return false;
-								},
-								core.COMMAND_PRIORITY_LOW
-							)
-						: () => {} // noop if no validation provided
-				)
-			: () => null;
+							},
+							core.COMMAND_PRIORITY_LOW
+						)
+					: () => {} // noop if no validation provided
+			)
 	});
 
 	// runtime

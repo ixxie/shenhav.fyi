@@ -5,9 +5,9 @@
 
 	const editor = useEditor();
 
-	$effect(() => {
-		editor.instance
-			? registerHistory(editor.instance, createEmptyHistoryState(), 300)
-			: null;
+	editor.plugin({
+		name: 'history',
+		register: (instance) =>
+			registerHistory(instance, createEmptyHistoryState(), 300)
 	});
 </script>

@@ -13,4 +13,6 @@
 	<CorePlugin />
 	<RichTextPlugin />
 	<HistoryPlugin />
+	<DragonPlugin />
+	<LinkPlugin />
 </Editor>

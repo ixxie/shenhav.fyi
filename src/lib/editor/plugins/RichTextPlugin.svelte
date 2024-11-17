@@ -5,7 +5,8 @@
 
 	const editor = useEditor();
 
-	$effect(() =>
-		editor.instance ? registerRichText(editor.instance) : () => null
-	);
+	editor.plugin({
+		name: 'rich-text',
+		register: (instance) => registerRichText(instance)
+	});
 </script>

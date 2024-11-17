@@ -5,7 +5,7 @@
 
 	const editor = useEditor();
 
-	editor.registerPlugin({ tools: [styleTool] });
+	editor.plugin({ name: 'core', tools: [styleTool] });
 </script>
 
 {#snippet styleTool()}

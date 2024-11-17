@@ -12,7 +12,7 @@
 	const editor = useEditor();
 </script>
 
-<div use:editor.root>
+<div use:editor.init>
 	<menu id="toolbar">
 		{#each editor.tools as tool}
 			{@render tool()}

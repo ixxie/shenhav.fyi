@@ -5,7 +5,8 @@
 
 	const editor = useEditor();
 
-	$effect(() =>
-		editor.instance ? registerDragonSupport(editor.instance) : () => null
-	);
+	editor.plugin({
+		name: 'dragon',
+		register: (instance) => registerDragonSupport(instance)
+	});
 </script>
