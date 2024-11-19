@@ -2,28 +2,9 @@ import * as core from 'lexical';
 
 import { setContext, getContext, hasContext, type Snippet } from 'svelte';
 import { on } from 'svelte/events';
-import type { Action } from 'svelte/action';
 
 import { theme } from './lib/theme';
-
-export interface EditorContext {
-	init: Action;
-	instance?: core.LexicalEditor;
-	state: {};
-	selecting: boolean;
-	tools: Snippet[];
-	mode: string | null;
-	plugin: (plugin: EditorPlugin) => void;
-	format: (style: core.TextFormatType) => void;
-	update: core.LexicalEditor['update'];
-}
-
-export interface EditorPlugin {
-	name: string;
-	tools?: Snippet[];
-	nodes?: (core.Klass<core.LexicalNode> | core.LexicalNodeReplacement)[];
-	register?: (instance: core.LexicalEditor) => void;
-}
+import type { EditorContext, EditorPlugin } from './types';
 
 export function useEditor() {
 	let context: EditorContext;
@@ -46,10 +27,18 @@ function initEditorContext() {
 	let state: {} = $state.raw({});
 	let nodes: (core.Klass<core.LexicalNode> | core.LexicalNodeReplacement)[] =
 		$state([]);
+	let toolbar = $state();
 	let tools: Snippet[] = $state([]);
 	let mode: string | null = $state(null);
 	let selecting: boolean = $state(false);
 
+	$effect(() => {
+		if (mode) {
+			instance?.setEditable(false);
+		} else {
+			instance?.setEditable(true);
+		}
+	});
 	// listen to selections
 
 	const init = (node: HTMLElement) => {
@@ -86,27 +75,44 @@ function initEditorContext() {
 
 		// setup toolbar
 
-		const toolbar = node.querySelector('menu');
-		if (toolbar) {
-			on(node, 'pointerup', () => {
-				const { active, rect } = getSelection();
-				if (active) {
-					toolbar.style.display = 'flex';
-					toolbar.style.top = `calc(${rect?.top}px - 45px)`;
-					toolbar.style.left = `calc(${rect?.left}px + calc(${rect?.width}px / 2) - 40px)`;
-				} else {
-					toolbar.style.display = 'none';
+		const menu = node.querySelector('menu');
+		if (menu) {
+			const show = () => {
+				const { rect } = getSelection();
+				menu.style.display = 'flex';
+				menu.style.top = `calc(${rect?.top}px - 45px)`;
+				menu.style.left = `calc(${rect?.left}px + calc(${rect?.width}px / 2) - 40px)`;
+			};
+			const hide = () => {
+				menu.style.display = 'none';
+				mode = null;
+			};
+			const toggle = () => {
+				const { active } = getSelection();
+				if (mode) {
+					return;
 				}
-			});
+				if (active) {
+					show();
+				} else {
+					hide();
+				}
+			};
+			on(node, 'pointerup', toggle);
 			// deselect and hide toolbar on press
 			on(document, 'pointerdown', () => {
 				document.getSelection()?.removeAllRanges();
-				toolbar.style.display = 'none';
+				hide();
 			});
 			// except when clicking the toolbar
-			on(toolbar, 'pointerdown', (e) => {
+			on(menu, 'pointerdown', (e) => {
 				e.stopPropagation();
 			});
+			toolbar = {
+				show,
+				hide,
+				toggle
+			};
 		}
 	};
 
@@ -131,6 +137,9 @@ function initEditorContext() {
 		},
 		set mode(value) {
 			mode = value;
+		},
+		get toolbar() {
+			return toolbar;
 		},
 		plugin(plugin: EditorPlugin) {
 			console.info(`Registering plugin ${plugin.name}`);

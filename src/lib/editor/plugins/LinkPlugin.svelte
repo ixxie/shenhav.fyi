@@ -16,7 +16,7 @@
 
 	const editor = useEditor();
 
-	let url = $state();
+	let url = $state('');
 
 	// init
 	editor.plugin({
@@ -97,18 +97,34 @@
 
 	// runtime
 
-	const createLink = () => {
+	const initLink = () => {
 		editor.instance?.dispatchCommand(link.TOGGLE_LINK_COMMAND, {
-			url: 'https://'
+			url: ''
 		});
 		editor.mode = 'link';
+	};
+	const saveLink = () => {
+		editor.instance?.dispatchCommand(link.TOGGLE_LINK_COMMAND, {
+			url
+		});
+		editor.toolbar.hide();
 	};
 </script>
 
 {#snippet linkTool()}
 	{#if !editor.mode}
-		<Tool name="Link" onclick={() => createLink()} --icon="var(--link-icon)" />
+		<Tool name="Link" onclick={initLink} --icon="var(--link-icon)" />
 	{:else if editor.mode == 'link'}
-		<input type="text" bind:value={url} />
+		<input
+			type="text"
+			bind:value={url}
+			onkeydown={(event) => {
+				event.stopPropagation();
+				if (event.key == 'Enter') {
+					saveLink();
+				}
+			}}
+		/>
+		<button onclick={saveLink}>+</button>
 	{/if}
 {/snippet}
