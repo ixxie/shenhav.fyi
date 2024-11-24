@@ -3,19 +3,19 @@ import * as core from 'lexical';
 import type { Snippet } from 'svelte';
 import type { Action } from 'svelte/action';
 
-export interface EditorContext {
+export interface SvelteLexicalContext {
 	init: Action;
 	instance?: core.LexicalEditor;
-	state: {};
+	content: {};
 	selecting: boolean;
 	tools: Snippet[];
 	mode: string | null;
-	plugin: (plugin: EditorPlugin) => void;
+	plugin: (plugin: SvelteLexicalPlugin) => void;
 	format: (style: core.TextFormatType) => void;
 	update: core.LexicalEditor['update'];
 }
 
-export interface EditorPlugin {
+export interface SvelteLexicalPlugin {
 	name: string;
 	tools?: Snippet[];
 	nodes?: (core.Klass<core.LexicalNode> | core.LexicalNodeReplacement)[];

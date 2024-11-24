@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { type Snippet, onMount } from 'svelte';
+	import { type Snippet } from 'svelte';
 
 	import './lib/theme.css';
 	import './lib/icons.css';
@@ -12,20 +12,20 @@
 	const editor = useEditor();
 </script>
 
-<div use:editor.init>
-	<menu id="toolbar">
+<div id="editor" use:editor.init>
+	<menu id="editor-toolbar">
 		{#each editor.tools as tool}
 			{@render tool()}
 		{/each}
 	</menu>
-	<article>
+	<article id="editor-content">
 		<!-- content -->
 	</article>
 	{@render children()}
 </div>
 
 {#if debug}
-	<pre>{JSON.stringify(editor.state, null, 2)}</pre>
+	<pre>{JSON.stringify(editor.content, null, 2)}</pre>
 {/if}
 
 <style>

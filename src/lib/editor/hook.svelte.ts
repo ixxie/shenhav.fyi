@@ -4,16 +4,16 @@ import { setContext, getContext, hasContext, type Snippet } from 'svelte';
 import { on } from 'svelte/events';
 
 import { theme } from './lib/theme';
-import type { EditorContext, EditorPlugin } from './types';
+import type { SvelteLexicalContext, SvelteLexicalPlugin } from './types';
 
 export function useEditor() {
-	let context: EditorContext;
+	let context: SvelteLexicalContext;
 
 	if (!hasContext('editor')) {
 		context = initEditorContext();
 		setContext('editor', context);
 	} else {
-		context = getContext<EditorContext>('editor');
+		context = getContext<SvelteLexicalContext>('editor');
 	}
 
 	return context;
@@ -24,7 +24,7 @@ export function useEditor() {
 function initEditorContext() {
 	// state
 	let instance: core.LexicalEditor | undefined = $state.raw();
-	let state: {} = $state.raw({});
+	let content: {} = $state.raw({});
 	let nodes: (core.Klass<core.LexicalNode> | core.LexicalNodeReplacement)[] =
 		$state([]);
 	let toolbar = $state();
@@ -55,19 +55,12 @@ function initEditorContext() {
 			}
 		});
 		instance.registerUpdateListener(({ editorState }) => {
-			state = editorState.toJSON();
-		});
-
-		// listen to selection changes
-
-		on(document, 'selectionchange', () => {
-			const selection = window?.getSelection();
-			selecting = selection !== null && !selection.isCollapsed;
+			content = editorState.toJSON();
 		});
 
 		// setup editable content
 
-		const article = node.querySelector('article');
+		const article: HTMLElement | null = node.querySelector('#editor-content');
 		if (article) {
 			article.contentEditable = 'true';
 			instance.setRootElement(article);
@@ -75,7 +68,7 @@ function initEditorContext() {
 
 		// setup toolbar
 
-		const menu = node.querySelector('menu');
+		const menu: HTMLElement | null = node.querySelector('#editor-toolbar');
 		if (menu) {
 			const show = () => {
 				const { rect } = getSelection();
@@ -123,8 +116,8 @@ function initEditorContext() {
 		get instance() {
 			return instance;
 		},
-		get state() {
-			return state;
+		get content() {
+			return content;
 		},
 		get selecting() {
 			return selecting;
@@ -141,7 +134,7 @@ function initEditorContext() {
 		get toolbar() {
 			return toolbar;
 		},
-		plugin(plugin: EditorPlugin) {
+		plugin(plugin: SvelteLexicalPlugin) {
 			console.info(`Registering plugin ${plugin.name}`);
 			tools.push(...(plugin?.tools ?? []));
 			nodes.push(...(plugin?.nodes ?? []));
@@ -173,3 +166,10 @@ function getSelection() {
 		active
 	};
 }
+
+// // listen to selection changes
+
+// on(document, 'selectionchange', () => {
+// 	const selection = window?.getSelection();
+// 	selecting = selection !== null && !selection.isCollapsed;
+// });
