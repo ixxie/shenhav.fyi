@@ -6,15 +6,20 @@ import { theme } from './lib/theme';
 
 import type { SvelteLexicalPlugin } from './types';
 
+// Editor State
+
 export class SvelteLexicalEditor {
 	#instance: core.LexicalEditor | undefined = $state.raw();
-	#content: {} = $state.raw({});
 	#toolbar: SvelteLexicalToolbar | undefined = $state();
 	#plugins: SvelteLexicalPlugin[] = $state([]);
+	#content: {} = $state.raw({});
+	selection: SvelteLexicalSelection;
+	log: boolean = false;
 
 	public mode: string | null = $state(null);
 
-	constructor() {
+	constructor({ log }: { log: boolean } = { log: false }) {
+		this.log = log;
 		$effect(() => {
 			if (this.mode) {
 				this.#instance?.setEditable(false);
@@ -22,12 +27,14 @@ export class SvelteLexicalEditor {
 				this.#instance?.setEditable(true);
 			}
 		});
+		// setup selection
+		this.selection = new SvelteLexicalSelection();
 	}
 
 	init(node: HTMLElement) {
 		// init instance
-
-		this.#instance = core.createEditor({
+		this.console.info('creating editor instance');
+		const options = {
 			theme,
 			editable: true,
 			namespace: 'editor',
@@ -35,37 +42,46 @@ export class SvelteLexicalEditor {
 			onError: (error: Error) => {
 				throw error;
 			}
-		});
+		};
+		this.console.debug(options);
+		this.#instance = core.createEditor(options);
+
+		this.console.info('registering content change event listener');
 		this.#instance.registerUpdateListener(({ editorState }) => {
+			this.console.debug('updating content state', editorState);
 			this.#content = editorState.toJSON();
 		});
 
-		// listen to selection changes
-
-		// on(document, 'selectionchange', () => {
-		// 	const selection = window?.getSelection();
-		// 	// this.#selecting = selection !== null && !selection.isCollapsed;
-		// });
-
 		// setup editable content
-
-		const article = node.querySelector('article');
-		if (article) {
-			article.contentEditable = 'true';
-			this.#instance.setRootElement(article);
+		const contentNode: HTMLElement | null = node.querySelector(
+			'#svelte-lexical-content'
+		);
+		if (contentNode) {
+			this.console.debug('registering content node', contentNode);
+			contentNode.contentEditable = 'true';
+			this.#instance.setRootElement(contentNode);
 		}
 
 		// setup toolbar
-
-		const menu = node.querySelector('menu');
-		if (menu) {
-			this.#toolbar = new SvelteLexicalToolbar(this, menu);
+		const toolbarNode: HTMLElement | null = node.querySelector(
+			'#svelte-lexical-toolbar'
+		);
+		if (toolbarNode) {
+			this.console.debug('registering toolbar node', toolbarNode);
+			this.#toolbar = new SvelteLexicalToolbar(this, toolbarNode);
 		}
 	}
 
 	plugin(plugin: SvelteLexicalPlugin) {
-		console.info(`Registering plugin ${plugin.name}`);
+		this.console.info(`registering plugin ${plugin.name}`);
 		this.#plugins.push(plugin);
+		if (plugin?.register) {
+			$effect(() =>
+				this.#instance && plugin.register
+					? plugin.register(this.#instance)
+					: () => {}
+			);
+		}
 	}
 
 	format(style: core.TextFormatType) {
@@ -96,19 +112,28 @@ export class SvelteLexicalEditor {
 		return this.#plugins.map(({ nodes }) => nodes ?? []).flat();
 	}
 
-	get selection() {
-		const instance = window?.getSelection();
-		let rect =
-			(instance?.rangeCount ?? 0) > 0
-				? instance?.getRangeAt(0)?.getBoundingClientRect()
-				: null;
-		const text = instance?.toString();
-		const active = !instance?.isCollapsed;
-		return {
-			rect,
-			text,
-			active
-		};
+	get console() {
+		const prefix = '[svelte-lexical]';
+		return this.log
+			? {
+					debug: (...args: Parameters<typeof console.debug>) =>
+						console.debug(prefix, ...args),
+					info: (...args: Parameters<typeof console.info>) =>
+						console.info(prefix, ...args),
+					log: (...args: Parameters<typeof console.log>) =>
+						console.log(prefix, ...args),
+					warn: (...args: Parameters<typeof console.warn>) =>
+						console.warn(prefix, ...args),
+					error: (...args: Parameters<typeof console.error>) =>
+						console.error(prefix, ...args)
+				}
+			: {
+					debug: (..._: Parameters<typeof console.debug>) => {},
+					info: (..._: Parameters<typeof console.info>) => {},
+					log: (..._: Parameters<typeof console.log>) => {},
+					warn: (..._: Parameters<typeof console.warn>) => {},
+					error: (..._: Parameters<typeof console.error>) => {}
+				};
 	}
 }
 
@@ -116,29 +141,40 @@ class SvelteLexicalToolbar {
 	#editor: SvelteLexicalEditor;
 	#node: HTMLElement;
 
-	constructor(editor: SvelteLexicalEditor, node: HTMLElement) {
+	constructor(editor: SvelteLexicalEditor, toolbarNode: HTMLElement) {
 		this.#editor = editor;
-		this.#node = node;
+		this.#node = toolbarNode;
 
 		if (!this.#editor.instance) {
 			return;
 		}
 
-		const root = this.#editor.instance.getRootElement();
-		if (root) {
-			on(root, 'pointerup', () => {
+		this.#editor.console.info('initializing toolbar');
+
+		const rootNode = this.#editor.instance.getRootElement();
+		if (rootNode) {
+			this.#editor.console.info(
+				'registering root node listener for toolbar toggle'
+			);
+			on(rootNode, 'pointerup', () => {
 				this.toggle();
 			});
 		}
 
 		// deselect and hide toolbar on press
+		this.#editor.console.info(
+			'registering document node listener for toolbar clearing'
+		);
 		on(document, 'pointerdown', () => {
 			document.getSelection()?.removeAllRanges();
 			this.hide();
 		});
 
 		// except when clicking the toolbar
-		on(node, 'pointerdown', (e) => {
+		this.#editor.console.info(
+			'registering toolbar node listener to stop propagation'
+		);
+		on(toolbarNode, 'pointerdown', (e) => {
 			e.stopPropagation();
 		});
 	}
@@ -156,14 +192,45 @@ class SvelteLexicalToolbar {
 	}
 
 	toggle() {
-		const { active } = this.#editor.selection;
 		if (this.#editor.mode) {
 			return;
 		}
+		const { active } = this.#editor.selection;
 		if (active) {
 			this.show();
 		} else {
 			this.hide();
 		}
+	}
+}
+
+export class SvelteLexicalSelection {
+	#rect: DOMRect | undefined = $state();
+	#text: string | undefined = $state();
+	#active: boolean = $state(false);
+
+	constructor() {
+		// listen to selection changes
+		if (typeof window !== 'undefined') {
+			on(document, 'selectionchange', () => {
+				const selection = window?.getSelection();
+				this.#rect =
+					(selection?.rangeCount ?? 0) > 0
+						? selection?.getRangeAt(0)?.getBoundingClientRect()
+						: undefined;
+				this.#text = selection?.toString();
+				this.#active = !selection?.isCollapsed;
+			});
+		}
+	}
+
+	get rect() {
+		return this.#rect;
+	}
+	get text() {
+		return this.#text;
+	}
+	get active() {
+		return this.#active;
 	}
 }

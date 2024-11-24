@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { registerDragonSupport } from '@lexical/dragon';
 
-	import { useEditor } from '../hook.svelte';
+	import { useEditor } from '..';
 
 	const editor = useEditor();
 

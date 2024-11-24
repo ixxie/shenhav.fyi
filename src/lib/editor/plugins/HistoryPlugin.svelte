@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { createEmptyHistoryState, registerHistory } from '@lexical/history';
 
-	import { useEditor } from '../hook.svelte';
+	import { useEditor } from '..';
 
 	const editor = useEditor();
 

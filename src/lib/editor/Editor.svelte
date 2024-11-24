@@ -12,19 +12,24 @@
 	const editor = useEditor();
 </script>
 
-<div id="editor" use:editor.init>
-	<menu id="editor-toolbar">
-		{#each editor.tools as tool}
-			{@render tool()}
-		{/each}
-	</menu>
-	<article id="editor-content">
-		<!-- content -->
-	</article>
-	{@render children()}
-</div>
+{#if editor}
+	<div id="svelte-lexical-editor" use:editor.init>
+		<menu id="svelte-lexical-toolbar">
+			{#each editor.tools as tool}
+				{@render tool()}
+			{/each}
+		</menu>
+		<article id="svelte-lexical-content">
+			<!-- content -->
+		</article>
+		{@render children()}
+	</div>
+{/if}
 
 {#if debug}
+	<pre>selection: {editor.selection.active
+			? editor.selection.text
+			: '<none>'}</pre>
 	<pre>{JSON.stringify(editor.content, null, 2)}</pre>
 {/if}
 

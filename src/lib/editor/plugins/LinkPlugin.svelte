@@ -3,7 +3,7 @@
 	import * as link from '@lexical/link';
 	import * as utils from '@lexical/utils';
 
-	import { useEditor } from '../hook.svelte';
+	import { useEditor } from '..';
 	import { Tool } from './lib';
 
 	const {
@@ -107,7 +107,7 @@
 		editor.instance?.dispatchCommand(link.TOGGLE_LINK_COMMAND, {
 			url
 		});
-		editor.toolbar.hide();
+		editor.toolbar?.hide();
 	};
 </script>
 

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { useEditor } from '../hook.svelte';
+	import { useEditor } from '..';
 
 	import { Tool } from './lib';
 
