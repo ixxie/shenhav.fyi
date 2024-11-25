@@ -16,8 +16,6 @@
 
 	const editor = useEditor();
 
-	let url = $state('');
-
 	// init
 	editor.plugin({
 		name: 'link',
@@ -96,7 +94,7 @@
 	});
 
 	// runtime
-
+	let url = $state('');
 	const initLink = () => {
 		editor.instance?.dispatchCommand(link.TOGGLE_LINK_COMMAND, {
 			url: ''
@@ -125,6 +123,6 @@
 				}
 			}}
 		/>
-		<button onclick={saveLink}>+</button>
+		<Tool name="Add link" onclick={saveLink} --icon="var(--plus-icon)" />
 	{/if}
 {/snippet}

@@ -3,10 +3,7 @@ import * as core from 'lexical';
 import { on } from 'svelte/events';
 
 import { theme } from './lib/theme';
-
 import type { SvelteLexicalPlugin } from './types';
-
-// Editor State
 
 export class SvelteLexicalEditor {
 	#instance: core.LexicalEditor | undefined = $state.raw();

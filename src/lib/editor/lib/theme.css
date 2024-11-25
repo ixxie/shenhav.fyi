@@ -5,3 +5,9 @@
 .e-italic {
   font-style: italic;
 }
+
+#svelte-lexical-editor {
+  input {
+    border-radius: 1rem;
+  }
+}
