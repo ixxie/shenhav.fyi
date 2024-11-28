@@ -8,3 +8,8 @@ export interface SvelteLexicalPlugin {
 	nodes?: (core.Klass<core.LexicalNode> | core.LexicalNodeReplacement)[];
 	register?: (instance: core.LexicalEditor) => void;
 }
+
+export interface SvelteLexicalTheme {
+	name: string;
+	classes?: core.EditorThemeClasses;
+}

@@ -111,7 +111,11 @@
 
 {#snippet linkTool()}
 	{#if !editor.mode}
-		<Tool name="Link" onclick={initLink} --icon="var(--link-icon)" />
+		<Tool
+			name="Link"
+			onclick={initLink}
+			--sl-icon="var(--sl-link-icon, var(--sl-default-link-icon))"
+		/>
 	{:else if editor.mode == 'link'}
 		<input
 			type="text"
@@ -123,6 +127,16 @@
 				}
 			}}
 		/>
-		<Tool name="Add link" onclick={saveLink} --icon="var(--plus-icon)" />
+		<Tool
+			name="Add link"
+			onclick={saveLink}
+			--sl-icon="var(--sl-plus-icon, var(--sl-default-plus-icon))"
+		/>
 	{/if}
+	<style>
+		:root {
+			--sl-default-link-icon: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgZmlsbD0iIzAwMDAwMCIgdmlld0JveD0iMCAwIDI1NiAyNTYiPjxwYXRoIGQ9Ik0xMTcuMTgsMTg4Ljc0YTEyLDEyLDAsMCwxLDAsMTdsLTUuMTIsNS4xMkE1OC4yNiw1OC4yNiwwLDAsMSw3MC42LDIyOGgwQTU4LjYyLDU4LjYyLDAsMCwxLDI5LjE0LDEyNy45Mkw2My44OSw5My4xN2E1OC42NCw1OC42NCwwLDAsMSw5OC41NiwyOC4xMSwxMiwxMiwwLDEsMS0yMy4zNyw1LjQ0LDM0LjY1LDM0LjY1LDAsMCwwLTU4LjIyLTE2LjU4TDQ2LjExLDE0NC44OUEzNC42MiwzNC42MiwwLDAsMCw3MC41NywyMDRoMGEzNC40MSwzNC40MSwwLDAsMCwyNC40OS0xMC4xNGw1LjExLTUuMTJBMTIsMTIsMCwwLDEsMTE3LjE4LDE4OC43NFpNMjI2LjgzLDQ1LjE3YTU4LjY1LDU4LjY1LDAsMCwwLTgyLjkzLDBsLTUuMTEsNS4xMWExMiwxMiwwLDAsMCwxNywxN2w1LjEyLTUuMTJhMzQuNjMsMzQuNjMsMCwxLDEsNDksNDlMMTc1LjEsMTQ1Ljg2QTM0LjM5LDM0LjM5LDAsMCwxLDE1MC42MSwxNTZoMGEzNC42MywzNC42MywwLDAsMS0zMy42OS0yNi43MiwxMiwxMiwwLDAsMC0yMy4zOCw1LjQ0QTU4LjY0LDU4LjY0LDAsMCwwLDE1MC41NiwxODBoLjA1YTU4LjI4LDU4LjI4LDAsMCwwLDQxLjQ3LTE3LjE3bDM0Ljc1LTM0Ljc1YTU4LjYyLDU4LjYyLDAsMCwwLDAtODIuOTFaIj48L3BhdGg+PC9zdmc+');
+			--sl-default-plus-icon: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgZmlsbD0iIzAwMDAwMCIgdmlld0JveD0iMCAwIDI1NiAyNTYiPjxwYXRoIGQ9Ik0yMjQsMTI4YTgsOCwwLDAsMS04LDhIMTM2djgwYTgsOCwwLDAsMS0xNiwwVjEzNkg0MGE4LDgsMCwwLDEsMC0xNmg4MFY0MGE4LDgsMCwwLDEsMTYsMHY4MGg4MEE4LDgsMCwwLDEsMjI0LDEyOFoiPjwvcGF0aD48L3N2Zz4=');
+		}
+	</style>
 {/snippet}

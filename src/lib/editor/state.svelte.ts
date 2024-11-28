@@ -2,13 +2,13 @@ import * as core from 'lexical';
 
 import { on } from 'svelte/events';
 
-import { theme } from './lib/theme';
-import type { SvelteLexicalPlugin } from './types';
+import type { SvelteLexicalPlugin, SvelteLexicalTheme } from './types';
 
 export class SvelteLexicalEditor {
 	#instance: core.LexicalEditor | undefined = $state.raw();
 	#toolbar: SvelteLexicalToolbar | undefined = $state();
 	#plugins: SvelteLexicalPlugin[] = $state([]);
+	#themes: SvelteLexicalTheme[] = $state([]);
 	#content: {} = $state.raw({});
 	selection: SvelteLexicalSelection;
 	log: boolean = false;
@@ -32,7 +32,11 @@ export class SvelteLexicalEditor {
 		// init instance
 		this.console.info('creating editor instance');
 		const options = {
-			theme,
+			theme: coalesce(
+				...this.#themes
+					.map(({ classes }) => classes)
+					.filter((c): c is core.EditorThemeClasses => c !== undefined)
+			),
 			editable: true,
 			namespace: 'editor',
 			nodes: this.nodes,
@@ -50,9 +54,7 @@ export class SvelteLexicalEditor {
 		});
 
 		// setup editable content
-		const contentNode: HTMLElement | null = node.querySelector(
-			'#svelte-lexical-content'
-		);
+		const contentNode: HTMLElement | null = node.querySelector('article');
 		if (contentNode) {
 			this.console.debug('registering content node', contentNode);
 			contentNode.contentEditable = 'true';
@@ -60,9 +62,7 @@ export class SvelteLexicalEditor {
 		}
 
 		// setup toolbar
-		const toolbarNode: HTMLElement | null = node.querySelector(
-			'#svelte-lexical-toolbar'
-		);
+		const toolbarNode: HTMLElement | null = node.querySelector('menu');
 		if (toolbarNode) {
 			this.console.debug('registering toolbar node', toolbarNode);
 			this.#toolbar = new SvelteLexicalToolbar(this, toolbarNode);
@@ -79,6 +79,12 @@ export class SvelteLexicalEditor {
 					: () => {}
 			);
 		}
+	}
+
+	theme(theme: SvelteLexicalTheme) {
+		this.console.info(`registering theme ${theme.name}`);
+		this.#themes.push(theme);
+		console.log(theme);
 	}
 
 	format(style: core.TextFormatType) {
@@ -230,4 +236,29 @@ export class SvelteLexicalSelection {
 	get active() {
 		return this.#active;
 	}
+}
+
+export function coalesce(
+	...themes: core.EditorThemeClasses[]
+): core.EditorThemeClasses {
+	return themes.reduce(deepMerge);
+}
+
+export function deepMerge(
+	target: core.EditorThemeClasses,
+	source: core.EditorThemeClasses
+) {
+	Object.keys(source).forEach((key) => {
+		if (isObject(source[key])) {
+			if (!target[key]) Object.assign(target, { [key]: {} });
+			deepMerge(target[key], source[key]);
+		} else {
+			Object.assign(target, { [key]: source[key] });
+		}
+	});
+	return target;
+}
+
+export function isObject(item: any) {
+	return item && typeof item === 'object' && !Array.isArray(item);
 }
