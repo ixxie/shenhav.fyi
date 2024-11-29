@@ -105,7 +105,7 @@
 		editor.instance?.dispatchCommand(link.TOGGLE_LINK_COMMAND, {
 			url
 		});
-		editor.toolbar?.hide();
+		editor.mode = null;
 	};
 </script>
 

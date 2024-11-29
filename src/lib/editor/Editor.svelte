@@ -2,17 +2,25 @@
 	import { type Snippet } from 'svelte';
 
 	import { useEditor } from './hook.svelte';
+	import { type SvelteLexicalConfig, defaults } from './state.svelte';
 
-	const { children, debug = false }: { children: Snippet; debug?: boolean } =
-		$props();
+	const {
+		children,
+		config = defaults,
+		debug = false
+	}: {
+		children: Snippet;
+		config?: SvelteLexicalConfig;
+		debug?: boolean;
+	} = $props();
 
-	const editor = useEditor();
+	const editor = useEditor(config);
 </script>
 
 {#if editor}
 	<div class="svelte-lexical" use:editor.init>
-		<!-- hover toolbar -->
-		<menu class="sl-hoverbar">
+		<!-- menus -->
+		<menu class="sl-toolbar">
 			{#each editor.tools as tool}
 				{@render tool()}
 			{/each}
@@ -23,17 +31,8 @@
 		{@render children()}
 		<!-- debugger -->
 		{#if debug}
-			<pre class="sl-debug">selection: {editor.selection.active
-					? editor.selection.text
-					: '<none>'}</pre>
+			<pre class="sl-debug">selection: {editor.selection.text ?? '<none>'}</pre>
 			<pre class="sl-debug">{JSON.stringify(editor.content, null, 2)}</pre>
 		{/if}
 	</div>
 {/if}
-
-<style>
-	.sl-hoverbar {
-		position: absolute;
-		z-index: 999;
-	}
-</style>

@@ -4,19 +4,29 @@ import { on } from 'svelte/events';
 
 import type { SvelteLexicalPlugin, SvelteLexicalTheme } from './types';
 
+export interface SvelteLexicalConfig {
+	log?: boolean;
+	layout?: 'modern' | 'classic';
+}
+
+export const defaults: SvelteLexicalConfig = {
+	log: true,
+	layout: 'modern'
+};
+
 export class SvelteLexicalEditor {
 	#instance: core.LexicalEditor | undefined = $state.raw();
-	#toolbar: SvelteLexicalToolbar | undefined = $state();
+	#hoverbar: SvelteLexicalHoverToolbar | undefined = $state();
 	#plugins: SvelteLexicalPlugin[] = $state([]);
 	#themes: SvelteLexicalTheme[] = $state([]);
 	#content: {} = $state.raw({});
+	#config: SvelteLexicalConfig;
 	selection: SvelteLexicalSelection;
-	log: boolean = false;
 
 	public mode: string | null = $state(null);
 
-	constructor({ log }: { log: boolean } = { log: false }) {
-		this.log = log;
+	constructor(config: SvelteLexicalConfig = defaults) {
+		this.#config = { ...defaults, ...config };
 		$effect(() => {
 			if (this.mode) {
 				this.#instance?.setEditable(false);
@@ -47,6 +57,7 @@ export class SvelteLexicalEditor {
 		this.console.debug(options);
 		this.#instance = core.createEditor(options);
 
+		// sync content state
 		this.console.info('registering content change event listener');
 		this.#instance.registerUpdateListener(({ editorState }) => {
 			this.console.debug('updating content state', editorState);
@@ -54,7 +65,7 @@ export class SvelteLexicalEditor {
 		});
 
 		// setup editable content
-		const contentNode: HTMLElement | null = node.querySelector('article');
+		const contentNode: HTMLElement | null = node.querySelector('.sl-content');
 		if (contentNode) {
 			this.console.debug('registering content node', contentNode);
 			contentNode.contentEditable = 'true';
@@ -62,10 +73,15 @@ export class SvelteLexicalEditor {
 		}
 
 		// setup toolbar
-		const toolbarNode: HTMLElement | null = node.querySelector('menu');
-		if (toolbarNode) {
+		const toolbarNode: HTMLElement | null = node.querySelector('.sl-toolbar');
+		if (toolbarNode && this.config.layout == 'modern') {
 			this.console.debug('registering toolbar node', toolbarNode);
-			this.#toolbar = new SvelteLexicalToolbar(this, toolbarNode);
+			this.#hoverbar = new SvelteLexicalHoverToolbar(this, toolbarNode);
+			$effect(() => {
+				if (!this.mode) {
+					this.#hoverbar?.hide();
+				}
+			});
 		}
 	}
 
@@ -103,10 +119,6 @@ export class SvelteLexicalEditor {
 		return this.#content;
 	}
 
-	get toolbar() {
-		return this.#toolbar;
-	}
-
 	get tools() {
 		return this.#plugins.map(({ tools }) => tools ?? []).flat();
 	}
@@ -115,9 +127,13 @@ export class SvelteLexicalEditor {
 		return this.#plugins.map(({ nodes }) => nodes ?? []).flat();
 	}
 
+	get config() {
+		return this.#config;
+	}
+
 	get console() {
 		const prefix = '[svelte-lexical]';
-		return this.log
+		return this.config.log
 			? {
 					debug: (...args: Parameters<typeof console.debug>) =>
 						console.debug(prefix, ...args),
@@ -140,7 +156,7 @@ export class SvelteLexicalEditor {
 	}
 }
 
-class SvelteLexicalToolbar {
+class SvelteLexicalHoverToolbar {
 	#editor: SvelteLexicalEditor;
 	#node: HTMLElement;
 
@@ -152,8 +168,15 @@ class SvelteLexicalToolbar {
 			return;
 		}
 
-		this.#editor.console.info('initializing toolbar');
+		// set hover styling
+		Object.assign(this.#node.style, {
+			position: 'absolute',
+			'z-index': 999,
+			display: 'none'
+		});
+		this.#editor.console.info('initializing hover toolbar');
 
+		// try to toggle on pointer events
 		const rootNode = this.#editor.instance.getRootElement();
 		if (rootNode) {
 			this.#editor.console.info(
@@ -166,7 +189,7 @@ class SvelteLexicalToolbar {
 
 		// deselect and hide toolbar on press
 		this.#editor.console.info(
-			'registering document node listener for toolbar clearing'
+			'registering document node listener for hover toolbar clearing'
 		);
 		on(document, 'pointerdown', () => {
 			document.getSelection()?.removeAllRanges();
@@ -175,7 +198,7 @@ class SvelteLexicalToolbar {
 
 		// except when clicking the toolbar
 		this.#editor.console.info(
-			'registering toolbar node listener to stop propagation'
+			'registering hover toolbar node listener to stop propagation'
 		);
 		on(toolbarNode, 'pointerdown', (e) => {
 			e.stopPropagation();
@@ -185,7 +208,7 @@ class SvelteLexicalToolbar {
 	show() {
 		const { rect } = this.#editor.selection;
 		this.#node.style.display = 'flex';
-		this.#node.style.top = `calc(${rect?.top}px - 45px)`;
+		this.#node.style.top = `calc(${rect?.top}px - ${this.#node.offsetHeight}px - 0.5rem)`;
 		this.#node.style.left = `calc(${rect?.left}px + calc(${rect?.width}px / 2) - 40px)`;
 	}
 

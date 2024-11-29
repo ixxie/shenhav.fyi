@@ -3,12 +3,10 @@
 		.svelte-lexical {
 			.sl-content {
 				margin-top: 3rem;
-				max-width: 60ch;
 				min-height: 10rem;
 			}
 
-			.sl-hoverbar {
-				position: absolute;
+			.sl-toolbar {
 				height: 40px;
 				/* appearance */
 				cursor: pointer;
@@ -16,11 +14,14 @@
 				border-radius: 1rem;
 				padding: 0.35rem;
 				/* layout */
-				display: none;
+				display: flex;
 				flex-flow: row;
 				align-items: center;
-				justify-content: space-around;
-				z-index: 999;
+				justify-content: flex-start;
+
+				input {
+					border-radius: 1rem;
+				}
 			}
 
 			.sl-debug {
