@@ -6,12 +6,10 @@ import type { SvelteLexicalPlugin, SvelteLexicalTheme } from './types';
 
 export interface SvelteLexicalConfig {
 	log?: boolean;
-	layout?: 'modern' | 'classic';
 }
 
 export const defaults: SvelteLexicalConfig = {
-	log: true,
-	layout: 'modern'
+	log: true
 };
 
 export class SvelteLexicalEditor {
@@ -73,8 +71,9 @@ export class SvelteLexicalEditor {
 		}
 
 		// setup toolbar
-		const toolbarNode: HTMLElement | null = node.querySelector('.sl-toolbar');
-		if (toolbarNode && this.config.layout == 'modern') {
+		const toolbarNode: HTMLElement | null =
+			node.querySelector('#sl-hover-menu');
+		if (toolbarNode) {
 			this.console.debug('registering toolbar node', toolbarNode);
 			this.#hoverbar = new SvelteLexicalHoverToolbar(this, toolbarNode);
 			$effect(() => {

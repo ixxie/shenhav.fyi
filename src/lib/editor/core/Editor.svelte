@@ -20,7 +20,12 @@
 {#if editor}
 	<div class="svelte-lexical" use:editor.init>
 		<!-- menus -->
-		<menu class="sl-toolbar">
+		<menu id="sl-main-menu" class="sl-toolbar">
+			{#each editor.tools as tool}
+				{@render tool()}
+			{/each}
+		</menu>
+		<menu id="sl-hover-menu" class="sl-toolbar">
 			{#each editor.tools as tool}
 				{@render tool()}
 			{/each}
