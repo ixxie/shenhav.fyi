@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Editor } from '$lib/editor';
+	import { Editor } from '$lib/editor/core';
 	import {
 		CorePlugin,
 		LinkPlugin,

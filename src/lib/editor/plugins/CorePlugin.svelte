@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { useEditor } from '..';
+	import { useEditor } from '../core';
 	import { Tool } from './lib';
 
 	const editor = useEditor();

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { registerDragonSupport } from '@lexical/dragon';
 
-	import { useEditor } from '..';
+	import { useEditor } from '../core';
 
 	const editor = useEditor();
 

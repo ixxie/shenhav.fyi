@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { registerRichText } from '@lexical/rich-text';
 
-	import { useEditor } from '..';
+	import { useEditor } from '../core';
 
 	const editor = useEditor();
 

@@ -3,7 +3,7 @@
 	import * as link from '@lexical/link';
 	import * as utils from '@lexical/utils';
 
-	import { useEditor } from '..';
+	import { useEditor } from '../core';
 	import { Tool } from './lib';
 
 	const {
