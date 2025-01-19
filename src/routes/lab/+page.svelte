@@ -1,27 +1,23 @@
 <script lang="ts">
 	import { Editor } from '$lib/editor/core';
 	import {
-		CorePlugin,
-		LinkPlugin,
-		DragonPlugin,
-		HistoryPlugin,
-		RichTextPlugin
-	} from '$lib/editor/plugins';
-	import { TypeTheme, LinkTheme, BasicToolTheme } from '$lib/editor/themes';
+		CoreModule,
+		LinkModule,
+		DragonModule,
+		HistoryModule,
+		RichTextModule,
+		BasicToolModule
+	} from '$lib/editor/modules';
 </script>
 
 <main>
 	<Editor debug>
-		<!--plugins-->
-		<CorePlugin />
-		<RichTextPlugin />
-		<HistoryPlugin />
-		<DragonPlugin />
-		<LinkPlugin />
-		<!--themes-->
-		<TypeTheme />
-		<LinkTheme />
-		<BasicToolTheme />
+		<CoreModule />
+		<RichTextModule />
+		<HistoryModule />
+		<DragonModule />
+		<LinkModule />
+		<BasicToolModule />
 	</Editor>
 </main>
 
