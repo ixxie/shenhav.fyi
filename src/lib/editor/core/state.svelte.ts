@@ -20,13 +20,14 @@ export class SvelteLexicalEditor {
 	#content: {} = $state.raw({});
 	#config: SvelteLexicalConfig;
 	selection: SvelteLexicalSelection;
+	editable: boolean = $state(false);
 
 	public mode: string | null = $state(null);
 
 	constructor(config: SvelteLexicalConfig = defaults) {
 		this.#config = { ...defaults, ...config };
 		$effect(() => {
-			if (this.mode) {
+			if (this.editable) {
 				this.#instance?.setEditable(false);
 			} else {
 				this.#instance?.setEditable(true);
@@ -102,14 +103,6 @@ export class SvelteLexicalEditor {
 		console.log(theme);
 	}
 
-	format(style: core.TextFormatType) {
-		return this.#instance?.dispatchCommand(core.FORMAT_TEXT_COMMAND, style);
-	}
-
-	update() {
-		return this.#instance?.update ?? (() => {});
-	}
-
 	get instance() {
 		return this.#instance;
 	}
@@ -118,8 +111,12 @@ export class SvelteLexicalEditor {
 		return this.#content;
 	}
 
-	get tools() {
-		return this.#plugins.map(({ tools }) => tools ?? []).flat();
+	get commands() {
+		return Object.fromEntries(
+			this.#plugins
+				.map(({ commands }) => (commands ? Object.entries(commands) : []))
+				.flat()
+		);
 	}
 
 	get nodes() {

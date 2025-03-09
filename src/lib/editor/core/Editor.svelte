@@ -7,11 +7,15 @@
 	const {
 		children,
 		config = defaults,
-		debug = false
+		debug = false,
+		mainMenu,
+		hoverMenu
 	}: {
 		children: Snippet;
 		config?: SvelteLexicalConfig;
 		debug?: boolean;
+		mainMenu?: Snippet<[{}]>;
+		hoverMenu?: Snippet<[{}]>;
 	} = $props();
 
 	const editor = useEditor(config);
@@ -20,16 +24,12 @@
 {#if editor}
 	<div class="svelte-lexical" use:editor.init>
 		<!-- menus -->
-		<menu id="sl-main-menu" class="sl-toolbar">
-			{#each editor.tools as tool}
-				{@render tool()}
-			{/each}
-		</menu>
-		<menu id="sl-hover-menu" class="sl-toolbar">
-			{#each editor.tools as tool}
-				{@render tool()}
-			{/each}
-		</menu>
+		<div id="sl-main-menu">
+			{@render mainMenu?.(editor.commands)}
+		</div>
+		<div id="sl-hover-menu">
+			{@render hoverMenu?.(editor.commands)}
+		</div>
 		<!-- content -->
 		<article class="sl-content"></article>
 		<!-- plugins & themes -->

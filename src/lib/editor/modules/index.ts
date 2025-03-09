@@ -3,4 +3,3 @@ export { default as LinkModule } from './LinkModule.svelte';
 export { default as DragonModule } from './DragonModule.svelte';
 export { default as HistoryModule } from './HistoryModule.svelte';
 export { default as RichTextModule } from './RichTextModule.svelte';
-export { default as BasicToolModule } from './BasicToolModule.svelte';

@@ -1,12 +1,10 @@
 import * as core from 'lexical';
 
-import type { Snippet } from 'svelte';
-
 export interface SvelteLexicalPlugin {
 	name: string;
-	tools?: Snippet[];
-	nodes?: (core.Klass<core.LexicalNode> | core.LexicalNodeReplacement)[];
 	register?: (instance: core.LexicalEditor) => void;
+	nodes?: (core.Klass<core.LexicalNode> | core.LexicalNodeReplacement)[];
+	commands?: { [key: string]: (...args: any[]) => void };
 }
 
 export interface SvelteLexicalTheme {

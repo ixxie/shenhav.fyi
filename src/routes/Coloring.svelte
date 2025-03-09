@@ -37,12 +37,22 @@
 		}
 	});
 
+	let isColored = $state(true);
+
 	// logic
 	$effect(() => {
 		$color = phase + (pageIndex * 360) / pageCount;
+		isColored = pageIndex >= 0;
 	});
 	setContext('color', color);
-	const style = $derived(`--color: ${$color};`);
+
+	const bright = $derived(isColored ? '50%' : '0%');
+	const dim = $derived(isColored ? '30%' : '0%');
+	const background = $derived(isColored ? '90%' : '0%');
+
+	const style = $derived(
+		`--color: ${$color}; --bright: ${bright}; --dim: ${dim}; --background: ${background};`
+	);
 
 	let container: HTMLDivElement;
 </script>
@@ -76,18 +86,18 @@
 	:global(a),
 	:global(h1),
 	:global(h2) {
-		color: hsl(var(--color), 50%, 20%);
+		color: hsl(var(--color), var(--bright), 20%);
 	}
 
 	:global(hgroup) :global(p) {
-		color: hsl(var(--color), 30%, 40%);
+		color: hsl(var(--color), var(--dim), 40%);
 	}
 
 	:global(.quote) {
-		color: hsl(var(--color), 50%, 30%);
+		color: hsl(var(--color), var(--bright), 30%);
 	}
 
 	:global(svg.picto) {
-		fill: hsl(var(--color), 30%, 50%);
+		fill: hsl(var(--color), var(--dim), 50%);
 	}
 </style>
