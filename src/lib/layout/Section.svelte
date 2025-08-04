@@ -18,12 +18,23 @@
 	</div>
 	<div class="illustration">
 		{#if Pictogram}
-			<Pictogram class="picto {layout}" width="min(100%, 250px)" height="auto" />
+			<Pictogram
+				class="picto {layout}"
+				width="min(100%, 250px)"
+				height="auto"
+			/>
 		{/if}
 	</div>
 </section>
 
 <style>
+	:root {
+		--illustration-ratio: 2fr;
+		@media print {
+			--illustration-ratio: 3fr;
+		}
+	}
+
 	.content {
 		grid-area: content;
 	}
@@ -40,12 +51,12 @@
 		gap: 1rem;
 
 		&.left {
-			grid-template-columns: 1fr 2fr;
+			grid-template-columns: 1fr var(--illustration-ratio);
 			grid-template-areas: 'illustration content';
 		}
 
 		&.right {
-			grid-template-columns: 2fr 1fr;
+			grid-template-columns: var(--illustration-ratio) 1fr;
 			grid-template-areas: 'content illustration';
 		}
 	}

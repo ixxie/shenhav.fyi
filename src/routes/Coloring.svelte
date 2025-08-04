@@ -68,18 +68,20 @@
     *    but I couldn't find a better way
     */
 	div {
-		height: 100%;
 		width: 100%;
 		max-width: 100%;
 		display: flex;
 		justify-items: flex-start;
 		justify-content: flex-start;
-		overflow: overlay;
 	}
 
 	@media (max-width: 1800px) {
 		div {
 			place-content: center;
+		}
+
+		:global(section) {
+			break-inside: avoid;
 		}
 	}
 

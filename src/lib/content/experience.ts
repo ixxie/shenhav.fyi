@@ -10,11 +10,37 @@ export interface ExperienceSection {
 
 export const industry = [
 	{
+		role: 'Freelance Fullstack Developer',
+		start: '09/22',
+		org: 'Self-employed',
+		skills: [
+			'Python',
+			'Vue',
+			'PrimeVue',
+			'Svelte',
+			'SQLite',
+			'FastAPI',
+			'uv',
+			'docker',
+			'GitHub Actions'
+		],
+		summary: 'Developing various apps and site for clients.'
+	},
+	{
 		role: 'Senior Software Developer',
 		start: '10/21',
 		end: '08/22',
 		org: 'Karsa (Startup)',
-		skills: ['Python', 'JavaScript', 'Vue', 'Buefy', 'HTML5', 'CSS3', 'SQLite', 'DuckDB', 'Gitlab'],
+		skills: [
+			'Python',
+			'JavaScript',
+			'Vue',
+			'Buefy',
+			'HTML5',
+			'CSS3',
+			'SQLite',
+			'Gitlab'
+		],
 		summary:
 			'Built software allowing non-technical users to detect chemicals using a mass spectrometer.',
 		details: [
@@ -55,7 +81,8 @@ export const industry = [
 		end: '09/19',
 		org: 'Sievo (Enterprise SaaS Scaleup)',
 		skills: ['Python', 'NLP', 'Docker', 'SQLServer', 'Jira', 'Jenkins', 'Bash'],
-		summary: 'Developed a new NLP-driven supplier record normalization microservice in Python.',
+		summary:
+			'Developed a new NLP-driven supplier record normalization microservice in Python.',
 		details: [
 			'Coarchitected, implemented, deployed and supported a human-in-the-loop AI microservice with internal UI.',
 			'Took ownership of DevOps tasks such as containerization, CI/CD pipelines and Git practices and	tooling.',
@@ -67,7 +94,8 @@ export const industry = [
 		start: '2004',
 		end: '2017',
 		skills: ['Illustrator', 'Photoshop', 'WordPress', 'Bash'],
-		summary: 'Executed graphic and web design, branding and copywriting jobs for small companies.'
+		summary:
+			'Executed graphic and web design, branding and copywriting jobs for small companies.'
 	},
 	{
 		role: 'EU Grant Writer',
@@ -110,7 +138,8 @@ export const academic = [
 		start: '2010',
 		end: '2017',
 		skills: ['Mathematics', 'Physics', 'Pedagogy', 'Empathy'],
-		summary: 'Tutoring children of various ages in mathematics, physics and chemistry.'
+		summary:
+			'Tutoring children of various ages in mathematics, physics and chemistry.'
 	},
 	{
 		role: 'BSc Mathematics & Physics',
@@ -118,7 +147,8 @@ export const academic = [
 		end: '2009',
 		org: 'University of Utrecht',
 		skills: ['Scientific Methodology', 'Elements of Physics & Mathematics'],
-		summary: 'Double degree covering the basics of the Physics and Mathematics disciplines.'
+		summary:
+			'Double degree covering the basics of the Physics and Mathematics disciplines.'
 	}
 ] as ExperienceSection[];
 
@@ -126,31 +156,33 @@ export const volunteering = [
 	{
 		role: 'Open-Source Maintainer',
 		start: '03/23',
-		org: "Threlte (Core Team)",
+		end: '09/24',
+		org: 'Threlte (Core Team)',
 		skills: ['Svelte', 'Three.js', 'Theatre.js', 'FOSS Community'],
-		summary: 'Core team member in the leading Svelte framework for 3D graphics in the web. Contributed major PRs and played a key role in community engagement and team organization.'
+		summary:
+			'Core team member in the leading Svelte framework for 3D graphics in the web. Contributed major PRs and played a key role in community engagement and team organization.'
 	},
 	{
 		role: 'WWOOFer / Farmhand ',
 		start: '07/23',
-		org: "Organic Farms",
+		end: '04/24',
+		org: 'Organic Farms',
 		skills: ['Permaculture', 'No-till', 'Homesteading', 'Livestock'],
-		summary: 'Volunteered in a small commercial organic vegetable farm in Provence and a mountain homesteading farm in the Savoie.'
+		summary:
+			'Volunteered in a small commercial organic vegetable farm in Provence and a mountain homesteading farm in the Savoie.'
 	},
 	{
 		role: 'Web Developer & Designer',
 		start: '01/23',
 		end: '07/23',
 		org: 'Global Ecovillage Network',
-		skills: ['WordPress', 'Associative Sector', 'Ecovillages', 'Multitiered Orgs'],
-		summary: "Helped streamline a legacy website's navigation and content in preperation for fundraising. The site had decades of legacy content and plugins contributed by dozens of volunteers. The network is composed of several regional organizations, making the site complex."
-	},
-	{
-		role: 'Community Member',
-		start: '02/21',
-		end: '07/22',
-		org: 'Pirilä Commune',
-		skills: ['Community', 'Homesteading', 'Somatics'],
-		summary: "In the forests of East-Finland, cocreated an intentional community exploring themes of sustainability living. Cocreated engaging events for visitors and established a network of likeminded folks in the area."
+		skills: [
+			'WordPress',
+			'Associative Sector',
+			'Ecovillages',
+			'Multitiered Orgs'
+		],
+		summary:
+			"Helped streamline a legacy website's navigation and content in preperation for fundraising. The site had decades of legacy content and plugins contributed by dozens of volunteers. The network is composed of several regional organizations, making the site complex."
 	}
-]
+];

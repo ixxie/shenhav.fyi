@@ -72,7 +72,7 @@ html {
 
 @media print {
 	html {
-		font-size: 12pt !important;
+		font-size: 11pt !important;
 	}
 }
 
@@ -83,6 +83,10 @@ p {
 section,
 article {
 	margin: 2em 0 3em 0 !important;
+
+	@media print {
+		margin: 1em 0 1em 0 !important;
+	}
 }
 
 /* links */

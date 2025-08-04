@@ -38,4 +38,10 @@
 			margin: 0;
 		}
 	}
+
+	@media print {
+		header {
+			display: none;
+		}
+	}
 </style>
