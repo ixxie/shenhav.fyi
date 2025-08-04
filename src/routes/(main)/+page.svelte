@@ -11,71 +11,18 @@
 <Article>
 	<Section Pictogram={FlashingContent} layout="right">
 		<hgroup>
-			<p>Awesome Web Experiences</p>
-			<h1>Web Design Makes a Difference</h1>
+			<p>Hey there, my name is</p>
+			<h1>Matan Bendix Shenhav</h1>
 		</hgroup>
 		<p>
-			My name is Matan Bendix Shenhav, I'm a digital jack-of-all-trades: I've done <a href="/about"
+			I'm a senior fullstack engineer: I've done <a href="/about"
 				>a little bit of everything</a
-			>, and I pick up new things quickly. This allows me to offer you a
-			<a href="/services">full-suite of web services</a>. Don't hesitate to
+			>
+			in software engineering teams, and I pick up new skills quickly. I'm a good
+			<a href="https://wildcardpeople.com/what-is-a-wildcard-person">wildcard</a
+			>
+			for small teams that demand adaptable members. Don't hesitate to
 			<a href="/contact">get in touch</a> to ask questions or get a quote!
 		</p>
-	</Section>
-	<Section Pictogram={Growth} layout="left">
-		<hgroup>
-			<p>Web Services for Small Organizations</p>
-			<h2>Make an Impression with your Website</h2>
-		</hgroup>
-		<p>
-			First impressions matter, and these days, that means your website. Your website will get that
-			special touch, whether its 3D graphics, sophisticated illustrations or quality stock footage.
-			Guaranteed to make a splash!
-		</p>
-		<p>
-			Your website can power-up your team as well. I can also build advanced app-like features and
-			custom integrations to optimize your processes and remove the pain-points. Let's remove your
-			roadblocks!
-		</p>
-		<List items={['Stunning Visuals', 'Custom Functionality', 'Affordable Prices']} />
-	</Section>
-	<Section Pictogram={SocialWork_01} layout="right">
-		<hgroup>
-			<p>Special Ops for Creative Agencies</p>
-			<h2>Deliver Awesome Projects to your Customers</h2>
-		</hgroup>
-		<p>
-			I love collaborating with other creatives. I can support in-house creative and web development
-			teams with challenging projects. I have extended experience collaborating with creative
-			professionals, and I'm happy to support project sales and customer relations processes.
-		</p>
-		<List
-			items={[
-				'3D for the Web',
-				'Advanced Features',
-				'Custom Integrations',
-				'Web Development',
-				'Graphic Design',
-				'Branding'
-			]}
-		/>
-	</Section>
-	<Section Pictogram={Rocket} layout="left">
-		<hgroup>
-			<p>Flexible Contracting for Startups</p>
-			<h2>Fullstack Support with No Strings Attached</h2>
-		</hgroup>
-		<p>
-			I also offer contracting services as a full-stack developer and UI/UX designer for tech
-			startups. I'm a good
-			<a href="https://wildcardpeople.com/what-is-a-wildcard-person">wildcard</a> for teams with diverse
-			workloads.
-		</p>
-		<p>
-			I'm happy to work with any technology, but I'm currently working with the following stack:
-		</p>
-		<List
-			items={['Svelte/Kit', 'TypeScript', 'NodeJS', 'Python', 'GitHub', 'Vercel', 'Linux', 'Bash']}
-		/>
 	</Section>
 </Article>

@@ -15,7 +15,7 @@
 
 <article in:blur={{ delay: 600 }} out:blur={{ delay: 0 }}>
 	<header>
-		<Menu pages={['about', 'services', 'contact']} />
+		<Menu pages={['about', 'contact']} />
 	</header>
 	<main>
 		{@render children()}
