@@ -10,23 +10,22 @@
 		details = undefined,
 		skills = undefined
 	} = $props<{
-		role: string
-		org?: string
-		start: string
-		end?: string
-		summary: string
-		details?: string[]
-		skills?: string[]
-	}>()
+		role: string;
+		org?: string;
+		start: string;
+		end?: string;
+		summary: string;
+		details?: string[];
+		skills?: string[];
+	}>();
 </script>
 
 <section class="panel">
 	<hgroup>
 		<p class="meta">
 			<span class="period">{start}-{end}</span><span class="org">{org}</span>
-		<p>
+		</p>
 		<h2 class="role">{role}</h2>
-		
 	</hgroup>
 	<p>
 		{summary}

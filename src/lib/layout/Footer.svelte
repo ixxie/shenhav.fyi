@@ -1,6 +1,6 @@
 <footer>
 	<p>
-		<span> Copyright © 2023 </span>
+		<span> Copyright © {new Date().getFullYear()} </span>
 		<span class="dash"></span>
 		<span> Matan Bendix Shenhav </span>
 		<span class="dash"></span>

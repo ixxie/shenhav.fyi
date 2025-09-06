@@ -1,53 +1,23 @@
 <script lang="ts">
-	import { page } from '$app/stores';
-	import { onNavigate, beforeNavigate } from '$app/navigation';
-
 	import type { Snippet } from 'svelte';
-	import type { BeforeNavigate } from '@sveltejs/kit';
 
 	import '../app.css';
-	import Coloring from '../Coloring.svelte';
 
 	const {
 		children
 	}: {
 		children: Snippet;
 	} = $props();
-
-	// page data
-	const pageNames = ['home', 'about', 'services', 'contact'];
-	const route = $derived($page.route.id?.replace('/(site)', '') ?? '/');
-	const current = $derived(route == '/' ? 'home' : route.substring(1));
-	const pageIndex = $derived(pageNames.indexOf(current));
-	const pageCount = pageNames.length;
-
-	let innerWidth: number | undefined = $state();
-	let innerHeight: number | undefined = $state();
-
-	// trigger for navigation transition
-	let target: string | null | undefined = null;
-	beforeNavigate(async (navigation: BeforeNavigate) => {
-		if (target == navigation.to?.route.id) {
-			navigation.cancel();
-		}
-	});
-	onNavigate((navigation) => {
-		target = navigation.to?.route.id;
-	});
 </script>
 
-<svelte:window bind:innerWidth bind:innerHeight />
-
-<Coloring {pageIndex} {pageCount}>
-	<div id="container">
-		{@render children()}
-		<div class="background">
-			<div id="stripes"></div>
-			<div id="noise"></div>
-			<div id="color"></div>
-		</div>
+<div id="container">
+	{@render children()}
+	<div class="background">
+		<div id="stripes"></div>
+		<div id="noise"></div>
+		<div id="color"></div>
 	</div>
-</Coloring>
+</div>
 
 <style>
 	#container {
@@ -103,13 +73,9 @@
 	}
 
 	#noise {
-		background: radial-gradient(
-				ellipse at bottom left,
-				rgb(49, 49, 49),
-				transparent
-			),
-			radial-gradient(ellipse at top right, rgb(49, 49, 49), transparent),
-			url(/images/noise.svg);
+		background:
+			radial-gradient(ellipse at bottom left, rgb(49, 49, 49), transparent),
+			radial-gradient(ellipse at top right, rgb(49, 49, 49), transparent), url(/images/noise.svg);
 		filter: contrast(200%) brightness(1000%);
 		opacity: 0.15;
 		mix-blend-mode: multiply;
@@ -117,16 +83,13 @@
 	}
 
 	#color {
-		background: radial-gradient(
+		background:
+			radial-gradient(
 				ellipse at bottom right,
 				hsl(var(--color), var(--background), 90%),
 				transparent
 			),
-			radial-gradient(
-				ellipse at top left,
-				hsl(var(--color), var(--background), 95%),
-				transparent
-			),
+			radial-gradient(ellipse at top left, hsl(var(--color), var(--background), 95%), transparent),
 			white;
 		z-index: -300;
 	}

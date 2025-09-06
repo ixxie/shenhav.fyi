@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { page } from '$app/stores';
+	import { page } from '$app/state';
 	import { onNavigate, beforeNavigate } from '$app/navigation';
 
 	import type { Snippet } from 'svelte';
@@ -15,8 +15,8 @@
 	} = $props();
 
 	// page data
-	const pageNames = ['home', 'about', 'services', 'contact'];
-	const route = $derived($page.route.id?.replace('/(main)', '') ?? '/');
+	const pageNames = ['home', 'about', 'contact'];
+	const route = $derived(page.route.id?.replace('/(main)', '') ?? '/');
 
 	const current = $derived(route === '' ? 'home' : route.substring(1));
 	const pageIndex = $derived(pageNames.indexOf(current));
@@ -106,13 +106,9 @@
 	}
 
 	#noise {
-		background: radial-gradient(
-				ellipse at bottom left,
-				rgb(49, 49, 49),
-				transparent
-			),
-			radial-gradient(ellipse at top right, rgb(49, 49, 49), transparent),
-			url(/images/noise.svg);
+		background:
+			radial-gradient(ellipse at bottom left, rgb(49, 49, 49), transparent),
+			radial-gradient(ellipse at top right, rgb(49, 49, 49), transparent), url(/images/noise.svg);
 		filter: contrast(200%) brightness(1000%);
 		opacity: 0.15;
 		mix-blend-mode: multiply;
@@ -120,16 +116,13 @@
 	}
 
 	#color {
-		background: radial-gradient(
+		background:
+			radial-gradient(
 				ellipse at bottom right,
 				hsl(var(--color), var(--background), 90%),
 				transparent
 			),
-			radial-gradient(
-				ellipse at top left,
-				hsl(var(--color), var(--background), 95%),
-				transparent
-			),
+			radial-gradient(ellipse at top left, hsl(var(--color), var(--background), 95%), transparent),
 			white;
 		z-index: -300;
 	}

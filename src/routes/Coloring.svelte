@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { setContext, type Snippet } from 'svelte';
-	import { tweened } from 'svelte/motion';
+	import { Tween } from 'svelte/motion';
 	import { sineInOut } from 'svelte/easing';
 
 	// props
@@ -15,14 +15,14 @@
 	} = $props();
 
 	// params
-	const phase = 20;
+	const phase = 23.5;
 
 	// helpers
 	const mod = (n: number) => ((n % 360) + 360) % 360;
 	const round = (n: number) => Math.round(n * 100) / 100;
 
 	// store
-	let color = tweened(phase + (pageIndex * 360) / pageCount, {
+	const color = new Tween(phase + (pageIndex * 360) / pageCount, {
 		duration: 2000,
 		easing: sineInOut,
 		interpolate: (from, to) => {
@@ -41,7 +41,7 @@
 
 	// logic
 	$effect(() => {
-		$color = phase + (pageIndex * 360) / pageCount;
+		color.target = phase + (pageIndex * 360) / pageCount;
 		isColored = pageIndex >= 0;
 	});
 	setContext('color', color);
@@ -50,9 +50,12 @@
 	const dim = $derived(isColored ? '30%' : '0%');
 	const background = $derived(isColored ? '90%' : '0%');
 
-	const style = $derived(
-		`--color: ${$color}; --bright: ${bright}; --dim: ${dim}; --background: ${background};`
-	);
+	const style = $derived(`
+		--color: ${color.current};
+		--bright: ${bright};
+		--dim: ${dim};
+		--background: ${background};
+	`);
 
 	let container: HTMLDivElement;
 </script>

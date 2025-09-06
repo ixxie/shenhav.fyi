@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { page } from '$app/stores';
+	import { page } from '$app/state';
 
 	import { MenuIcon, CloseIcon } from '$lib/icons';
 
@@ -12,7 +12,7 @@
 		pages: string[];
 	} = $props();
 
-	const active = $derived($page.url.pathname.slice(1));
+	const active = $derived(page.url.pathname.slice(1));
 
 	const deactivate = () => {
 		const toggle = document.getElementById('menu-toggle') as HTMLInputElement;

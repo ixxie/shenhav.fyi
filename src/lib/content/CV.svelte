@@ -1,7 +1,6 @@
 <script lang="ts">
 	import UserExperienceDesign from 'carbon-pictograms-svelte/lib/UserExperienceDesign.svelte';
 	import University from 'carbon-pictograms-svelte/lib/University.svelte';
-	import CodeSyntax from 'carbon-pictograms-svelte/lib/CodeSyntax.svelte';
 	import Advocate from 'carbon-pictograms-svelte/lib/Advocate.svelte';
 
 	import { Article, Section, ExperienceSection } from '$lib/layout';
