@@ -1,13 +1,7 @@
 /* typography */
 
 @font-face {
-	font-family: 'Permanent Marker';
-	src: local('Permanent Marker'), url('/fonts/PermanentMarker-Regular.ttf');
-	font-weight: 100 900;
-}
-
-@font-face {
-	font-family: 'Perm';
+	font-family: 'Vollkorn';
 	src: local('Vollkorn'), url('/fonts/Vollkorn-VariableFont_wght.ttf');
 	font-weight: 100 900;
 }
