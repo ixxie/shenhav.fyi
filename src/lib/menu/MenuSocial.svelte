@@ -1,12 +1,12 @@
 <div>
 	<a aria-label="linkedin" title="linkedin" href="https://www.linkedin.com/in/matan-shenhav/">
-		<div class="icon linkedin"></div>
+		<span class="icon linkedin"></span>
 	</a>
 	<a aria-label="github" title="github" href="https://github.com/ixxie">
-		<div class="icon github"></div>
+		<span class="icon github"></span>
 	</a>
 	<a aria-label="discord" title="discord" href="https://discordapp.com/users/611892156197765160">
-		<div class="icon discord"></div>
+		<span class="icon discord"></span>
 	</a>
 </div>
 

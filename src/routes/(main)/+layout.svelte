@@ -29,7 +29,7 @@
 	// trigger for navigation transition
 	let target: string | null | undefined = null;
 	beforeNavigate(async (navigation: BeforeNavigate) => {
-		if (target == navigation.to?.route.id) {
+		if (navigation.to?.route.id && target === navigation.to.route.id) {
 			navigation.cancel();
 		}
 	});
