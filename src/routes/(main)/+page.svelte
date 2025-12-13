@@ -25,7 +25,7 @@
 		<p>
 			I'm currently founding engineer and frontend lead at
 			<a href="https://qualiastudios.dev">Qualia</a>, where we are building a devops platform for
-			robotics. I'm currently working with modern Svelte/Kit, Python and Supabase.
+			robotics. I'm work mainly with modern Svelte/Kit, Python and Supabase.
 		</p>
 		<p>
 			I'm interested in how social institutions can evolve rapidly to face the challenges we face
