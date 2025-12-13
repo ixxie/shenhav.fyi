@@ -18,11 +18,7 @@
 	</div>
 	<div class="illustration">
 		{#if Pictogram}
-			<Pictogram
-				class="picto {layout}"
-				width="min(100%, 250px)"
-				height="auto"
-			/>
+			<Pictogram class="picto {layout}" />
 		{/if}
 	</div>
 </section>
@@ -37,6 +33,8 @@
 
 	.content {
 		grid-area: content;
+		position: relative;
+		z-index: 1;
 	}
 
 	.illustration {
@@ -47,41 +45,30 @@
 	}
 
 	section {
-		display: grid;
-		gap: 1rem;
-
-		&.left {
-			grid-template-columns: 1fr var(--illustration-ratio);
-			grid-template-areas: 'illustration content';
-		}
-
-		&.right {
-			grid-template-columns: var(--illustration-ratio) 1fr;
-			grid-template-areas: 'content illustration';
-		}
+		display: flex;
+		flex-flow: column;
+		align-items: center;
+		position: relative;
+		isolation: isolate;
 	}
 
-	@media (max-width: 700px) {
-		section {
-			display: flex;
-			flex-flow: column;
-			align-items: center;
-			position: relative;
-		}
+	.illustration {
+		position: absolute;
+		top: 0;
+		z-index: 0;
+		opacity: 0.3 !important;
+	}
 
-		.illustration {
-			position: absolute;
-			top: 0;
-			z-index: -1;
-			opacity: 0.2 !important;
-		}
+	.illustration :global(svg) {
+		width: min(100%, 350px);
+		height: auto;
+	}
 
-		.left .illustration {
-			left: 0;
-		}
+	.left .illustration {
+		left: 0;
+	}
 
-		.right .illustration {
-			right: 0;
-		}
+	.right .illustration {
+		right: 0;
 	}
 </style>

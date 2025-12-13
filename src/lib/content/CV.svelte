@@ -1,7 +1,7 @@
 <script lang="ts">
-	import UserExperienceDesign from 'carbon-pictograms-svelte/lib/UserExperienceDesign.svelte';
-	import University from 'carbon-pictograms-svelte/lib/University.svelte';
-	import Advocate from 'carbon-pictograms-svelte/lib/Advocate.svelte';
+	import Dev from '$lib/sketches/Dev.svelte';
+	import Academic from '$lib/sketches/Academic.svelte';
+	import Heart from '$lib/sketches/Heart.svelte';
 
 	import { Article, Section, ExperienceSection } from '$lib/layout';
 	import { List } from '$lib/list';
@@ -9,28 +9,25 @@
 </script>
 
 <Article>
-	<Section Pictogram={UserExperienceDesign} layout="left">
+	<Section Pictogram={Dev} layout="left">
 		<hgroup class="screen">
-			<p>a swiss army knife</p>
-			<h1>Senior Fullstack Developer</h1>
+			<p>software developer</p>
+			<h1>Product Engineer<br />& Designer</h1>
 		</hgroup>
 		<hgroup class="print">
 			<p>curriculum vitae</p>
 			<h1>Matan Bendix Shenhav</h1>
 		</hgroup>
-		<ul class="info">
-			<li>matan@shenhav.fyi</li>
-			<li>+33 6 42 31 84 04</li>
-			<li>www.shenhav.fyi</li>
-			<li>Dutch citizen</li>
-		</ul>
 		<p>
-			I've worked in a variety of positions in tech, and now freelance as a
-			fullstack dev. I have a wide range of skills, and function well in small
-			startup teams that require team members to wear many hats. I work hard and
-			deliver clean code, but know when to cut corners to meet delivery targets.
-			I've done major architectural work that tackles technical debt across the
-			stack and significantly improved team velocity.
+			As a senior software product engineer, I take end-to-end ownership of shipping an application
+			to users. I do communication, design, architecture, devops, backend and frontend work as
+			needed. I'm specialized in delivering great UX for data-intensive, technical software.
+		</p>
+
+		<p>
+			Since I have a wide range of skills, and function well in startup environments which demand
+			versatility. I try to balance code quality with shipping fast. I believe in investing in
+			modern tooling and infrastructure to improve team velocity.
 		</p>
 		<List
 			items={[
@@ -39,7 +36,7 @@
 				'devops',
 				'ui/ux design',
 				'data science',
-				'writing',
+				'communication',
 				'agile'
 			]}
 		/>
@@ -49,19 +46,21 @@
 	{/each}
 
 	<!-- Academic -->
-	<Section Pictogram={University} layout="right">
+	<Section Pictogram={Academic} layout="right">
 		<hgroup>
 			<p>academic background</p>
-			<h1>Biomathematician</h1>
+			<h1>Maths, Biology <br /> & Philosophy</h1>
 		</hgroup>
+		<p>I've started out in Maths & Physics and later moved towards Biomathematics.</p>
 		<p>
-			By training, I am a biomathematician: I was interested in mathematically
-			describing social and biological networks. In the end, I decided I want to <i
-				>do</i
-			>
-			stuff instead of just
-			<i>think</i>
-			about it, and decided to leave academic pursuits for professional practice.
+			In my master's degree, I was interested in mathematical models of social and biological
+			networks. I also spent a lot of time reading philosophy of science, trying to understand the
+			limits of technical knowledge.
+		</p>
+
+		<p>
+			In the end, I decided I want to <i>do</i> stuff instead of just <i>think</i> about it, and decided
+			to leave the academy and try out the private sector.
 		</p>
 	</Section>
 	{#each academic as item}
@@ -69,40 +68,24 @@
 	{/each}
 
 	<!-- Volunteering -->
-	<Section Pictogram={Advocate} layout="left">
+	<Section Pictogram={Heart} layout="left">
 		<hgroup>
 			<p>community minded</p>
-			<h1>Engaged Citizen</h1>
+			<h1>Human Being</h1>
 		</hgroup>
 		<p>
-			In recent years I have gotten interested in the civil society, in
-			particular the associative sector and the social economy. I've also been
-			interested in agroecological practices and community-orientated living for
-			years.
+			In recent years I have gotten interested in the civil society and the social economy. I've
+			also been interested in agroecological practices and community-orientated living for years.
+			I've done a little volunteer work to learn more.
 		</p>
 	</Section>
 	{#each volunteering as item}
 		<ExperienceSection {...item} />
 	{/each}
-
-	<section class="screen">
-		<hgroup>
-			<p>seems legit...</p>
-			<h2 style="font-weight: bold">Want to know more?</h2>
-		</hgroup>
-		<p>
-			<a href="/contact">Get in touch</a> and let's have a chat! I'm happy to share
-			my experience with you.
-		</p>
-	</section>
 </Article>
 
 <style>
 	.print {
-		display: none;
-	}
-
-	.info {
 		display: none;
 	}
 
@@ -113,16 +96,6 @@
 
 		.print {
 			display: block;
-		}
-
-		.info {
-			display: flex;
-			flex-flow: row;
-			justify-content: space-between;
-
-			li {
-				list-style: none;
-			}
 		}
 	}
 </style>

@@ -15,7 +15,7 @@
 	} = $props();
 
 	// params
-	const phase = 23.5;
+	const phase = 333;
 
 	// helpers
 	const mod = (n: number) => ((n % 360) + 360) % 360;

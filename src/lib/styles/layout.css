@@ -1,0 +1,25 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	height: 100%;
+	width: 100%;
+	max-width: 100%;
+	display: flex;
+	justify-items: flex-start;
+	justify-content: flex-start;
+	overflow: overlay;
+}
+
+article {
+	padding: 1rem;
+}
+
+@media (max-width: 1800px) {
+	body {
+		justify-content: center;
+	}
+}

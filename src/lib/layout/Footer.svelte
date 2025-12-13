@@ -16,32 +16,28 @@
 		align-items: center;
 		text-align: center;
 		gap: 1rem;
-		opacity: 0.5;
-	}
+		opacity: 0.8 !important;
 
-	footer p {
-		display: flex;
-		flex-flow: row wrap;
-		justify-content: center;
-		gap: 0.5em;
-	}
+		p {
+			display: flex;
+			flex-flow: row wrap;
+			justify-content: center;
+			gap: 0.5em;
 
-	.dash::before {
-		content: '-';
-	}
+			.dash::before {
+				content: '-';
+			}
 
-	@media (max-width: 1100px) {
-		footer p {
-			flex-flow: column;
+			@media (max-width: 1100px) {
+				flex-flow: column;
+
+				.dash {
+					display: none;
+				}
+			}
 		}
 
-		footer p .dash {
-			display: none;
-		}
-	}
-
-	@media print {
-		footer {
+		@media print {
 			display: none;
 		}
 	}

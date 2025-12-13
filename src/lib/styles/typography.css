@@ -1,57 +1,13 @@
-* {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
-	scrollbar-width: thin;
-	scrollbar-color: rgb(100, 100, 100, 0.4);
-	scrollbar-gutter: auto;
-}
-
-body {
-	height: 100%;
-	width: 100%;
-	max-width: 100%;
-	display: flex;
-	justify-items: flex-start;
-	justify-content: flex-start;
-	overflow: overlay;
-}
-
-article {
-	padding: 1rem;
-}
-
-blockquote {
-	padding-left: 1rem;
-	font-style: italic;
-}
-
-@media (max-width: 1800px) {
-	body {
-		justify-content: center;
-	}
-}
-
-/* scroll bar */
-
-::-webkit-scrollbar {
-	width: 6px;
-	background: transparent;
-}
-
-::-webkit-scrollbar-track {
-	background: transparent;
-}
-
-::-webkit-scrollbar-thumb {
-	background-color: rgb(100, 100, 100, 0.4);
-	border-radius: 3px;
-}
-
 /* typography */
 
 @font-face {
-	font-family: 'Vollkorn';
+	font-family: 'Permanent Marker';
+	src: local('Permanent Marker'), url('/fonts/PermanentMarker-Regular.ttf');
+	font-weight: 100 900;
+}
+
+@font-face {
+	font-family: 'Perm';
 	src: local('Vollkorn'), url('/fonts/Vollkorn-VariableFont_wght.ttf');
 	font-weight: 100 900;
 }
@@ -63,7 +19,9 @@ blockquote {
 }
 
 html {
-	font-family: Maven Pro, Arial;
+	font-family:
+		Maven Pro,
+		Arial;
 	color: #272727;
 	font-size: 18px;
 	line-height: 1.5rem;
@@ -92,8 +50,12 @@ article {
 /* links */
 
 a {
-	text-decoration: underline dotted;
 	font-weight: 500;
+	text-decoration: 1px underline dashed currentColor;
+
+	&:hover {
+		text-decoration: 1px underline solid currentColor;
+	}
 }
 
 nav a {
@@ -131,10 +93,17 @@ hgroup p {
 
 .quote {
 	display: block;
-	font-family: Vollkorn SC, Times;
+	font-family:
+		Vollkorn SC,
+		Times;
 	font-weight: 900;
 	font-size: 1.4rem;
 	margin: 1.5rem 2rem;
+}
+
+blockquote {
+	padding-left: 1rem;
+	font-style: italic;
 }
 
 .deactivate {

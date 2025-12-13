@@ -26,22 +26,32 @@
 <style>
 	article {
 		margin: 0 !important;
-	}
+		min-height: 100%;
+		display: flex;
+		flex-direction: column;
 
-	main {
-		margin: 0 2rem 5rem 2rem;
-		flex-grow: 1;
-	}
-
-	@media (max-width: 700px) {
-		main {
-			margin: 0;
+		:global(*) {
+			opacity: 0.95;
 		}
-	}
 
-	@media print {
+		main {
+			margin: 0 2rem 5rem 2rem;
+			flex-grow: 1;
+
+			:global(*) {
+				opacity: 0.95;
+			}
+
+			:global(section:has(h1):not(:first-of-type)) {
+				border-top: 1px solid color-mix(in srgb, currentColor 30%, transparent);
+				padding-top: 3rem;
+			}
+		}
+
 		header {
-			display: none;
+			@media print {
+				display: none;
+			}
 		}
 	}
 </style>

@@ -10,8 +10,20 @@ export interface ExperienceSection {
 
 export const industry = [
 	{
+		role: 'Founding Engineer & Frontend Lead',
+		start: '09/25',
+		org: 'Qualia',
+		skills: ['Svelte', 'SvelteKit', 'Python', 'uv', 'FastAPI', 'Supabase', 'docker'],
+		summary: 'Leading frontend development of a devops platform for robotics.',
+		details: [
+			'Architecting, designing and leading the implementation of a cloud dashboard for training VLAs.',
+			'Helping out with backend tooling, CLI and devops development.'
+		]
+	},
+	{
 		role: 'Freelance Fullstack Developer',
 		start: '09/22',
+		end: '09/25',
 		org: 'Self-employed',
 		skills: [
 			'Python',
@@ -31,16 +43,7 @@ export const industry = [
 		start: '10/21',
 		end: '08/22',
 		org: 'Karsa (Startup)',
-		skills: [
-			'Python',
-			'JavaScript',
-			'Vue',
-			'Buefy',
-			'HTML5',
-			'CSS3',
-			'SQLite',
-			'Gitlab'
-		],
+		skills: ['Python', 'JavaScript', 'Vue', 'Buefy', 'HTML5', 'CSS3', 'SQLite', 'Gitlab'],
 		summary:
 			'Built software allowing non-technical users to detect chemicals using a mass spectrometer.',
 		details: [
@@ -81,8 +84,7 @@ export const industry = [
 		end: '09/19',
 		org: 'Sievo (Enterprise SaaS Scaleup)',
 		skills: ['Python', 'NLP', 'Docker', 'SQLServer', 'Jira', 'Jenkins', 'Bash'],
-		summary:
-			'Developed a new NLP-driven supplier record normalization microservice in Python.',
+		summary: 'Developed a new NLP-driven supplier record normalization microservice in Python.',
 		details: [
 			'Coarchitected, implemented, deployed and supported a human-in-the-loop AI microservice with internal UI.',
 			'Took ownership of DevOps tasks such as containerization, CI/CD pipelines and Git practices and	tooling.',
@@ -94,8 +96,7 @@ export const industry = [
 		start: '2004',
 		end: '2017',
 		skills: ['Illustrator', 'Photoshop', 'WordPress', 'Bash'],
-		summary:
-			'Executed graphic and web design, branding and copywriting jobs for small companies.'
+		summary: 'Executed graphic and web design, branding and copywriting jobs for small companies.'
 	},
 	{
 		role: 'EU Grant Writer',
@@ -133,22 +134,21 @@ export const academic = [
 		summary:
 			'Specialized in stochastic processes and risk management in biological and social networks.'
 	},
-	{
-		role: 'Private Tutor',
-		start: '2010',
-		end: '2017',
-		skills: ['Mathematics', 'Physics', 'Pedagogy', 'Empathy'],
-		summary:
-			'Tutoring children of various ages in mathematics, physics and chemistry.'
-	},
+	// {
+	// 	role: 'Private Tutor',
+	// 	start: '2010',
+	// 	end: '2017',
+	// 	skills: ['Mathematics', 'Physics', 'Pedagogy', 'Empathy'],
+	// 	summary:
+	// 		'Tutoring children of various ages in mathematics, physics and chemistry.'
+	// },
 	{
 		role: 'BSc Mathematics & Physics',
 		start: '2005',
 		end: '2009',
 		org: 'University of Utrecht',
 		skills: ['Scientific Methodology', 'Elements of Physics & Mathematics'],
-		summary:
-			'Double degree covering the basics of the Physics and Mathematics disciplines.'
+		summary: 'Double degree covering the basics of the Physics and Mathematics disciplines.'
 	}
 ] as ExperienceSection[];
 
@@ -176,12 +176,7 @@ export const volunteering = [
 		start: '01/23',
 		end: '07/23',
 		org: 'Global Ecovillage Network',
-		skills: [
-			'WordPress',
-			'Associative Sector',
-			'Ecovillages',
-			'Multitiered Orgs'
-		],
+		skills: ['WordPress', 'Associative Sector', 'Ecovillages', 'Multitiered Orgs'],
 		summary:
 			"Helped streamline a legacy website's navigation and content in preperation for fundraising. The site had decades of legacy content and plugins contributed by dozens of volunteers. The network is composed of several regional organizations, making the site complex."
 	}
