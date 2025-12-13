@@ -12,31 +12,36 @@
 
 	const active = $derived(page.url.pathname.slice(1));
 
-	let menuOpen = $state(false);
-
-	const toggle = () => (menuOpen = !menuOpen);
-	const close = () => (menuOpen = false);
+	const deactivate = () => {
+		const toggle = document.getElementById('menu-toggle') as HTMLInputElement;
+		if (toggle) {
+			toggle.checked = false;
+		}
+	};
 </script>
 
-<nav class:open={menuOpen}>
+<nav>
 	<div id="topbar">
-		<Logo onclick={close} />
+		<Logo onclick={deactivate} />
 		<menu id="desktop-menu">
 			{#each pages as page}
-				<a class:active={active == page} href="/{page}" onclick={close}>{page}</a>
+				<a class:active={active == page} href="/{page}" onclick={deactivate}>{page}</a>
 				<span>∙</span>
 			{/each}
 			<MenuSocial />
 		</menu>
-		<button aria-label="toggle menu" id="hamburger-button" onclick={toggle}>
-			<span class="icon menu"></span>
-			<span class="icon close"></span>
+		<button aria-label="toggle menu" id="hamburger-button">
+			<label for="menu-toggle">
+				<div class="icon menu"></div>
+				<div class="icon close"></div>
+			</label>
+			<input type="checkbox" id="menu-toggle" />
 		</button>
 	</div>
 	<menu id="mobile-menu">
-		<a class:active={'home' == active} href="/" onclick={close}> home </a>
+		<a class:active={'home' == active} href="/" onclick={deactivate}> home </a>
 		{#each pages as page}
-			<a class:active={page == active} href="/{page}" onclick={close}>
+			<a class:active={page == active} href="/{page}" onclick={deactivate}>
 				{page}
 			</a>
 		{/each}
@@ -74,19 +79,22 @@
 			border: none;
 			background-color: transparent;
 			opacity: 0.9;
-			cursor: pointer;
+
+			& input[type='checkbox'] {
+				appearance: none;
+			}
 		}
 
 		#mobile-menu {
 			display: flex;
 			flex-direction: column;
-			justify-content: flex-end;
+			justify-content: flex-start;
 			align-items: flex-end;
-			gap: 3rem;
 			transition: all 0.5s ease-in-out;
 			height: 0;
 			padding: 0 1.5rem;
 			overflow: hidden;
+			gap: 4rem;
 		}
 
 		@media screen and (max-width: 600px) {
@@ -107,23 +115,25 @@
 				display: none;
 			}
 
-			&.open {
+			&:has(#hamburger-button input[type='checkbox']:checked) {
 				& #mobile-menu {
-					height: calc(80vh);
+					height: calc(100vh - 120px);
 					margin: 3rem 0;
 				}
 				& :global(.icon.menu) {
 					display: none;
 				}
+			}
+
+			&:has(#hamburger-button input[type='checkbox']:checked) {
 				& :global(.icon.close) {
 					display: block;
 				}
 			}
-		}
-	}
 
-	:global(body):has(nav.open),
-	:global(html):has(nav.open) {
-		overflow: hidden;
+			:global(#container):has(#hamburger-button input[type='checkbox']:checked) {
+				overflow: hidden;
+			}
+		}
 	}
 </style>
