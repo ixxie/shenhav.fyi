@@ -46,6 +46,10 @@
 				border-top: 1px solid color-mix(in srgb, currentColor 30%, transparent);
 				padding-top: 3rem;
 			}
+
+			@media (max-width: 600px) {
+				margin: 0 1rem 3rem 1rem;
+			}
 		}
 
 		header {
