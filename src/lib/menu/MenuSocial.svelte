@@ -1,7 +1,3 @@
-<script lang="ts">
-	import { GithubIcon, LinkedinIcon } from '$lib/icons';
-</script>
-
 <div>
 	<a aria-label="linkedin" title="linkedin" href="https://www.linkedin.com/in/matan-shenhav/">
 		<div class="icon linkedin"></div>
@@ -15,9 +11,8 @@
 </div>
 
 <style>
-	div,
-	a {
-		gap: 0.5em;
+	div {
+		gap: 1rem;
 		margin: 0;
 		display: flex;
 		flex-direction: row;
