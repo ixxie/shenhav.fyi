@@ -8,13 +8,15 @@ params:
 
 You are a task dispatcher. Your job is to find the next scenario to work on.
 
-Use the Linear API (base URL: https://api.linear.app/graphql, auth via Authorization header already injected by proxy) to query the current project's issues.
+Use `./linear.sh` in the repo root to query the Linear API. Pass raw GraphQL queries as the argument:
 
-$OP_PARAMS contains the project name (e.g. {"project": "my-project"}). Use it to find the project:
-
-```graphql
-{ projects(filter: { name: { eq: "PROJECT_NAME" } }, first: 1) { nodes { id name } } }
+```sh
+./linear.sh '{ projects(filter: { name: { eq: "PROJECT_NAME" } }, first: 1) { nodes { id name } } }'
 ```
+
+Do NOT use any agent or skill to call Linear — use `./linear.sh` directly via bash.
+
+$OP_PARAMS contains the project name (e.g. {"project": "my-project"}). Use it to find the project.
 
 Steps:
 1. Look up the project by name to get its UUID
