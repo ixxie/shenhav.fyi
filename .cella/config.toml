@@ -1,0 +1,25 @@
+memory = "4096M"
+vcpu = 2
+server = "grove"
+shell_timeout = 600
+ports = [5173]
+post_push = "bun install"
+
+[secrets]
+recipient = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPcwKdkSvC2AP3kbQva2nhLOM9ha4VIuHVTne5RPIXLz"
+
+[egress]
+writes.allowed = ["opencode.ai", "*.opencode.ai", "api.linear.app"]
+
+[[egress.credentials]]
+host = "opencode.ai"
+header = "Authorization"
+env_var = "OPENCODE_API_KEY"
+
+[[egress.credentials]]
+host = "api.linear.app"
+header = "Authorization"
+env_var = "LINEAR_API_KEY"
+
+[session]
+hooks = [".cella/hooks/rate-limit.sh"]
