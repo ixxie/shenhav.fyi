@@ -8,6 +8,7 @@
     nixosModule = { pkgs, ... }: {
       environment.systemPackages = [
         opencode.packages.${pkgs.stdenv.hostPlatform.system}.default
+        pkgs.python313
       ];
     };
   };

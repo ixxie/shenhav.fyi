@@ -2,3 +2,4 @@
 start = "dispatch"
 max_retries = 5
 timeout = "2h"
+requires = ["project"]
