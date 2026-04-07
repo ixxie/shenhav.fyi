@@ -17,6 +17,11 @@ header = "Authorization"
 env_var = "OPENCODE_API_KEY"
 
 [[egress.credentials]]
+host = "api.opencode.ai"
+header = "Authorization"
+env_var = "OPENCODE_API_KEY"
+
+[[egress.credentials]]
 host = "api.linear.app"
 header = "Authorization"
 env_var = "LINEAR_API_KEY"
