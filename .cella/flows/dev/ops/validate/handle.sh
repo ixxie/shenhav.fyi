@@ -1,24 +1,15 @@
 #!/bin/sh
-# validate overrides the agent handle — this is pure script
 cd /shenhav.fyi
 
-# start dev server as a background service
+# start dev server for the agent to inspect
 cellx service start devserver 'bun run dev --host 0.0.0.0'
 sleep 3
 
-# run build check
-bun run build
-BUILD_EXIT=$?
-
-# run playwright if build passes
-if [ $BUILD_EXIT -eq 0 ] && command -v playwright >/dev/null 2>&1; then
-  npx playwright test 2>&1
-  TEST_EXIT=$?
-else
-  TEST_EXIT=$BUILD_EXIT
-fi
+# run the agent harness (flow-level handle.sh uses opencode)
+opencode run -m "$PARAM_MODEL" "$OP_PROMPT"
+EXIT=$?
 
 # stop dev server
 cellx service stop devserver
 
-exit $TEST_EXIT
+exit $EXIT
