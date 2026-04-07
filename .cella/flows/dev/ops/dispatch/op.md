@@ -3,7 +3,7 @@ name: dispatch
 next:
   - implement
 params:
-  model: opencode/gpt-5-nano
+  model: opencode/claude-haiku-4-5
 ---
 
 You are a task dispatcher. Your job is to find the next scenario to work on.

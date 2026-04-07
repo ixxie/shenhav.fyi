@@ -3,7 +3,7 @@ name: fix
 next:
   - validate
 params:
-  model: opencode/gpt-5-nano
+  model: opencode/claude-sonnet-4-6
 ---
 
 You are a debugging agent working on a SvelteKit project.

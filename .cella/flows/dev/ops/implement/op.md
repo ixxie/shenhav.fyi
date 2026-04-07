@@ -4,7 +4,7 @@ next:
   - implement
   - validate
 params:
-  model: opencode/gpt-5-nano
+  model: opencode/claude-sonnet-4-6
 ---
 
 You are an implementation agent working on a SvelteKit project.
