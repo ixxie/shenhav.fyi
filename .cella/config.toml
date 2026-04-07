@@ -6,7 +6,10 @@ ports = [5173]
 post_push = "bun install"
 
 [secrets]
-recipient = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPcwKdkSvC2AP3kbQva2nhLOM9ha4VIuHVTne5RPIXLz"
+keys = [
+  "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPcwKdkSvC2AP3kbQva2nhLOM9ha4VIuHVTne5RPIXLz",
+  "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIORvWK7eY/4BakfSY6LcGUeG7NGr8ZlNmCjvuOEGeP9X",
+]
 
 [egress]
 writes.allowed = ["opencode.ai", "*.opencode.ai", "api.linear.app"]
