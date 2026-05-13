@@ -23,7 +23,7 @@
 			<h1>What I do</h1>
 		</hgroup>
 		<p>
-			I'm currently founding engineer and frontend lead at
+			I'm currently founding product engineer at
 			<a href="https://qualiastudios.dev">Qualia</a>, where we are building a devops platform for
 			robotics. I work mainly with modern Svelte/Kit, Python and Supabase.
 		</p>

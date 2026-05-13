@@ -10,14 +10,17 @@ export interface ExperienceSection {
 
 export const industry = [
 	{
-		role: 'Founding Engineer & Frontend Lead',
+		role: 'Founding Engineer',
 		start: '09/25',
 		org: 'Qualia',
 		skills: ['Svelte', 'SvelteKit', 'Python', 'uv', 'FastAPI', 'Supabase', 'docker'],
-		summary: 'Leading frontend development of a devops platform for robotics.',
+		summary: 'Founding engineer for a foundation model platform for robotics.',
 		details: [
-			'Architecting, designing and leading the implementation of a cloud dashboard for training VLAs.',
-			'Helping out with backend tooling, CLI and devops development.'
+			'Building the product frontend',
+			'Leading UI/UX design',
+			'Architecting an ML training orchastrator',
+			'Developing team agentic workflows & tooling',
+			'Building backend tooling, CLI & devops'
 		]
 	},
 	{
